@@ -1,6 +1,7 @@
 ### Node template
 
 .idea/
+build/
 
 # Logs
 logs
