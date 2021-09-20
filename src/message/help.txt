@@ -1,0 +1,8 @@
+```asciidoc
+= MessageQuote :: / command =
+    /<command> [+ option]
+
+= command =
+    help :: ヘルプを表示
+    ping :: レイテンシ(伝送遅延時間)の表示
+```
