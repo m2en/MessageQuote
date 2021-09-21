@@ -76,9 +76,6 @@ client.on("messageCreate", async (message) => {
     });
     return;
   }
-  const quoteEmbed = new Discord.MessageEmbed().setFooter(
-    `To ${message.author.tag}`
-  );
 
   const fetched = await channel?.messages?.fetch(`${messageID}`);
   if (fetched == null) {
@@ -93,10 +90,10 @@ client.on("messageCreate", async (message) => {
     return;
   }
 
-  fetched.channel
-    .send({
+  message
+    .reply({
       embeds: [
-        quoteEmbed
+        new Discord.MessageEmbed()
           .setDescription(`${fetched.content}`)
           .setColor("GREEN")
           .setAuthor(
