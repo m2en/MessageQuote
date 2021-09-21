@@ -39,6 +39,10 @@ client.on("interactionCreate", async (interaction) => {
   }
 });
 
+const errorEmbed = new Discord.MessageEmbed()
+  .setTitle("エラーが発生しました。")
+  .setColor("RED");
+
 client.on("messageCreate", async (message) => {
   if (!message.content.startsWith("https://discord.com/channels/")) {
     return;
@@ -52,28 +56,53 @@ client.on("messageCreate", async (message) => {
   const messageID = splittedMessage[6];
   if (channel == null) {
     console.log("MQ Info: channel not found");
-    message.channel.send("チャンネルがみつかりませんでした");
+    await message.reply({
+      embeds: [
+        errorEmbed.setDescription(
+          "メッセージが見つかりませんでした。IDが正しいか、閲覧権限が有効か確認してください。"
+        ),
+      ],
+    });
     return;
   }
   if (!channel.isText()) {
     message.channel.send("テキストチャンネルではありません");
+    await message.reply({
+      embeds: [
+        errorEmbed.setDescription(
+          "テキストチャンネルのメッセージURLではありません。スレッド・アナウンスチャンネル・ストアチャンネルのメッセージURLは取得できません。"
+        ),
+      ],
+    });
     return;
   }
-  const quoteEmbed = new Discord.MessageEmbed().setAuthor(
+  const quoteEmbed = new Discord.MessageEmbed().setFooter(
     `To ${message.author.tag}`
   );
 
   const fetched = await channel?.messages?.fetch(`${messageID}`);
   if (fetched == null) {
-    console.log("MQ Info: message not found.");
-    message.channel.send("メッセージが見つかりませんでした。");
+    console.log("MQ Not Message: message not found.");
+    await message.reply({
+      embeds: [
+        errorEmbed.setDescription(
+          "メッセージが見つかりませんでした。IDが正しいか、確認してください。"
+        ),
+      ],
+    });
     return;
   }
 
   fetched.channel
     .send({
       embeds: [
-        quoteEmbed.setDescription(`${fetched.content}`).setColor("GREEN"),
+        quoteEmbed
+          .setDescription(`${fetched.content}`)
+          .setColor("GREEN")
+          .setAuthor(
+            `${fetched.author.username}`,
+            `${fetched.author.avatarURL()}`
+          ),
       ],
     })
     .catch(console.error);
