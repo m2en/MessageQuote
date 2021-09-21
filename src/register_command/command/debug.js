@@ -4,7 +4,7 @@ module.exports = {
   data: new SlashCommandBuilder()
     .setName("debug")
     .setDescription("Debugging messages.")
-    .addIntegerOption((option) =>
+    .addStringOption((option) =>
       option
         .setName("id")
         .setDescription("Specify the message ID to debug.")
