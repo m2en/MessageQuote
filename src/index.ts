@@ -26,9 +26,7 @@ const errorEmbed = new Discord.MessageEmbed()
 
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isCommand()) return;
-  //これにしなかった 死にます
   switch (interaction.commandName) {
-    // ここコマンドごとに関数に分けたほうがいいような気もする
     case "help":
       await interaction.reply({
         content: HELP_MESSAGE,
@@ -52,9 +50,6 @@ client.on("messageCreate", async (message) => {
   if (!message.content.startsWith("https://discord.com/channels/")) {
     return;
   }
-  /**
-   * ~~~/channels/<serverid>/<channelid>/<messageid>
-   */
   const splittedMessage = message.content.split("/");
   const channelID = splittedMessage[5];
   const channel = client.channels.cache.get(`${channelID}`);
