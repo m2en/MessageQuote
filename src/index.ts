@@ -20,6 +20,10 @@ client.once("ready", () => {
   console.log(`Ready: ${client.user?.username}が準備完了しました。`);
 });
 
+const errorEmbed = new Discord.MessageEmbed()
+  .setTitle("エラーが発生しました。")
+  .setColor("RED");
+
 client.on("interactionCreate", async (interaction) => {
   if (!interaction.isCommand()) return;
   //これにしなかった 死にます
@@ -36,12 +40,13 @@ client.on("interactionCreate", async (interaction) => {
         content: `<a:gif_ichiyo:709701170763137054>  ${client.ws.ping}ms <:isozaki_kirito:836249519632023623> `,
       });
       break;
+    case "debug":
+      const debugContent = interaction.options.getString("content");
+      await interaction.reply({
+        content: "メッセージをデバッグします。\n\n" + `\`${debugContent}\``,
+      });
   }
 });
-
-const errorEmbed = new Discord.MessageEmbed()
-  .setTitle("エラーが発生しました。")
-  .setColor("RED");
 
 client.on("messageCreate", async (message) => {
   if (!message.content.startsWith("https://discord.com/channels/")) {
