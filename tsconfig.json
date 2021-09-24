@@ -17,6 +17,10 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "pretty": true,
-    "newLine": "CRLF"
+    "newLine": "CRLF",
+    "compilerOptions": {
+      "moduleResolution": "node",
+      "resolveJsonModule": true
+    }
   }
 }
