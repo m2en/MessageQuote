@@ -18,9 +18,5 @@
     "experimentalDecorators": true,
     "pretty": true,
     "newLine": "CRLF",
-    "compilerOptions": {
-      "moduleResolution": "node",
-      "resolveJsonModule": true
-    }
   }
 }
