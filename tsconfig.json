@@ -17,6 +17,6 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "pretty": true,
-    "newLine": "CRLF"
+    "newLine": "CRLF",
   }
 }
