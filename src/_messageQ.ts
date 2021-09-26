@@ -1,4 +1,5 @@
 import Discord from "discord.js";
+import ErrorInfo from "./message/error/error.json";
 
 export function messageQ(client: Discord.Client) {
   client.on("messageCreate", async (message) => {
@@ -14,22 +15,18 @@ export function messageQ(client: Discord.Client) {
     const errorEmbed = new Discord.MessageEmbed()
       .setTitle("お例外がお呼ばれされました")
       .setColor("RED");
-    const notFound: string = "Nonexistent error: The channel does not exist.";
-    const notMsg: string = "Missing content: The message does not exist.";
-    const noText: string =
-      "Unavailable Content: The source channel of the message you are trying to quote is not a text channel. Messages in threaded channels, etc. cannot be quoted.";
 
     if (channel == null) {
-      console.error(notFound);
+      console.error(ErrorInfo.notFound);
       await message.reply({
-        embeds: [errorEmbed.setDescription(notFound)],
+        embeds: [errorEmbed.setDescription(ErrorInfo.notFound)],
       });
       return;
     }
     if (!channel.isText()) {
-      console.error(noText);
+      console.error(ErrorInfo.notText);
       await message.reply({
-        embeds: [errorEmbed.setDescription(noText)],
+        embeds: [errorEmbed.setDescription(ErrorInfo.notText)],
       });
       return;
     }
@@ -37,9 +34,9 @@ export function messageQ(client: Discord.Client) {
     const fetchMessage = await channel?.messages?.fetch(`${messageID}`);
 
     if (fetchMessage == null) {
-      console.error(notMsg);
+      console.error(ErrorInfo.notMsg);
       await message.reply({
-        embeds: [errorEmbed.setDescription(notMsg)],
+        embeds: [errorEmbed.setDescription(ErrorInfo.notMsg)],
       });
       return;
     }
@@ -57,14 +54,23 @@ export function messageQ(client: Discord.Client) {
         `${fetchMessage.author.avatarURL()}`
       );
 
-    await message
-      .reply({
+    try {
+      await message.reply({
         embeds: [quoteEmbed],
         components: [
           new Discord.MessageActionRow().addComponents([messageButton]),
         ],
-      })
-      .catch(console.error);
+      });
+    } catch (error) {
+      await message.reply({
+        embeds: [
+          errorEmbed
+            .setDescription(ErrorInfo.AllErrors)
+            .addField("Reason for error", "```\n" + error + "\n```"),
+        ],
+      });
+      console.error(error);
+    }
   });
 
   return "messageQ";
