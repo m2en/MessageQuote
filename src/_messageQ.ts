@@ -9,13 +9,10 @@ export function messageQ(client: Discord.Client) {
     const channelID = splitMessage[5];
     const messageID = splitMessage[6];
     const channel = client.channels.cache.get(`${channelID}`);
-
     const errorEmbed = new Discord.MessageEmbed()
       .setTitle("お例外がお呼ばれされました")
       .setColor("RED");
-    if (!regex.test(str)) {
-      return;
-    }
+    if (message.author.bot || !regex.test(str)) return;
     if (channel == null) {
       console.error(ErrorInfo.notFound);
       await message.reply({
@@ -32,7 +29,6 @@ export function messageQ(client: Discord.Client) {
     }
 
     const fetchMessage = await channel?.messages?.fetch(`${messageID}`);
-
     if (fetchMessage == null) {
       console.error(ErrorInfo.notMsg);
       await message.reply({
@@ -59,11 +55,22 @@ export function messageQ(client: Discord.Client) {
         `${fetchMessage.author.avatarURL()}`
       )
       .setTimestamp();
-
     try {
-      await message.reply({
-        embeds: [quoteEmbed],
-      });
+      switch (message.author.id) {
+        case "521958252280545280":
+          await message.reply({
+            embeds: [
+              errorEmbed.setDescription(
+                "えぬさんのメッセージリンクの展開に失敗しました。"
+              ),
+            ],
+          });
+          break;
+        default:
+          await message.reply({
+            embeds: [quoteEmbed],
+          });
+      }
     } catch (error) {
       await message.reply({
         embeds: [
