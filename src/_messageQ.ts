@@ -56,9 +56,18 @@ export function messageQ(client: Discord.Client) {
       )
       .setTimestamp();
     try {
-      await message.reply({
-        embeds: [quoteEmbed],
-      });
+      if (fetchMessage.attachments.size) {
+        const file = fetchMessage.attachments.map(
+          (attachment) => attachment.url
+        );
+        await message.reply({
+          embeds: [quoteEmbed.setImage(`${file}`)],
+        });
+      } else {
+        await message.reply({
+          embeds: [quoteEmbed],
+        });
+      }
     } catch (error) {
       await message.reply({
         embeds: [
