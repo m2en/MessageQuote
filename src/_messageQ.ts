@@ -56,21 +56,9 @@ export function messageQ(client: Discord.Client) {
       )
       .setTimestamp();
     try {
-      switch (message.author.id) {
-        case "521958252280545280":
-          await message.reply({
-            embeds: [
-              errorEmbed.setDescription(
-                "えぬさんのメッセージリンクの展開に失敗しました。"
-              ),
-            ],
-          });
-          break;
-        default:
-          await message.reply({
-            embeds: [quoteEmbed],
-          });
-      }
+      await message.reply({
+        embeds: [quoteEmbed],
+      });
     } catch (error) {
       await message.reply({
         embeds: [
