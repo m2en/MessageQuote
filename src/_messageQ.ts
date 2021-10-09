@@ -40,6 +40,16 @@ export function messageQ(client: Discord.Client) {
       });
       return;
     }
+    if (fetchMessage.system) {
+      await message.reply({
+        embeds: [
+          errorEmbed.setDescription(
+            "システムメッセージのため引用をキャンセルしました。"
+          ),
+        ],
+      });
+      return;
+    }
 
     const quoteEmbed = new Discord.MessageEmbed()
       .setDescription(`${fetchMessage.content}`)
