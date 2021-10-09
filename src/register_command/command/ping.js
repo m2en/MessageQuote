@@ -3,5 +3,5 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("ping")
-    .setDescription("Measure and display latency."),
+    .setDescription("レイテンシを測定して表示します。"),
 };

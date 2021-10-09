@@ -3,11 +3,11 @@ const { SlashCommandBuilder } = require("@discordjs/builders");
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("debug")
-    .setDescription("Debugging messages.")
+    .setDescription("文字列をデバックします。")
     .addStringOption((option) =>
       option
         .setName("content")
-        .setDescription("Specify the message to debug.")
+        .setDescription("文字列を指定します。")
         .setRequired(true)
     ),
 };
