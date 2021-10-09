@@ -3,10 +3,8 @@ import ErrorInfo from "./message/error/error.json";
 
 export function messageQ(client: Discord.Client) {
   client.on("messageCreate", async (message) => {
-    if (!message.content.startsWith("https://discord.com/channels/")) {
-      return;
-    }
-
+    const regex = /https:\/\/discord.com\/channels\/([0-9]+)\/([0-9]+)/;
+    const str = message.content;
     const splitMessage = message.content.split("/");
     const channelID = splitMessage[5];
     const messageID = splitMessage[6];
@@ -15,7 +13,9 @@ export function messageQ(client: Discord.Client) {
     const errorEmbed = new Discord.MessageEmbed()
       .setTitle("お例外がお呼ばれされました")
       .setColor("RED");
-
+    if (!regex.test(str)) {
+      return;
+    }
     if (channel == null) {
       console.error(ErrorInfo.notFound);
       await message.reply({
@@ -41,25 +41,18 @@ export function messageQ(client: Discord.Client) {
       return;
     }
 
-    const messageButton = new Discord.MessageButton()
-      .setStyle("LINK")
-      .setLabel("ジャンプ")
-      .setURL(`${message.content}`);
-
     const quoteEmbed = new Discord.MessageEmbed()
       .setDescription(`${fetchMessage.content}`)
       .setColor("AQUA")
       .setAuthor(
         `${fetchMessage.author.username}`,
         `${fetchMessage.author.avatarURL()}`
-      );
+      )
+      .setTimestamp();
 
     try {
       await message.reply({
         embeds: [quoteEmbed],
-        components: [
-          new Discord.MessageActionRow().addComponents([messageButton]),
-        ],
       });
     } catch (error) {
       await message.reply({
@@ -72,6 +65,5 @@ export function messageQ(client: Discord.Client) {
       console.error(error);
     }
   });
-
   return "messageQ";
 }
