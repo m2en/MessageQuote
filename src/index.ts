@@ -2,6 +2,7 @@ import Discord from "discord.js";
 import dotenv from "dotenv";
 import { Command } from "./_Command";
 import { messageQ } from "./_messageQ";
+import Event from "./_Event";
 dotenv.config();
 
 const client = new Discord.Client({
@@ -21,3 +22,4 @@ client.once("ready", () => {
 
 messageQ(client);
 Command(client);
+Event(client);
