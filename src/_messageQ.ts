@@ -1,53 +1,51 @@
 import Discord from "discord.js";
+import ErrorInfo from "./message/error/error.json";
 
 export function messageQ(client: Discord.Client) {
   client.on("messageCreate", async (message) => {
-    if (!message.content.startsWith("https://discord.com/channels/")) {
-      return;
-    }
-
+    const regex = /https:\/\/discord.com\/channels\/([0-9]+)\/([0-9]+)/;
+    const str = message.content;
     const splitMessage = message.content.split("/");
     const channelID = splitMessage[5];
     const messageID = splitMessage[6];
     const channel = client.channels.cache.get(`${channelID}`);
-
     const errorEmbed = new Discord.MessageEmbed()
       .setTitle("お例外がお呼ばれされました")
       .setColor("RED");
-    const notFound: string = "Nonexistent error: The channel does not exist.";
-    const notMsg: string = "Missing content: The message does not exist.";
-    const noText: string =
-      "Unavailable Content: The source channel of the message you are trying to quote is not a text channel. Messages in threaded channels, etc. cannot be quoted.";
-
+    if (message.author.bot || !regex.test(str)) return;
     if (channel == null) {
-      console.error(notFound);
+      console.error(ErrorInfo.notFound);
       await message.reply({
-        embeds: [errorEmbed.setDescription(notFound)],
+        embeds: [errorEmbed.setDescription(ErrorInfo.notFound)],
       });
       return;
     }
     if (!channel.isText()) {
-      console.error(noText);
+      console.error(ErrorInfo.notText);
       await message.reply({
-        embeds: [errorEmbed.setDescription(noText)],
+        embeds: [errorEmbed.setDescription(ErrorInfo.notText)],
       });
       return;
     }
 
     const fetchMessage = await channel?.messages?.fetch(`${messageID}`);
-
     if (fetchMessage == null) {
-      console.error(notMsg);
+      console.error(ErrorInfo.notMsg);
       await message.reply({
-        embeds: [errorEmbed.setDescription(notMsg)],
+        embeds: [errorEmbed.setDescription(ErrorInfo.notMsg)],
       });
       return;
     }
-
-    const messageButton = new Discord.MessageButton()
-      .setStyle("LINK")
-      .setLabel("ジャンプ")
-      .setURL(`${message.content}`);
+    if (fetchMessage.system) {
+      await message.reply({
+        embeds: [
+          errorEmbed.setDescription(
+            "システムメッセージのため引用をキャンセルしました。"
+          ),
+        ],
+      });
+      return;
+    }
 
     const quoteEmbed = new Discord.MessageEmbed()
       .setDescription(`${fetchMessage.content}`)
@@ -55,17 +53,31 @@ export function messageQ(client: Discord.Client) {
       .setAuthor(
         `${fetchMessage.author.username}`,
         `${fetchMessage.author.avatarURL()}`
-      );
-
-    await message
-      .reply({
-        embeds: [quoteEmbed],
-        components: [
-          new Discord.MessageActionRow().addComponents([messageButton]),
+      )
+      .setTimestamp();
+    try {
+      if (fetchMessage.attachments.size) {
+        const file = fetchMessage.attachments.map(
+          (attachment) => attachment.url
+        );
+        await message.reply({
+          embeds: [quoteEmbed.setImage(`${file}`)],
+        });
+      } else {
+        await message.reply({
+          embeds: [quoteEmbed],
+        });
+      }
+    } catch (error) {
+      await message.reply({
+        embeds: [
+          errorEmbed
+            .setDescription(ErrorInfo.AllErrors)
+            .addField("Reason for error", "```\n" + error + "\n```"),
         ],
-      })
-      .catch(console.error);
+      });
+      console.error(error);
+    }
   });
-
   return "messageQ";
 }
