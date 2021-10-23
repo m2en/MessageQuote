@@ -5,6 +5,7 @@ export function messageQ(client: Discord.Client) {
   client.on("messageCreate", async (message) => {
     const regex = /https:\/\/discord.com\/channels\/([0-9]+)\/([0-9]+)/;
     const str = message.content;
+    str.replace(/[^0-9]/g, "");
     const splitMessage = message.content.split("/");
     const channelID = splitMessage[5];
     const messageID = splitMessage[6];
@@ -28,12 +29,15 @@ export function messageQ(client: Discord.Client) {
       return;
     }
 
-    const fetchMessage = await channel?.messages?.fetch(`${messageID}`);
+    const fetchMessage = await channel?.messages
+      ?.fetch(`${messageID}`)
+      .catch(console.error);
+
     if (fetchMessage == null) {
-      console.error(ErrorInfo.notMsg);
-      await message.reply({
-        embeds: [errorEmbed.setDescription(ErrorInfo.notMsg)],
-      });
+      message.channel.sendTyping();
+      message.channel.send(
+        "引用に失敗しました。開発者はこのエラーを認知しており、修正するために頑張ってます。\n<https://github.com/approvers/MessageQuote/issues/7>"
+      );
       return;
     }
     if (fetchMessage.system) {
