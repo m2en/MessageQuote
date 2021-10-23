@@ -18,11 +18,6 @@ export function Command(client: Discord.Client) {
           content: `<a:gif_ichiyo:709701170763137054>  ${client.ws.ping}ms <:isozaki_kirito:836249519632023623> `,
         });
         break;
-      case "debug":
-        const debugContent = interaction.options.getString("content");
-        await interaction.reply({
-          content: "メッセージをデバッグします。\n\n" + `\`${debugContent}\``,
-        });
     }
   });
 
