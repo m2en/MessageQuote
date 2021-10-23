@@ -8,7 +8,7 @@ export default function Event(client: Discord.Client) {
     thread.join().catch(console.error);
     thread
       .send({
-        content: `<@${thread.ownerId}>, スレッドに自動参加しました。`,
+        content: `<@${thread.ownerId}>, **スレッド:${thread.name}**に自動参加しました。スレッド内のメッセージを引用することが可能です。`,
       })
       .catch(console.error);
   });
