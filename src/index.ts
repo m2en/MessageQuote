@@ -20,7 +20,7 @@ async function onReady() {
   await client.application?.commands.set(
     [
       {
-        name: "デバック / Debug",
+        name: "引用する",
         type: "MESSAGE",
       },
     ],
