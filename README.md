@@ -1,27 +1,47 @@
 # MessageQuote
 
-メッセージリンク、IDからメッセージを取得して展開するBot。
+メッセージリンクからIDを取得して引用できるDiscord Bot
+
+TypeScriptとDiscord.jsを使い、メッセージIDからDiscord APIでメッセージを取得しています。
+
+----
+
+```shell
+$ git clone https://github.com/approvers/MessageQuote.git
+$ yarn install 
+$ echo .env >> TOKEN=~~~~
+```
+
+```shell
+$ yarn debug 
+ts-nodeでテスト(コンパイル不要)
+$ yarn compile
+JavaScriptにコンパイル
+$ yarn start
+起動
+```
+
+## 環境変数
+
+| 値 | 概要 |
+| TOKEN | DiscordのBotのToken |
 
 ## 実装
 
-### 言語
+### メッセージ引用
+`./src/_messageQ.ts`
 
-TypeScript
+- メッセージリンクからメッセージIDを取得
+- メッセージIDでメッセージを取得
+- Embedに代入
 
-### ライブラリ
+### Slash Command
+`./src/_Command.ts` (限界開発鯖内でのみ利用できるギルドコマンド)
 
-discord.js
+- interactionAPIを使っています。
 
-### 処理
+### スレッド参加
+`./src/_Event.ts`
 
-| 処理 | ファイル |
-| ---- | ---- |
-| メイン | `index.ts` |
-| 引用 | `_messageQ.ts` |
-| (/) コマンド | `_Command.ts` |
+- スレッド作成のイベントハンドラを使用
 
-### モジュールのインストール
-
-```bash
-$ yarn install
-```
