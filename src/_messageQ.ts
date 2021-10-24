@@ -7,10 +7,12 @@ export function messageQ(client: Discord.Client) {
     const str = message.content;
     str.replace(/[^0-9]/g, "");
     const splitMessage = message.content.split("/");
-    const channelID = splitMessage[5];
-    const messageID = splitMessage[6];
+
     const match = str.match(regex);
     if (message.author.bot || match == null) return;
+    const channelID = match[1];
+    const messageID = match[2];
+
     const channel = client.channels.cache.get(`${channelID}`);
     const errorEmbed = new Discord.MessageEmbed()
       .setTitle("お例外がお呼ばれされました")
