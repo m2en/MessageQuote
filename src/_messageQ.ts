@@ -5,8 +5,6 @@ export function messageQ(client: Discord.Client) {
   client.on("messageCreate", async (message) => {
     const regex = /https:\/\/discord.com\/channels\/[0-9]+\/([0-9]+)\/([0-9]+)/;
     const str = message.content;
-    str.replace(/[^0-9]/g, "");
-    const splitMessage = message.content.split("/");
 
     const match = str.match(regex);
     if (message.author.bot || match == null) return;
