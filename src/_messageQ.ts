@@ -9,11 +9,12 @@ export function messageQ(client: Discord.Client) {
     const splitMessage = message.content.split("/");
     const channelID = splitMessage[5];
     const messageID = splitMessage[6];
+    const match = str.match(regex);
+    if (message.author.bot || match == null) return;
     const channel = client.channels.cache.get(`${channelID}`);
     const errorEmbed = new Discord.MessageEmbed()
       .setTitle("お例外がお呼ばれされました")
       .setColor("RED");
-    if (message.author.bot || !regex.test(str)) return;
     if (channel == null) {
       console.error(ErrorInfo.notFound);
       await message.reply({
