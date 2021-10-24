@@ -35,10 +35,10 @@ export function messageQ(client: Discord.Client) {
       .catch(console.error);
 
     if (fetchMessage == null) {
-      message.channel.sendTyping();
-      message.channel.send(
-        "引用に失敗しました。開発者はこのエラーを認知しており、修正するために頑張ってます。\n<https://github.com/approvers/MessageQuote/issues/7>"
-      );
+      console.error(ErrorInfo.notMsg);
+      await message.reply({
+        embeds: [errorEmbed.setDescription(ErrorInfo.notMsg)],
+      });
       return;
     }
     if (fetchMessage.system) {
