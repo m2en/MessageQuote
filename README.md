@@ -9,21 +9,19 @@ TypeScriptとDiscord.jsを使い、メッセージIDからDiscord APIでメッ�
 ```shell
 $ git clone https://github.com/approvers/MessageQuote.git
 $ yarn install 
-$ echo .env >> TOKEN=~~~~
+$ echo .env >> TOKEN=
 ```
 
 ```shell
 $ yarn debug 
-ts-nodeでテスト(コンパイル不要)
 $ yarn compile
-JavaScriptにコンパイル
 $ yarn start
-起動
 ```
 
 ## 環境変数
 
 | 値 | 概要 |
+| --- | --- |
 | TOKEN | DiscordのBotのToken |
 
 ## 実装
