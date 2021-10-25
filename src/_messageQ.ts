@@ -90,7 +90,7 @@ export function messageQ(client: Discord.Client) {
       thread.join().catch(console.error);
       thread
         .send({
-          content: `<@${thread.ownerId}>, **スレッド:${thread.name}**に自動参加しました。スレッド内のメッセージを引用することが可能です。`,
+          content: `<@${thread.ownerId}>, **スレッド:${thread.name}**に自動参加しました。スレッド内のメッセージを引用することが可能になりました。`,
         })
         .catch(console.error);
     });
