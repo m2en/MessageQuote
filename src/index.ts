@@ -15,21 +15,8 @@ if (TOKEN == null) {
 
 client.login(TOKEN).catch(console.error);
 
-async function onReady() {
-  await client.application?.commands.set(
-    [
-      {
-        name: "引用する",
-        type: "MESSAGE",
-      },
-    ],
-    "683939861539192860"
-  );
-}
-
 client.once("ready", () => {
   console.log(`Ready: ${client.user?.username}が準備完了しました。`);
-  onReady().catch(console.error); // ContentMenuの登録操作
 });
 
 messageQ(client);

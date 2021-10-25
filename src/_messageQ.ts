@@ -33,7 +33,6 @@ export function messageQ(client: Discord.Client) {
     const fetchMessage = await channel?.messages
       ?.fetch(`${messageID}`)
       .catch(console.error);
-
     if (fetchMessage == null) {
       console.error(ErrorInfo.notMsg);
       await message.reply({
@@ -82,29 +81,6 @@ export function messageQ(client: Discord.Client) {
         ],
       });
       console.error(error);
-    }
-  });
-
-  // 引用する - ContextMenuの処理 //
-  client.on("interactionCreate", (interaction) => {
-    if (!interaction.isContextMenu()) return;
-    if (interaction.targetId === "引用する") {
-      const contextMessage = interaction.options.getMessage("引用する");
-      if (contextMessage === null) {
-        return;
-      }
-      try {
-        interaction.reply({
-          embeds: [
-            new Discord.MessageEmbed()
-              .setDescription(`${contextMessage}`)
-              .setAuthor(`${contextMessage.author}`)
-              .setColor("AQUA"),
-          ],
-        });
-      } catch (error) {
-        return;
-      }
     }
   });
 }
