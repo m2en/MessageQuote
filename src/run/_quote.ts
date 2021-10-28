@@ -7,7 +7,7 @@ export function _quote(client: Discord.Client) {
     /**
      * https://(ptb.|canary.)?discord.com/channels/サーバーID/チャンネルID/メッセージID
      */
-    const regex = /https:\/\/discord.com\/channels\/[0-9]+\/([0-9]+)\/([0-9]+)/;
+    const regex = /https:\/\/discord.com\/channels\/\d+\/(\d+)\/(\d+)/;
     const str = msg.content;
     const match = str.match(regex);
     if (match === null) return;
