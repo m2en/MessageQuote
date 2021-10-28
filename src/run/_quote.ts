@@ -76,7 +76,7 @@ export function _quote(client: Discord.Client) {
         });
       }
     } catch (error) {
-      console.error(error);
+      await console.error(error);
     }
   });
 
