@@ -1,6 +1,0 @@
-{
-  "notFound": "Nonexistent error: The channel does not exist.",
-  "notMsg": "Missing content: The message does not exist.",
-  "notText": "Unavailable Content: The source channel of the message you are trying to quote is not a text channel. Messages in threaded channels, etc. cannot be quoted.",
-  "AllErrors": "MessageQuote Error: The quote failed for some reason. Terminate the quoting process."
-}
