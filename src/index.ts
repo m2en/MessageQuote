@@ -1,6 +1,6 @@
 import Discord from "discord.js";
 import dotenv from "dotenv";
-import { messageQ } from "./_messageQ";
+import { _quote } from "./run/_quote";
 dotenv.config();
 
 const client = new Discord.Client({
@@ -18,4 +18,4 @@ client.once("ready", () => {
   console.log(`Ready: ${client.user?.username}が準備完了しました。`);
 });
 
-messageQ(client);
+_quote(client);
