@@ -1,8 +1,6 @@
 import Discord from "discord.js";
 import dotenv from "dotenv";
-import { Command } from "./_Command";
-import { messageQ } from "./_messageQ";
-import Event from "./_Event";
+import { _quote } from "./run/_quote";
 dotenv.config();
 
 const client = new Discord.Client({
@@ -16,23 +14,8 @@ if (TOKEN == null) {
 
 client.login(TOKEN).catch(console.error);
 
-async function onReady() {
-  await client.application?.commands.set(
-    [
-      {
-        name: "引用する",
-        type: "MESSAGE",
-      },
-    ],
-    "683939861539192860"
-  );
-}
-
 client.once("ready", () => {
   console.log(`Ready: ${client.user?.username}が準備完了しました。`);
-  onReady().catch(console.error); // ContentMenuの登録操作
 });
 
-messageQ(client);
-Command(client);
-Event(client);
+_quote(client);
