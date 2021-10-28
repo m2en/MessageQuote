@@ -19,35 +19,31 @@ export function _quote(client: Discord.Client) {
       .setTitle("例外の呼び出し - エラーが発生しました。")
       .setColor("RED");
     if (quoteChannel == null) {
-      msg
-        .reply({
-          embeds: [errorEmbed.setDescription(`Channel not found`)],
-        })
-        .catch(console.error);
+      await msg.reply({
+        embeds: [errorEmbed.setDescription(`Channel not found`)],
+      });
+
       return;
     }
     if (!quoteChannel.isText()) {
-      msg
-        .reply({
-          embeds: [
-            errorEmbed.setDescription(
-              `**Channel:**<#${quoteChannel.id}> not text channel`
-            ),
-          ],
-        })
-        .catch(console.error);
+      await msg.reply({
+        embeds: [
+          errorEmbed.setDescription(
+            `**Channel:**<#${quoteChannel.id}> not text channel`
+          ),
+        ],
+      });
+
       return;
     }
 
-    const quoteMessage = await quoteChannel.messages
-      .fetch(`${messageID}`)
-      .catch(console.error);
+    const quoteMessage = await quoteChannel.messages.fetch(`${messageID}`);
+
     if (quoteMessage == null) {
-      msg
-        .reply({
-          embeds: [errorEmbed.setDescription("Message not found.")],
-        })
-        .catch(console.error);
+      await msg.reply({
+        embeds: [errorEmbed.setDescription("Message not found.")],
+      });
+
       return;
     }
     if (quoteMessage.system) {
@@ -76,19 +72,17 @@ export function _quote(client: Discord.Client) {
         });
       }
     } catch (error) {
-      await console.error(error);
+      console.error(error);
     }
   });
 
-  client.on("threadCreate", (thread) => {
+  client.on("threadCreate", async (thread) => {
     if (thread === null) {
       return;
     }
-    thread.join().catch(console.error);
-    thread
-      .send({
-        content: `<@${thread.ownerId}>, **スレッド:${thread.name}**に自動参加しました。スレッド内のメッセージを引用することが可能になりました。`,
-      })
-      .catch(console.error);
+    await thread.join();
+    await thread.send({
+      content: `<@${thread.ownerId}>, **スレッド:${thread.name}**に自動参加しました。スレッド内のメッセージを引用することが可能になりました。`,
+    });
   });
 }
