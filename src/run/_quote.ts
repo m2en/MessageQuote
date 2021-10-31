@@ -75,14 +75,4 @@ export function _quote(client: Discord.Client) {
       console.error(error);
     }
   });
-
-  client.on("threadCreate", async (thread) => {
-    if (thread === null) {
-      return;
-    }
-    await thread.join();
-    await thread.send({
-      content: `<@${thread.ownerId}>, **スレッド:${thread.name}**に自動参加しました。スレッド内のメッセージを引用することが可能になりました。`,
-    });
-  });
 }
