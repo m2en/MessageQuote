@@ -1,6 +1,6 @@
-import Discord from "discord.js";
+import { Client, MessageEmbed } from "discord.js";
 
-export function _rt(client: Discord.Client) {
+export function _rt(client: Client) {
   client.on("messageCreate", async (message) => {
     if (message.author.bot) return;
     if (message.content.startsWith("RT:")) {
@@ -18,7 +18,7 @@ export function _rt(client: Discord.Client) {
 
       if (quoteMessage == null || quoteMessage.system) return;
 
-      const rtEmbed = new Discord.MessageEmbed()
+      const rtEmbed = new MessageEmbed()
         .setAuthor(
           `${message.author.username} さんが ${quoteMessage.author.username} さんのTimesをRTしました。`,
           `${message.author.avatarURL()}`

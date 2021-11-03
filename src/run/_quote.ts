@@ -1,6 +1,6 @@
-import Discord from "discord.js";
+import { Client, MessageEmbed } from "discord.js";
 
-export function _quote(client: Discord.Client) {
+export function _quote(client: Client) {
   client.on("messageCreate", async (msg) => {
     if (
       msg.author.bot ||
@@ -20,7 +20,7 @@ export function _quote(client: Discord.Client) {
     const messageID = match[2];
     const quoteChannel = client.channels.cache.get(`${channelID}`);
 
-    const errorEmbed = new Discord.MessageEmbed()
+    const errorEmbed = new MessageEmbed()
       .setTitle("例外の呼び出し - エラーが発生しました。")
       .setColor("RED");
     if (quoteChannel == null) {
@@ -55,7 +55,7 @@ export function _quote(client: Discord.Client) {
       return;
     }
 
-    const quoteEmbed = new Discord.MessageEmbed()
+    const quoteEmbed = new MessageEmbed()
       .setDescription(`${quoteMessage.content}`)
       .setColor("RANDOM")
       .setAuthor(

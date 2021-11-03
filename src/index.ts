@@ -1,10 +1,10 @@
-import Discord from "discord.js";
+import { Client } from "discord.js";
 import dotenv from "dotenv";
 import { _quote } from "./run/_quote";
 import { _rt } from "./run/gtimes/_rt";
 dotenv.config();
 
-const client = new Discord.Client({
+const client = new Client({
   intents: ["GUILDS", "GUILD_MESSAGES"],
 });
 
