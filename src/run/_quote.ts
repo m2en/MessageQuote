@@ -16,9 +16,8 @@ export function _quote(client: Client) {
     const str = msg.content;
     const match = str.match(regex);
     if (match === null) return;
-    const channelID = match[1];
-    const messageID = match[2];
-    const quoteChannel = client.channels.cache.get(`${channelID}`);
+    const [, channelID, messageID] = match;
+    const quoteChannel = client.channels.cache.get(channelID);
 
     const errorEmbed = new MessageEmbed()
       .setTitle("例外の呼び出し - エラーが発生しました。")
@@ -42,7 +41,7 @@ export function _quote(client: Client) {
       return;
     }
 
-    const quoteMessage = await quoteChannel.messages.fetch(`${messageID}`);
+    const quoteMessage = await quoteChannel.messages.fetch(messageID);
 
     if (quoteMessage == null) {
       await msg.reply({
@@ -56,10 +55,10 @@ export function _quote(client: Client) {
     }
 
     const quoteEmbed = new MessageEmbed()
-      .setDescription(`${quoteMessage.content}`)
+      .setDescription(quoteMessage.content)
       .setColor("RANDOM")
       .setAuthor(
-        `${quoteMessage.author.username}`,
+        quoteMessage.author.username,
         `${quoteMessage.author.avatarURL()}`
       )
       .setFooter(`${quoteMessage.createdAt}`);

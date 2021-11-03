@@ -9,11 +9,11 @@ export function _rt(client: Client) {
       const match = str.match(regex);
       if (match === null) return;
       const [, channelID, messageID] = match;
-      const quoteChannel = client.channels.cache.get(`${channelID}`);
+      const quoteChannel = client.channels.cache.get(channelID);
       // @ts-ignore
       if ([quoteChannel, quoteChannel].includes(null)) return;
       if (!quoteChannel?.isText()) return;
-      const quoteMessage = await quoteChannel?.messages.fetch(`${messageID}`);
+      const quoteMessage = await quoteChannel?.messages.fetch(messageID);
 
       if (quoteMessage == null || quoteMessage.system) return;
 
@@ -22,7 +22,7 @@ export function _rt(client: Client) {
           `${message.author.username} さんが ${quoteMessage.author.username} さんのTimesをRTしました。`,
           `${message.author.avatarURL()}`
         )
-        .setDescription(`${quoteMessage.content}`)
+        .setDescription(quoteMessage.content)
         .setFooter(`${quoteMessage.createdAt}`)
         .setColor("GREEN");
 
