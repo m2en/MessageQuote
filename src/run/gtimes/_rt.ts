@@ -8,8 +8,7 @@ export function _rt(client: Client) {
       const str = message.content;
       const match = str.match(regex);
       if (match === null) return;
-      const channelID = match[1];
-      const messageID = match[2];
+      const [, channelID, messageID] = match;
       const quoteChannel = client.channels.cache.get(`${channelID}`);
       // @ts-ignore
       if ([quoteChannel, quoteChannel].includes(null)) return;
