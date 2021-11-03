@@ -2,7 +2,12 @@ import Discord from "discord.js";
 
 export function _quote(client: Discord.Client) {
   client.on("messageCreate", async (msg) => {
-    if (msg.author.bot || msg.content.startsWith(";")) return;
+    if (
+      msg.author.bot ||
+      msg.content.startsWith(";") ||
+      msg.content.startsWith("RT:")
+    )
+      return;
 
     /**
      * https://(ptb.|canary.)?discord.com/channels/サーバーID/チャンネルID/メッセージID
@@ -58,21 +63,14 @@ export function _quote(client: Discord.Client) {
         `${quoteMessage.author.avatarURL()}`
       )
       .setFooter(`${quoteMessage.createdAt}`);
-    try {
-      if (quoteMessage.attachments.size) {
-        const file = quoteMessage.attachments.map(
-          (attachment) => attachment.url
-        );
-        await msg.reply({
-          embeds: [quoteEmbed.setImage(`${file}`)],
-        });
-      } else {
-        await msg.reply({
-          embeds: [quoteEmbed],
-        });
-      }
-    } catch (error) {
-      console.error(error);
+    if (quoteMessage.attachments.size) {
+      const file = quoteMessage.attachments.map((attachment) => attachment.url);
+      quoteEmbed.setImage(`${file}`);
     }
+    msg.channel
+      .send({
+        embeds: [quoteEmbed],
+      })
+      .catch(console.error);
   });
 }
