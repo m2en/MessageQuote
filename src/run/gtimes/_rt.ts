@@ -10,8 +10,7 @@ export function _rt(client: Client) {
       if (match === null) return;
       const [, channelID, messageID] = match;
       const quoteChannel = client.channels.cache.get(channelID);
-      // @ts-ignore
-      if ([quoteChannel, quoteChannel].includes(null)) return;
+      if ([quoteChannel, quoteChannel].includes(undefined)) return;
       if (!quoteChannel?.isText()) return;
       const quoteMessage = await quoteChannel?.messages.fetch(messageID);
 
