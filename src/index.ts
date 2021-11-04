@@ -16,7 +16,11 @@ if (TOKEN == null) {
 client.login(TOKEN).catch(console.error);
 
 client.once("ready", () => {
-  console.log(`Ready: ${client.user?.username}が準備完了しました。`);
+  console.log(
+    `Ready: ${client.user?.username}が準備完了しました。 - v` +
+      process.env.npm_package_version
+  );
+  client.user?.setActivity("v" + process.env.npm_package_version);
 });
 
 _quote(client);
