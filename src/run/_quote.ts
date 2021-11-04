@@ -61,7 +61,7 @@ export function _quote(client: Client) {
         quoteMessage.author.username,
         `${quoteMessage.author.avatarURL()}`
       )
-      .addField("送信日時", `<t:${quoteMessage.createdTimestamp}>`);
+      .setTimestamp(quoteMessage.createdAt);
     if (quoteMessage.attachments.size) {
       const file = quoteMessage.attachments.map((attachment) => attachment.url);
       quoteEmbed.setImage(`${file}`);
