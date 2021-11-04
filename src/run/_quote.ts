@@ -56,12 +56,12 @@ export function _quote(client: Client) {
 
     const quoteEmbed = new MessageEmbed()
       .setDescription(quoteMessage.content)
-      .setColor("RANDOM")
+      .setColor("AQUA")
       .setAuthor(
         quoteMessage.author.username,
         `${quoteMessage.author.avatarURL()}`
       )
-      .setFooter(`${quoteMessage.createdAt}`);
+      .addField("送信日時", `<t:${quoteMessage.createdTimestamp}>`);
     if (quoteMessage.attachments.size) {
       const file = quoteMessage.attachments.map((attachment) => attachment.url);
       quoteEmbed.setImage(`${file}`);

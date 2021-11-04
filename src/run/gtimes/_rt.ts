@@ -21,8 +21,8 @@ export function _rt(client: Client) {
           `${message.author.username} さんが ${quoteMessage.author.username} さんのTimesをRTしました。`,
           `${message.author.avatarURL()}`
         )
+        .addField("送信日時", `<t:${quoteMessage.createdTimestamp}>`)
         .setDescription(quoteMessage.content)
-        .setFooter(`${quoteMessage.createdAt}`)
         .setColor("GREEN");
 
       if (quoteMessage.attachments.size) {
