@@ -23,3 +23,5 @@ $ yarn start
 | 値 | 概要 |
 | --- | --- |
 | TOKEN | DiscordのBotのToken |
+| clientID | BOTのクライアントID |
+| guildID | Slash (/) Command を登録するサーバーのID |
