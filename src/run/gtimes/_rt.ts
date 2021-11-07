@@ -1,8 +1,8 @@
 import { Client, MessageEmbed } from "discord.js";
+const regex = /https:\/\/discord.com\/channels\/\d+\/(\d+)\/(\d+)/;
 
 export function _rt(client: Client) {
   client.on("messageCreate", async (message) => {
-    const regex = /https:\/\/discord.com\/channels\/\d+\/(\d+)\/(\d+)/;
     if (message.author.bot) return;
     if (!message.content.startsWith("RT:")) return;
 
