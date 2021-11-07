@@ -26,8 +26,10 @@ export function _rt(client: Client) {
       .setColor("GREEN");
 
     if (quoteMessage.attachments.size) {
-      const file = quoteMessage.attachments.map((attachment) => attachment.url);
-      rtEmbed.setImage(`${file}`);
+      const [file] = quoteMessage.attachments.map(
+        (attachment) => attachment.url
+      );
+      rtEmbed.setImage(file);
     }
     message.channel
       .send({

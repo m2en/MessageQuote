@@ -63,8 +63,10 @@ export function _quote(client: Client) {
       )
       .setTimestamp(quoteMessage.createdAt);
     if (quoteMessage.attachments.size) {
-      const file = quoteMessage.attachments.map((attachment) => attachment.url);
-      quoteEmbed.setImage(`${file}`);
+      const [file] = quoteMessage.attachments.map(
+        (attachment) => attachment.url
+      );
+      quoteEmbed.setImage(file);
     }
     msg.channel
       .send({
