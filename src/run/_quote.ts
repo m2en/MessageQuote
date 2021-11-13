@@ -51,12 +51,16 @@ export function _quote(client: Client) {
       return;
     }
     if (quoteMessage.system) {
+      await msg.reply({
+        embeds: [errorEmbed.setDescription("システムメッセージは引用できません。")],
+      });
+
       return;
     }
 
     const quoteEmbed = new MessageEmbed()
       .setDescription(quoteMessage.content)
-      .setColor("AQUA")
+      .setColor("#FFC9E9")
       .setAuthor(
         quoteMessage.author.username,
         `${quoteMessage.author.avatarURL()}`
