@@ -2,12 +2,10 @@ import { Client, MessageEmbed } from "discord.js";
 
 export function _quote(client: Client) {
   client.on("messageCreate", async (msg) => {
-    if (
-      msg.author.bot ||
-      msg.content.startsWith(";") ||
-      msg.content.startsWith("RT:")
-    )
-      return;
+    if (msg.author.bot)　return;
+    if(msg.content.startsWith(";")) {
+      console.log("Skip: 引用スキップが使用されました。")
+    }
 
     /**
      * https://(ptb.|canary.)?discord.com/channels/サーバーID/チャンネルID/メッセージID
