@@ -1,7 +1,6 @@
 import { Client } from "discord.js";
 import dotenv from "dotenv";
 import { _quote } from "./run/_quote";
-import { _rt } from "./run/gtimes/_rt";
 dotenv.config();
 
 const client = new Client({
@@ -24,4 +23,3 @@ client.once("ready", () => {
 });
 
 _quote(client);
-_rt(client);
