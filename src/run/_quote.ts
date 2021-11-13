@@ -26,6 +26,7 @@ export function _quote(client: Client) {
       await msg.reply({
         embeds: [errorEmbed.setDescription(`チャンネルが見つかりませんでした。`)],
       });
+      console.error("Error: チャンネルが見つからなかったため、引用をスキップしました。")
 
       return;
     }
@@ -37,6 +38,7 @@ export function _quote(client: Client) {
           ),
         ],
       });
+      console.error("Error: テキストチャンネルではなかったため、引用をスキップしました。")
 
       return;
     }
@@ -47,6 +49,7 @@ export function _quote(client: Client) {
       await msg.reply({
         embeds: [errorEmbed.setDescription("メッセージが見つかりませんでした。")],
       });
+      console.error("Error: メッセージが見つからなかったため、引用をスキップしました。")
 
       return;
     }
@@ -54,6 +57,7 @@ export function _quote(client: Client) {
       await msg.reply({
         embeds: [errorEmbed.setDescription("システムメッセージは引用できません。")],
       });
+      console.error("Error: システムメッセージだったため、引用をスキップしました。")
 
       return;
     }
