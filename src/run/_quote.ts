@@ -20,11 +20,11 @@ export function _quote(client: Client) {
     const quoteChannel = client.channels.cache.get(channelID);
 
     const errorEmbed = new MessageEmbed()
-      .setTitle("例外の呼び出し - エラーが発生しました。")
+      .setTitle("エラー")
       .setColor("RED");
     if (quoteChannel == null) {
       await msg.reply({
-        embeds: [errorEmbed.setDescription(`Channel not found`)],
+        embeds: [errorEmbed.setDescription(`チャンネルが見つかりませんでした。`)],
       });
 
       return;
@@ -33,7 +33,7 @@ export function _quote(client: Client) {
       await msg.reply({
         embeds: [
           errorEmbed.setDescription(
-            `**Channel:**<#${quoteChannel.id}> not text channel`
+            `<#${quoteChannel.id}> はテキストチャンネルではありません。`
           ),
         ],
       });
@@ -45,7 +45,7 @@ export function _quote(client: Client) {
 
     if (quoteMessage == null) {
       await msg.reply({
-        embeds: [errorEmbed.setDescription("Message not found.")],
+        embeds: [errorEmbed.setDescription("メッセージが見つかりませんでした。")],
       });
 
       return;
