@@ -2,12 +2,10 @@ import { Client, MessageEmbed } from "discord.js";
 
 export function _quote(client: Client) {
   client.on("messageCreate", async (msg) => {
-    if (
-      msg.author.bot ||
-      msg.content.startsWith(";") ||
-      msg.content.startsWith("RT:")
-    )
-      return;
+    if (msg.author.bot)　return;
+    if(msg.content.startsWith(";")) {
+      console.log("Skip: 引用スキップが使用されました。")
+    }
 
     /**
      * https://(ptb.|canary.)?discord.com/channels/サーバーID/チャンネルID/メッセージID
@@ -20,12 +18,13 @@ export function _quote(client: Client) {
     const quoteChannel = client.channels.cache.get(channelID);
 
     const errorEmbed = new MessageEmbed()
-      .setTitle("例外の呼び出し - エラーが発生しました。")
+      .setTitle("エラー")
       .setColor("RED");
     if (quoteChannel == null) {
       await msg.reply({
-        embeds: [errorEmbed.setDescription(`Channel not found`)],
+        embeds: [errorEmbed.setDescription(`チャンネルが見つかりませんでした。`)],
       });
+      console.error("Error: チャンネルが見つからなかったため、引用をスキップしました。")
 
       return;
     }
@@ -33,10 +32,11 @@ export function _quote(client: Client) {
       await msg.reply({
         embeds: [
           errorEmbed.setDescription(
-            `**Channel:**<#${quoteChannel.id}> not text channel`
+            `<#${quoteChannel.id}> はテキストチャンネルではありません。`
           ),
         ],
       });
+      console.error("Error: テキストチャンネルではなかったため、引用をスキップしました。")
 
       return;
     }
@@ -45,18 +45,24 @@ export function _quote(client: Client) {
 
     if (quoteMessage == null) {
       await msg.reply({
-        embeds: [errorEmbed.setDescription("Message not found.")],
+        embeds: [errorEmbed.setDescription("メッセージが見つかりませんでした。")],
       });
+      console.error("Error: メッセージが見つからなかったため、引用をスキップしました。")
 
       return;
     }
     if (quoteMessage.system) {
+      await msg.reply({
+        embeds: [errorEmbed.setDescription("システムメッセージは引用できません。")],
+      });
+      console.error("Error: システムメッセージだったため、引用をスキップしました。")
+
       return;
     }
 
     const quoteEmbed = new MessageEmbed()
       .setDescription(quoteMessage.content)
-      .setColor("AQUA")
+      .setColor("#FFC9E9")
       .setAuthor(
         quoteMessage.author.username,
         `${quoteMessage.author.avatarURL()}`

@@ -16,7 +16,7 @@ for (const file of commandFile) {
   commands.push(command.data.toJSON());
 }
 
-const client = process.env["clinetID"];
+const client = process.env["clientID"];
 const guild = process.env["guildID"];
 const token = process.env["TOKEN"];
 if ([client, guild, token].includes(undefined)) {
@@ -27,14 +27,14 @@ const rest = new REST({ version: "9" }).setToken(token);
 
 (async () => {
   try {
-    console.log("slash (/) command の登録を開始します。");
-    await rest.put(Routes.applicationGuildCommands(client, guild), {
-      body: commands,
-    });
-    console.log("slash (/) command の登録が完了しました。");
+    console.log("グローバル方式のslash (/) command の登録を開始します。");
+    await rest.put(Routes.applicationCommands(client), {
+      body: commands
+    })
+    console.log("グローバル方式のslash (/) command の登録が完了しました。");
   } catch (commandRefreshError) {
     console.error(
-      "slash (/) command の登録中にエラーが発生しました。: commandRefreshError"
+      "グローバル方式のslash (/) command の登録中にエラーが発生しました。: commandRefreshError"
     );
     console.error(commandRefreshError);
   }
