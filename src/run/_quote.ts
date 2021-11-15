@@ -75,8 +75,7 @@ export function _quote(client: Client) {
       );
       quoteEmbed.setImage(file);
     }
-    msg.channel
-      .send({
+    msg.reply({
         embeds: [quoteEmbed],
       })
       .catch(console.error);
