@@ -5,6 +5,7 @@ export function _quote(client: Client) {
     if (msg.author.bot)　return;
     if(msg.content.startsWith(";")) {
       console.log("Skip: 引用スキップが使用されました。")
+      return;
     }
 
     /**
@@ -74,8 +75,7 @@ export function _quote(client: Client) {
       );
       quoteEmbed.setImage(file);
     }
-    msg.channel
-      .send({
+    msg.reply({
         embeds: [quoteEmbed],
       })
       .catch(console.error);
