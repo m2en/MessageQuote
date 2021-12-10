@@ -92,5 +92,6 @@ export function _quote(client: Client) {
         embeds: [quoteEmbed]
       })
       .catch(console.error)
+    console.log('Quote:' + quoteMessage.author.username + 'が引用を使用')
   })
 }
