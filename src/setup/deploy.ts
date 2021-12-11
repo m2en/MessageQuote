@@ -12,6 +12,10 @@ if (TOKEN === undefined || CLIENT === undefined) {
 
 const rest = new REST({ version: '9' }).setToken(TOKEN)
 
+/**
+ * 12/12付けのPRで変更リクエストがありましたが、時間がかかりそうだし、Slash Commandの登録処理のため、保留
+ * TODO: importに切り替える
+ */
 const commands = []
 const commandFiles = fs
   .readdirSync('src/setup')
