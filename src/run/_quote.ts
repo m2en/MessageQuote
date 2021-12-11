@@ -11,7 +11,8 @@ export function _quote(client: Client) {
     /**
      * https://(ptb.|canary.)?discord.com/channels/サーバーID/チャンネルID/メッセージID
      */
-    const regex = /https:\/\/discord.com\/channels\/(\d+)\/(\d+)\/(\d+)/
+    const regex =
+      /https:\/\/(?:ptb.|canary.)?discord.com\/channels\/(\d+)\/(\d+)\/(\d+)/
     const str = msg.content
     const match = str.match(regex)
     if (match === null) return
