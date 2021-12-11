@@ -20,40 +20,21 @@ export function _quote(client: Client) {
 
     const errorEmbed = new MessageEmbed().setTitle('エラー').setColor('RED')
     if (quoteChannel == null) {
-      await msg.reply({
-        embeds: [
-          errorEmbed.setDescription('チャンネルが見つかりませんでした。')
-        ]
-      })
       console.error(
         'Error: チャンネルが見つからなかったため、引用をスキップしました。'
       )
-
       return
     }
     if (!quoteChannel.isText()) {
-      await msg.reply({
-        embeds: [
-          errorEmbed.setDescription(
-            `<#${quoteChannel.id}> はテキストチャンネルではありません。`
-          )
-        ]
-      })
       console.error(
         'Error: テキストチャンネルではなかったため、引用をスキップしました。'
       )
-
       return
     }
 
     const quoteMessage = await quoteChannel.messages.fetch(messageID)
 
     if (quoteMessage == null) {
-      await msg.reply({
-        embeds: [
-          errorEmbed.setDescription('メッセージが見つかりませんでした。')
-        ]
-      })
       console.error(
         'Error: メッセージが見つからなかったため、引用をスキップしました。'
       )
@@ -92,6 +73,6 @@ export function _quote(client: Client) {
         embeds: [quoteEmbed]
       })
       .catch(console.error)
-    console.log('Quote:' + quoteMessage.author.username + 'が引用を使用')
+    console.log('Quote:' + quoteMessage.author.username + 'が引用を使用.')
   })
 }
