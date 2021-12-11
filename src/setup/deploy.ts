@@ -18,7 +18,7 @@ const rest = new REST({ version: '9' }).setToken(TOKEN)
  */
 const commands = []
 const commandFiles = fs
-  .readdirSync('src/setup')
+  .readdirSync('src/setup/commands')
   .filter((file) => file.endsWith('.ts'))
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`)

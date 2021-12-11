@@ -23,12 +23,16 @@ export function _quote(client: Client) {
     const errorEmbed = new MessageEmbed().setTitle('エラー').setColor('RED')
     if (serverID === quoteServerID) {
       if (quoteChannel == null) {
+        msg.react('710157668882317373').catch(console.error)
+        msg.react('❌').catch(console.error)
         console.error(
           'Error: チャンネルが見つからなかったため、引用をスキップしました。'
         )
         return
       }
       if (!quoteChannel.isText()) {
+        msg.react('710157668882317373').catch(console.error)
+        msg.react('❌').catch(console.error)
         console.error(
           'Error: テキストチャンネルではなかったため、引用をスキップしました。'
         )
@@ -38,6 +42,8 @@ export function _quote(client: Client) {
       const quoteMessage = await quoteChannel.messages.fetch(messageID)
 
       if (quoteMessage == null) {
+        msg.react('710157668882317373').catch(console.error)
+        msg.react('❌').catch(console.error)
         console.error(
           'Error: メッセージが見つからなかったため、引用をスキップしました。'
         )
@@ -45,6 +51,8 @@ export function _quote(client: Client) {
         return
       }
       if (quoteMessage.system) {
+        msg.react('710157668882317373').catch(console.error)
+        msg.react('❌').catch(console.error)
         await msg.reply({
           embeds: [
             errorEmbed.setDescription('システムメッセージは引用できません。')
@@ -78,6 +86,8 @@ export function _quote(client: Client) {
         .catch(console.error)
       console.log('Quote: ' + msg.author.username + 'が引用を使用.')
     } else {
+      msg.react('710157668882317373').catch(console.error)
+      msg.react('❌').catch(console.error)
       console.error(
         'Error: 別サーバー同士の引用だったため、引用をキャンセルしました。'
       )
