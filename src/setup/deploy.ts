@@ -7,7 +7,7 @@ dotenv.config()
 const TOKEN = process.env.TOKEN
 const CLIENT = process.env.clientID
 if (TOKEN === undefined || CLIENT === undefined) {
-  throw new Error('環境変数の指定エラー')
+  throw new Error('Environment variable specification error.')
 }
 
 const rest = new REST({ version: '9' }).setToken(TOKEN)
