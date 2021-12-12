@@ -1,7 +1,8 @@
 import { REST } from '@discordjs/rest'
 import { Routes } from 'discord-api-types/v9'
 import dotenv from 'dotenv'
-import * as fs from 'fs'
+import { readdirSync } from 'fs'
+
 dotenv.config()
 
 const TOKEN = process.env.TOKEN
@@ -12,14 +13,10 @@ if (TOKEN === undefined || CLIENT === undefined) {
 
 const rest = new REST({ version: '9' }).setToken(TOKEN)
 
-/**
- * 12/12付けのPRで変更リクエストがありましたが、時間がかかりそうだし、Slash Commandの登録処理のため、保留
- * TODO: importに切り替える
- */
 const commands = []
-const commandFiles = fs
-  .readdirSync('src/setup/commands')
-  .filter((file) => file.endsWith('.ts'))
+const commandFiles = readdirSync('src/setup/commands').filter((file) =>
+  file.endsWith('.ts')
+)
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`)
   commands.push(command.data.toJSON())
