@@ -1,6 +1,6 @@
 {
   "name": "messagequote",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "main": "index.js",
   "license": "MIT",
   "description": "メッセージリンク、IDからメッセージを取得して展開するBot。",
@@ -10,20 +10,43 @@
     "start": "node ./build/index.js",
     "debug": "ts-node ./src/index.ts",
     "compile": "tsc -p .",
+    "format": "prettier --write",
+    "lint": "eslint",
+    "fix": "yarn run format && npm run lint -- --fix",
+    "prepare": "husky install",
+    "lint-staged": "lint-staged",
     "compile:test": "tsc -p . --noEmit",
-    "register": "node ./src/setup/index.js",
-    "register:global": "node ./src/setup/index_global.js"
+    "register:global": "ts-node ./src/setup/deploy.ts"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,less,sass,scss}": [
+      "stylelint --fix"
+    ]
   },
   "dependencies": {
     "@discordjs/rest": "^0.1.0-canary.0",
-    "discord-api-types": "^0.24.0",
-    "discord.js": "^13.2.0",
+    "discord-api-types": "^0.25.2",
+    "discord.js": "^13.3.1",
     "dotenv": "^10.0.0"
   },
   "devDependencies": {
-    "@discordjs/builders": "^0.7.0",
-    "@types/node": "^16.9.4",
+    "@discordjs/builders": "^0.9.0",
+    "@types/node": "^16.11.12",
+    "@typescript-eslint/eslint-plugin": "^5.6.0",
+    "@typescript-eslint/parser": "^5.6.0",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.2",
+    "prettier": "^2.5.1",
     "ts-node": "^10.2.1",
-    "typescript": "^4.4.3"
+    "typescript": "^4.5.3"
   }
 }
