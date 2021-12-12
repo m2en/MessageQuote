@@ -1,4 +1,4 @@
-import { Client, MessageEmbed } from 'discord.js'
+import { Client, MessageEmbed, version } from 'discord.js'
 
 export function _help(client: Client) {
   client.on('interactionCreate', (i) => {
@@ -20,10 +20,7 @@ export function _help(client: Client) {
             '開発者',
             '[merunno](https://github.com/merunno)・[mirror-kt](https://github.com/mirror-kt)・[isso0424](https://github.com/isso0424)・[loxygenK](https://github.com/loxygenK)\n**開発にご協力くださった3人、ありがとう。**'
           )
-          .addField(
-            '実行しているdiscord.jsバージョン',
-            require('discord.js').version
-          )
+          .addField('実行しているdiscord.jsバージョン', version)
           .addField(
             'リポジトリ',
             '[approvers/MessageQuote](https://github.com/approvers/MessageQuote)'
