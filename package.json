@@ -16,7 +16,8 @@
     "prepare": "husky install",
     "lint-staged": "lint-staged",
     "compile:test": "tsc -p . --noEmit",
-    "register:global": "ts-node ./src/setup/deploy.ts"
+    "register:global": "ts-node ./src/setup/deploy.ts",
+    "register:debug": "ts-node ./src/setup/debug.ts"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
