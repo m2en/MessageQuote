@@ -1,7 +1,7 @@
 import { Client } from 'discord.js'
 import dotenv from 'dotenv'
 import { _quote } from './run/_quote'
-import { _help } from './command/help'
+import { _help } from './run/command/help'
 dotenv.config()
 
 const client = new Client({
