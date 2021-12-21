@@ -7,7 +7,7 @@ dotenv.config()
 
 const TOKEN = process.env.TOKEN
 const CLIENT = process.env.clientID
-const GUILD = process.env.guientID
+const GUILD = process.env.guildID
 if (TOKEN === undefined || CLIENT === undefined || GUILD === undefined) {
   throw new Error('Environment variable specification error.')
 }
