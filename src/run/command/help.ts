@@ -4,7 +4,7 @@ export function _help(client: Client) {
   const embed = new MessageEmbed()
     .setTitle('ヘルプ')
     .setColor('#FFC9E9')
-    .setAuthor('MessageQuote', `${client.user?.avatarURL()}`)
+    .setAuthor('MessageQuote v' + version)
     .addField(
       'メッセージ引用',
       'メッセージリンクが送られるとそのメッセージの内容を読み込み送信します。MessageQuoteが参加しているサーバーのメッセージは全て取得できますが、引用はされません。'
@@ -31,8 +31,9 @@ export function _help(client: Client) {
 
   client.on('messageCreate', (m) => {
     if (m.author.bot) return
-    if (!client.user) return
-    if (m.content !== '*help' || !m.mentions.users.has(client.user.id)) return
-    m.reply({ embeds: [embed] }).catch(console.error)
+    if (client.user == null) return
+    if (m.content === '*help' || m.mentions.users.has(client.user.id)) {
+      m.reply({ embeds: [embed] }).catch(console.error)
+    }
   })
 }
