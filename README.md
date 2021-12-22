@@ -36,7 +36,6 @@ Slash Commandを使えるようにするには登録、スコープの付与が�
 ```
 $ git pull
 $ yarn
-$ yarn upgrade --latest
 $ yarn compile
 $ yarn start
 ```
