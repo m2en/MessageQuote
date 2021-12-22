@@ -18,7 +18,7 @@ Botのプロフィールから直接導入も可です。
 
 node.jsの最新版をセットアップしてください。
 
-```shell
+```
 $ git clone https://github.com/approvers/MessageQuote.git
 $ yarn
 $ echo .env >> TOKEN=
@@ -33,7 +33,7 @@ Slash Commandを使えるようにするには登録、スコープの付与が�
 
 [Releases](https://github.com/approvers/MessageQuote/releases) が更新されたらアップデートを行うことを推奨します。
 
-```shell
+```
 $ git pull
 $ yarn
 $ yarn upgrade --latest
