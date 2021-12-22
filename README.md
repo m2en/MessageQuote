@@ -19,7 +19,6 @@ Botのプロフィールから直接導入も可です。
 node.jsの最新版をセットアップしてください。
 
 ```shell
-yarn is GOD!!!!!!!
 $ git clone https://github.com/approvers/MessageQuote.git
 $ yarn add
 $ echo .env >> TOKEN=
