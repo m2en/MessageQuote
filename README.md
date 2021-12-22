@@ -12,7 +12,7 @@ TypeScriptとDiscord.jsを使い、メッセージIDからDiscord APIでメッ�
 
 Botのプロフィールから直接導入も可です。
 
-![img.png](image/addBot.png)
+![直接導入ボタン](image/addBot.png)
 
 ### 直接利用する
 
