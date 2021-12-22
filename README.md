@@ -19,11 +19,11 @@ Botのプロフィールから直接導入も可です。
 node.jsの最新版をセットアップしてください。
 
 ```
-$ git clone https://github.com/approvers/MessageQuote.git
-$ yarn
-$ echo .env >> TOKEN=
-$ yarn compile
-$ yarn start
+git clone https://github.com/approvers/MessageQuote.git
+yarn
+echo .env >> TOKEN=
+yarn compile
+yarn start
 ```
 
 Slash Commandを使えるようにするには登録、スコープの付与が必要です。(ここでは省略します。)
@@ -34,10 +34,10 @@ Slash Commandを使えるようにするには登録、スコープの付与が�
 [Releases](https://github.com/approvers/MessageQuote/releases) が更新されたらアップデートを行うことを推奨します。
 
 ```
-$ git pull
-$ yarn
-$ yarn compile
-$ yarn start
+git pull
+yarn
+yarn compile
+yarn start
 ```
 
 </details>
