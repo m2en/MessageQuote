@@ -8,13 +8,13 @@ TypeScriptとDiscord.jsを使い、メッセージIDからDiscord APIでメッ�
 
 ## 導入する
 
-[このURL](https://discord.com/api/oauth2/authorize?client_id=889343802433757185&permissions=274877914112&scope=bot%20applications.commands) から導入できます。
+ホストせず使う場合は [このURL](https://discord.com/api/oauth2/authorize?client_id=889343802433757185&permissions=274877914112&scope=bot%20applications.commands) から導入できます。
 
 Botのプロフィールから直接導入も可です。
 
 ![直接導入ボタン](image/addBot.png)
 
-### 直接利用する
+### 自分でホストする
 
 node.jsの最新版をセットアップしてください。
 
