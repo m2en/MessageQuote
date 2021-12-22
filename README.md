@@ -20,7 +20,7 @@ node.jsの最新版をセットアップしてください。
 
 ```shell
 $ git clone https://github.com/approvers/MessageQuote.git
-$ yarn add
+$ yarn
 $ echo .env >> TOKEN=
 $ yarn compile
 $ yarn start
@@ -35,7 +35,7 @@ Slash Commandを使えるようにするには登録、スコープの付与が�
 
 ```shell
 $ git pull
-$ yarn add
+$ yarn
 $ yarn upgrade --latest
 $ yarn compile
 $ yarn start
