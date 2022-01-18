@@ -18,12 +18,9 @@
     "compile:test": "tsc -p . --noEmit"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "*.{ts}": [
       "eslint --fix",
       "prettier --write"
-    ],
-    "*.{css,less,sass,scss}": [
-      "stylelint --fix"
     ]
   },
   "dependencies": {
