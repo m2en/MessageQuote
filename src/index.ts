@@ -1,27 +1,52 @@
-import { Client } from 'discord.js'
-import dotenv from 'dotenv'
-import { _quote } from './run/_quote'
-import { _help } from './run/command/help'
-dotenv.config()
+import { AnyChannel, Client, version } from 'discord.js';
+import dotenv from 'dotenv';
 
-const client = new Client({
-  intents: ['GUILDS', 'GUILD_MESSAGES']
-})
-
-const TOKEN = process.env.TOKEN
-if (TOKEN == null) {
-  throw new Error('Env Null Error: Environment variable not found.')
+dotenv.config();
+const token = getEnv('DISCORD_TOKEN');
+const status = getEnv('STATUS_CHANNEL_ID');
+function getEnv(name: string): string {
+  const value = process.env[name];
+  if (!value) return '';
+  return value;
 }
 
-client.login(TOKEN).catch(console.error)
+const client = new Client({
+  intents: [0]
+});
 
-client.once('ready', () => {
-  console.log(
-    `Ready: ${client.user?.username}が準備完了しました。 - v` +
-      process.env.npm_package_version
-  )
-  client.user?.setActivity('v' + process.env.npm_package_version)
-})
+/* 接続時にクライアントの情報を提供する */
+function readyLog(client: Client): void {
+  const connectionClient = client.user;
+  const projectVersion = process.env.npm_package_version;
+  if (connectionClient == null) return;
+  console.info('============');
+  console.info('');
+  console.info('起動完了しました。');
+  console.info('');
+  console.info('接続クライアント> ' + connectionClient.username);
+  console.info('接続クライアントID> ' + connectionClient.id);
+  //
+  console.info(`接続クライアントバージョン> ${String(projectVersion)}`);
+  console.info('');
+  console.info('discord.js バージョン> ' + version);
+  console.info('');
+  console.info('============');
+}
 
-_quote(client)
-_help(client)
+client.login(token).catch(console.error);
+
+client.once('ready', async () => {
+  readyLog(client);
+
+  const channel: AnyChannel | null = await client.channels.fetch(`${status}`);
+  if (!channel || !channel.isText()) return;
+
+  try {
+    void channel.send({
+      content: '✅: <@586824421470109716>, 起動に成功しました。'
+    });
+  } catch (e) {
+    console.error(e);
+    client.destroy();
+  }
+});
