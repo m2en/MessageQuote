@@ -14,10 +14,8 @@ export function _help(client: Client) {
       'メッセージ引用スキップ',
       'メッセージの最初に`;`をつけるとメッセージ引用がキャンセルされます。'
     )
-    .addField(
-      '開発者',
-      '[merunno](https://github.com/merunno)・[mirror-kt](https://github.com/mirror-kt)・[isso0424](https://github.com/isso0424)・[loxygenK](https://github.com/loxygenK)\n**開発にご協力くださった3人、ありがとう。**'
-    )
+    .addField('コマンド', '`*help`')
+    .addField('開発者', '[merunno](https://github.com/merunno)')
     .addField('実行しているdiscord.jsバージョン', version)
     .addField(
       'リポジトリ',
@@ -26,9 +24,10 @@ export function _help(client: Client) {
 
   client.on('messageCreate', (m) => {
     if (m.author.bot) return;
-    if (client.user == null) return;
-    if (m.content === '*help' || m.mentions.users.has(client.user.id)) {
-      m.reply({ embeds: [embed] }).catch(console.error);
+    if (m.content === '*help') {
+      m.reply({
+        embeds: [embed]
+      }).catch(console.error);
     }
   });
 }

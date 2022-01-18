@@ -1,5 +1,6 @@
 import { AnyChannel, Client, version } from 'discord.js';
 import dotenv from 'dotenv';
+import { _help } from '../run/command/help';
 
 dotenv.config();
 const token = getEnv('DISCORD_TOKEN');
@@ -11,7 +12,7 @@ function getEnv(name: string): string {
 }
 
 const client = new Client({
-  intents: [0]
+  intents: ['GUILDS', 'GUILD_MESSAGES']
 });
 
 /* 接続時にクライアントの情報を提供する */
@@ -34,6 +35,8 @@ function readyLog(client: Client): void {
 }
 
 client.login(token).catch(console.error);
+
+_help(client);
 
 client.once('ready', async () => {
   readyLog(client);
