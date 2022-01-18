@@ -7,18 +7,20 @@
   "author": "merunno",
   "private": false,
   "scripts": {
-    "start": "node ./build/index.js",
-    "debug": "ts-node ./src/index.ts",
+    "start": "node ./build/server/index.js",
+    "test": "ts-node ./src/server/index.ts",
+    "deploy": "node ./build/setup/index.js",
     "compile": "tsc -p .",
     "format": "prettier --write",
-    "lint": "eslint",
+    "eslint": "eslint --ignore-path .gitignore \"src/**/*.{js,ts}\"",
+    "eslint:fix": "eslint --ignore-path .gitignore \"src/**/*.{js,ts}\" --fix",
     "fix": "yarn run format && npm run lint -- --fix",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
-    "compile:test": "tsc -p . --noEmit"
+    "clean": "echo \"Build directory, Removed.\" && rm -rf build"
   },
   "lint-staged": {
-    "*.{ts}": [
+    "*.{js,ts}": [
       "eslint --fix",
       "prettier --write"
     ]
