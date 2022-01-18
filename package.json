@@ -14,7 +14,7 @@
     "format": "prettier --write",
     "eslint": "eslint --ignore-path .gitignore \"src/**/*.{js,ts}\"",
     "eslint:fix": "eslint --ignore-path .gitignore \"src/**/*.{js,ts}\" --fix",
-    "fix": "yarn run format && npm run lint -- --fix",
+    "fix": "yarn run format && yarn run lint -- --fix",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
     "clean": "echo \"Build directory, Removed.\" && rm -rf build"
