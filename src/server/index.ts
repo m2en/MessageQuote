@@ -1,6 +1,7 @@
 import { AnyChannel, Client, version } from 'discord.js';
 import dotenv from 'dotenv';
 import { _help } from '../run/command/help';
+import { _quote } from '../run/_quote';
 
 dotenv.config();
 const token = getEnv('DISCORD_TOKEN');
@@ -37,6 +38,7 @@ function readyLog(client: Client): void {
 client.login(token).catch(console.error);
 
 _help(client);
+_quote(client);
 
 client.once('ready', async () => {
   readyLog(client);
