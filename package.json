@@ -20,12 +20,9 @@
     "register:debug": "ts-node ./src/setup/debug.ts"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": [
+    "*.{js,ts}": [
       "eslint --fix",
       "prettier --write"
-    ],
-    "*.{css,less,sass,scss}": [
-      "stylelint --fix"
     ]
   },
   "dependencies": {
