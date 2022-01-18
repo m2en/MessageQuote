@@ -17,7 +17,7 @@
     "fix": "yarn run format && yarn run lint -- --fix",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
-    "clean": "echo \"Build directory, Removed.\" && rm -rf build"
+    "clean": "rm -rf build"
   },
   "lint-staged": {
     "*.{js,ts}": [
