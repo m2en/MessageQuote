@@ -1,10 +1,11 @@
-import { Client, MessageEmbed, version } from 'discord.js'
+import { Client, MessageEmbed, version } from 'discord.js';
 
 export function _help(client: Client) {
+  const projectVersion: string | undefined = process.env.npm_package_version;
+
   const embed = new MessageEmbed()
-    .setTitle('ヘルプ')
+    .setTitle(`ヘルプ: v${String(projectVersion)}`)
     .setColor('#FFC9E9')
-    .setAuthor('MessageQuote v' + version)
     .addField(
       'メッセージ引用',
       'メッセージリンクが送られるとそのメッセージの内容を読み込み送信します。MessageQuoteが参加しているサーバーのメッセージは全て取得できますが、引用はされません。'
@@ -21,19 +22,13 @@ export function _help(client: Client) {
     .addField(
       'リポジトリ',
       '[approvers/MessageQuote](https://github.com/approvers/MessageQuote)'
-    )
-
-  client.on('interactionCreate', (i) => {
-    if (!i.isCommand()) return
-    if (i.commandName !== 'help') return
-    i.reply({ embeds: [embed], ephemeral: true }).catch(console.error)
-  })
+    );
 
   client.on('messageCreate', (m) => {
-    if (m.author.bot) return
-    if (client.user == null) return
+    if (m.author.bot) return;
+    if (client.user == null) return;
     if (m.content === '*help' || m.mentions.users.has(client.user.id)) {
-      m.reply({ embeds: [embed] }).catch(console.error)
+      m.reply({ embeds: [embed] }).catch(console.error);
     }
-  })
+  });
 }
