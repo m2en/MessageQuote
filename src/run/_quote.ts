@@ -1,4 +1,9 @@
-import { Client, MessageEmbed } from 'discord.js';
+import {
+  Client,
+  MessageActionRow,
+  MessageButton,
+  MessageEmbed
+} from 'discord.js';
 
 export function _quote(client: Client) {
   client.on('messageCreate', async (msg) => {
@@ -72,6 +77,10 @@ export function _quote(client: Client) {
         .setAuthor({ name: quoteUserName, iconURL: quoteUserAvatar })
         .addField('チャンネル', '<#' + quoteChannelId + '>', true)
         .setTimestamp(quoteMessage.createdAt);
+      const quoteDelete = new MessageButton()
+        .setStyle('DANGER')
+        .setLabel('Delete')
+        .setCustomId('quoteDelete');
       if (quoteMessage.attachments.size) {
         const [file] = quoteMessage.attachments.map(
           (attachment) => attachment.url
@@ -80,7 +89,8 @@ export function _quote(client: Client) {
       }
       msg
         .reply({
-          embeds: [quoteEmbed]
+          embeds: [quoteEmbed],
+          components: [new MessageActionRow().setComponents([quoteDelete])]
         })
         .catch(console.error);
       console.log('Quote: ' + msg.author.username + 'が引用を使用.');
