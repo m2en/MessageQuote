@@ -1,4 +1,10 @@
-import { Client, MessageEmbed, version } from 'discord.js';
+import {
+  Client,
+  MessageActionRow,
+  MessageEmbed,
+  MessageSelectMenu,
+  version
+} from 'discord.js';
 
 export function _help(client: Client) {
   const projectVersion: string | undefined = process.env.npm_package_version;
@@ -14,21 +20,37 @@ export function _help(client: Client) {
       'メッセージ引用スキップ',
       'メッセージの最初に`;`をつけるとメッセージ引用がキャンセルされます。'
     )
-    .addField(
-      '開発者',
-      '[merunno](https://github.com/merunno)・[mirror-kt](https://github.com/mirror-kt)・[isso0424](https://github.com/isso0424)・[loxygenK](https://github.com/loxygenK)\n**開発にご協力くださった3人、ありがとう。**'
-    )
+    .addField('開発者', '[merunno](https://github.com/merunno)')
     .addField('実行しているdiscord.jsバージョン', version)
     .addField(
       'リポジトリ',
       '[approvers/MessageQuote](https://github.com/approvers/MessageQuote)'
     );
+  const helpSelect = new MessageActionRow().addComponents(
+    new MessageSelectMenu()
+      .setCustomId('select')
+      .setPlaceholder('ヘルプの種類選択')
+      .addOptions([
+        {
+          label: '概要',
+          description: 'このBotの概要を確認する',
+          value: 'about'
+        },
+        {
+          label: 'コマンド',
+          description: 'コマンド一覧を確認する',
+          value: 'command'
+        }
+      ])
+  );
 
   client.on('messageCreate', (m) => {
     if (m.author.bot) return;
-    if (client.user == null) return;
-    if (m.content === '*help' || m.mentions.users.has(client.user.id)) {
-      m.reply({ embeds: [embed] }).catch(console.error);
+    if (m.content === '*help') {
+      m.reply({
+        embeds: [embed],
+        components: [helpSelect]
+      }).catch(console.error);
     }
   });
 }
