@@ -4,6 +4,7 @@ export function _quote(client: Client) {
   client.on('messageCreate', async (msg) => {
     if (msg.author.bot) return;
     if (msg.content.startsWith(';')) {
+      msg.react('🔕').catch(console.error);
       console.log('Skip: 引用スキップが使用されました。');
       return;
     }
