@@ -35,7 +35,7 @@ function readyLog(client: Client): void {
   console.info('============');
 }
 
-client.login(token).catch(console.error);
+client.login(token);
 
 _help(client);
 _quote(client);
