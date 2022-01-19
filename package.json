@@ -1,6 +1,6 @@
 {
   "name": "messagequote",
-  "version": "1.2.1",
+  "version": "2.2.1",
   "main": "index.js",
   "license": "MIT",
   "description": "メッセージリンク、IDからメッセージを取得して展開するBot。",
@@ -8,7 +8,7 @@
   "private": false,
   "scripts": {
     "start": "node ./build/index.js",
-    "debug": "ts-node ./src/index.ts",
+    "debug": "ts-node src/server/index.ts",
     "compile": "tsc -p .",
     "format": "prettier --write",
     "lint": "eslint",
@@ -26,9 +26,6 @@
     ]
   },
   "dependencies": {
-    "@discordjs/builders": "^0.11.0",
-    "@discordjs/rest": "^0.2.0-canary.0",
-    "discord-api-types": "^0.26.1",
     "discord.js": "^13.6.0",
     "dotenv": "^14.2.0"
   },

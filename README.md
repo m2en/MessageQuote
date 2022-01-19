@@ -26,8 +26,6 @@ yarn compile
 yarn start
 ```
 
-Slash Commandを使えるようにするには登録、スコープの付与が必要です。(ここでは省略します。)
-
 <details>
 <summary>アップデート方法</summary>
 
@@ -52,8 +50,7 @@ yarn start
 
 ----
 
-| 値        | 概要                             |
-|----------|--------------------------------|
-| TOKEN    | DiscordのBotのToken              |
-| clientID | BOTのクライアントID                   |
-| guildID  | Slash (/) Command を登録するサーバーのID |
+| 値                 | 概要                      |
+|-------------------|-------------------------|
+| TOKEN             | DiscordのBotのToken       |
+| STATUS_CHANNEL_ID | ステータスメッセージを送信するチャンネルを指定 |
