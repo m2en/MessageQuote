@@ -1,0 +1,17 @@
+name: MessageQuote run eslint
+
+on:
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  run_eslint:
+    name: MessageQuote eslint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install packages
+        run: yarn install
+      - name: eslint
+        run: yarn run lint
