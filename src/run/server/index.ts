@@ -1,7 +1,7 @@
 import { AnyChannel, Client, version } from 'discord.js';
 import dotenv from 'dotenv';
-import { _help } from '../run/command/help';
-import { _quote } from '../run/_quote';
+import { _help } from '../command/help';
+import { _quote } from '../_quote';
 
 dotenv.config();
 const token = getEnv('DISCORD_TOKEN');
@@ -35,7 +35,7 @@ function readyLog(client: Client): void {
   console.info('============');
 }
 
-client.login(token);
+void client.login(token);
 
 _help(client);
 _quote(client);
