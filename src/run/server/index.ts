@@ -68,7 +68,7 @@ client.on('error', async (e) => {
   const errorMessage = e.message;
   if (!errorName || !errorMessage) return;
 
-  const channel: AnyChannel | null = await client.channels.fetch(`${status}`);
+  const channel: AnyChannel | null = await client.channels.fetch(status);
   if (!channel || !channel.isText()) return;
 
   const errorEmbed = new MessageEmbed()
