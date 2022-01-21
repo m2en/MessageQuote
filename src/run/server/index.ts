@@ -54,7 +54,7 @@ client.once('ready', async () => {
   if (!channel || !channel.isText()) return;
 
   try {
-    void channel.send({
+    await channel.send({
       content: '✅: <@586824421470109716>, 起動に成功しました。'
     });
   } catch (e) {
