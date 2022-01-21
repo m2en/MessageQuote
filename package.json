@@ -7,7 +7,7 @@
   "author": "merunno",
   "private": false,
   "scripts": {
-    "start": "node ./build/server/index.js",
+    "start": "node ./build/run/server/index.js",
     "debug": "ts-node src/run/server/index.ts",
     "compile": "tsc -p .",
     "format": "prettier --write src/**/**/*.ts",
