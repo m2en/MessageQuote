@@ -3,11 +3,6 @@ import { Client, MessageEmbed } from 'discord.js';
 export function _quote(client: Client) {
   client.on('messageCreate', async (msg) => {
     if (msg.author.bot) return;
-    if (msg.content.startsWith(';')) {
-      msg.react('🔕').catch(console.error);
-      console.log('Skip: 引用スキップが使用されました。');
-      return;
-    }
 
     /**
      * https://(ptb.|canary.)?discord.com/channels/サーバーID/チャンネルID/メッセージID
@@ -20,6 +15,16 @@ export function _quote(client: Client) {
     const [, serverID, channelID, messageID] = match;
     const quoteChannel = client.channels.cache.get(channelID);
     const quoteServerID = msg.guild?.id;
+
+    if (msg.content.match(regex) && msg.content.startsWith(';')) {
+      /**
+       * 今までは ; がついているかで評価していたがこうすると ; をprefixに扱うBotのコマンドと衝突するため、メッセージリンクがあるかを評価するようにする
+       * 参考: https://github.com/approvers/MessageQuote/issues/35
+       */
+      msg.react('🔕').catch(console.error);
+      console.log('Skip: 引用スキップが使用されました。');
+      return;
+    }
 
     const errorEmbed = new MessageEmbed().setTitle('エラー').setColor('RED');
     if (serverID === quoteServerID) {
