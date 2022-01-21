@@ -64,7 +64,7 @@ client.once('ready', async () => {
 });
 
 client.on('error', async (e) => {
-  const {name: errorName, message: errorMessage} = e;
+  const { name: errorName, message: errorMessage } = e;
   if (!errorName || !errorMessage) return;
 
   const channel: AnyChannel | null = await client.channels.fetch(status);
