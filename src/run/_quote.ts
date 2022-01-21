@@ -15,7 +15,7 @@ export function _quote(client: Client) {
     const [, serverID, channelID, messageID] = match;
     const quoteChannel = client.channels.cache.get(channelID);
     const quoteServerID = msg.guild?.id;
-
+    
     /**
      * 既に 14 行目の if (match === null) return; によって早期 returnしている
      * msg.content.match(regex) が false になることはありえないので, msg.content.startsWith(';') だけでよい
