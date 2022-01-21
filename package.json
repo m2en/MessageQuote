@@ -11,6 +11,7 @@
     "debug": "ts-node src/run/server/index.ts",
     "compile": "tsc -p .",
     "format": "prettier --write src/**/**/*.ts",
+    "check": "prettier --check src/**/**/*.ts",
     "lint": "eslint",
     "fix": "yarn run format && yarn run lint -- --fix",
     "prepare": "husky install",
