@@ -7,8 +7,8 @@ import {
   version
 } from 'discord.js';
 import dotenv from 'dotenv';
-import { _help } from '../command/help';
-import { _quote } from '../_quote';
+import { _help } from './command/help';
+import { _quote } from './service/_quote';
 
 dotenv.config();
 const token = getEnv('DISCORD_TOKEN');
