@@ -74,13 +74,16 @@ export function _quote(client: Client) {
       const quoteUserName: string | undefined = quoteMessage.author.username;
       const quoteUserAvatar: string | null = quoteMessage.author.avatarURL();
       const quoteChannelId: string | undefined = quoteMessage.channel.id;
-      if (!quoteUserName || !quoteUserAvatar) return;
+      if (!quoteUserName) return;
       const quoteEmbed = new MessageEmbed()
         .setDescription(quoteMessage.content)
         .setColor('#FFC9E9')
-        .setAuthor({ name: quoteUserName, iconURL: quoteUserAvatar })
+        .setAuthor({ name: quoteUserName })
         .addField('チャンネル', '<#' + quoteChannelId + '>', true)
         .setTimestamp(quoteMessage.createdAt);
+      if (quoteUserAvatar) {
+        quoteEmbed.setAuthor({ name: quoteUserName, iconURL: quoteUserAvatar });
+      }
       if (quoteMessage.attachments.size) {
         const [file] = quoteMessage.attachments.map(
           (attachment) => attachment.url
