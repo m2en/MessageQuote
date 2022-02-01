@@ -21,7 +21,7 @@ client.on('ready', () => {
   const shardClientV: string = process.env.npm_package_version ?? '不明';
   if (!shardClient) return;
 
-  console.log(`${shardClient?.username}@${shardClientV} 起動しています......`);
+  console.log(`${shardClient.username}@${shardClientV} 起動しています......`);
 
   // アクティビティ登録
 
