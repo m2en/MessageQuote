@@ -9,7 +9,8 @@
   "scripts": {
     "start": "node ./build/run/server/index.js",
     "debug": "ts-node src/run/server/index.ts",
-    "deploy": "node ./build/setup/index.js",
+    "deploy:guild": "node ./build/setup/guild.js",
+    "deploy:global": "node ./build/setup/global.js",
     "compile": "tsc -p .",
     "format": "prettier --write src/**/**/*.ts",
     "check": "prettier --check src/**/**/*.ts",
