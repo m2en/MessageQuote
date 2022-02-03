@@ -1,6 +1,7 @@
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
 import * as dotenv from 'dotenv';
+import { RESTPutAPIApplicationCommandsJSONBody } from 'discord-api-types/v9';
 
 dotenv.config();
 const token: string | undefined = process.env.DISCORD_TOKEN;
@@ -15,7 +16,7 @@ if (!token || !clientId || !guildId) {
 
 const rest = new REST({ version: '9' }).setToken(token);
 
-function setCommand(): object[] {
+function setCommand(): RESTPutAPIApplicationCommandsJSONBody {
   return [
     {
       name: '翻訳する',
