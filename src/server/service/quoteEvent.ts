@@ -1,13 +1,13 @@
 import { Client, Message, MessageEmbed } from 'discord.js';
 
-async function extracted(
+async function quoteSystem(
   receiptMsg: Message<boolean>,
   client: Client<boolean>
 ) {
+  // 1. メッセージの受け取り
   // BOTとDMからのメッセージは弾く
   if (receiptMsg.author.bot || !receiptMsg.guild) return;
 
-  // 1. メッセージの受け取り
   // https://(ptb.|canary.)?discord.com/channels/サーバーID/チャンネルID/メッセージID
   const receiptLink = new RegExp(
     /https:\/\/(?:ptb.|canary.)?discord(?:app)?.com\/channels\/(\d+)\/(\d+)\/(\d+)/
@@ -125,7 +125,7 @@ async function extracted(
 export function quoteEvent(client: Client) {
   client.on('messageCreate', async (receiptMsg) => {
     try {
-      await extracted(receiptMsg, client);
+      await quoteSystem(receiptMsg, client);
     } catch (e) {
       console.error(e);
     }
