@@ -62,7 +62,9 @@ async function quoteSystem(
     throw new Error(
       'The user information of the quoted message could not be retrieved from the Discord API.'
     );
-  } else if (!quoteChannelId) {
+  }
+
+  if (!quoteChannelId) {
     await receiptMsg.reply(failedMsg);
     throw new Error(
       'Error: The channel ID of the quoted message could not be retrieved from the Discord API.'
