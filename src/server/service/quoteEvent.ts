@@ -6,6 +6,7 @@ import {
   MessageEmbed,
   TextChannel
 } from 'discord.js';
+const toSec = 1000;
 
 async function getMessage(client: Client, receiptMsg: Message) {
   // メッセージの受け取り
@@ -88,7 +89,7 @@ function createQuoteEmbed(quoteMessage: Message) {
     );
   }
 
-  const quoteCreateTstamp = quoteMessage.createdTimestamp / 1000;
+  const quoteCreateTstamp = quoteMessage.createdTimestamp / toSec;
 
   const sendQuoteEmbed = new MessageEmbed()
     .setDescription(quoteMessage.content)
@@ -123,8 +124,7 @@ function createQuoteEmbed(quoteMessage: Message) {
   }
 
   const endTime = performance.now();
-  const digit = 20;
-  const createMs = Math.round(endTime - startTime) / digit;
+  const createMs = Math.round(endTime - startTime) / toSec;
   console.info(
     `* Quote Create End >>> The creation of the citation has been completed successfully. - Done! ${createMs}`
   );
