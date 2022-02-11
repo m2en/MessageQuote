@@ -94,8 +94,8 @@ function createQuoteEmbed(quoteMessage: Message) {
   const sendQuoteEmbed = new MessageEmbed()
     .setDescription(quoteMessage.content)
     .setColor('#FFC9E9')
-    .setAuthor({ name: quoteUser.username + `(${quoteUser.id})` })
-    .addField('チャンネル', '<#' + quoteChannelId + '>', true)
+    .setAuthor({ name: `${quoteUser.username}(${quoteUser.id})` })
+    .addField('チャンネル', `<#${quoteChannelId}>`, true)
     .addField(
       '送信日時',
       `<t:${Math.floor(quoteCreateTstamp)}:F>(<t:${Math.floor(
