@@ -14,7 +14,7 @@ async function getMessage(client: Client, receiptMsg: Message) {
 
   // https://(ptb.|canary.)?discord.com/channels/サーバーID/チャンネルID/メッセージID
   const receiptLink = new RegExp(
-    /https:\/\/(?:ptb.|canary.)?discord(?:app)?.com\/channels\/(\d+)\/(\d+)\/(\d+)/
+    /https:\/\/(?:ptb.|canary.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)\/(\d+)/
   );
   const str = receiptMsg.content;
   const match = str.match(receiptLink);
