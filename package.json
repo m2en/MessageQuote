@@ -26,11 +26,11 @@
   },
   "dependencies": {
     "discord.js": "^13.6.0",
-    "dotenv": "^14.3.2"
+    "dotenv": "^16.0.0"
   },
   "devDependencies": {
     "@types/node": "^17.0.17",
-    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
     "eslint": "^8.8.0",
     "husky": "^7.0.4",
