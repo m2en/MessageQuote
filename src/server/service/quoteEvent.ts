@@ -123,7 +123,8 @@ function createQuoteEmbed(quoteMessage: Message) {
   }
 
   const endTime = performance.now();
-  const createMs = Math.round(endTime - startTime) / 20;
+  const digit = 20;
+  const createMs = Math.round(endTime - startTime) / digit;
   console.info(
     `* Quote Create End >>> The creation of the citation has been completed successfully. - Done! ${createMs}`
   );
