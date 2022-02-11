@@ -1,10 +1,14 @@
-import { Client, Message, MessageEmbed } from 'discord.js';
+import {
+  AnyChannel,
+  Client,
+  Guild,
+  Message,
+  MessageEmbed,
+  TextChannel
+} from 'discord.js';
 
-async function quoteSystem(
-  receiptMsg: Message<boolean>,
-  client: Client<boolean>
-) {
-  // 1. メッセージの受け取り
+async function getMessage(client: Client, receiptMsg: Message) {
+  // メッセージの受け取り
   // BOTとDMからのメッセージは弾く
   if (receiptMsg.author.bot || !receiptMsg.guild) return;
 
@@ -22,12 +26,21 @@ async function quoteSystem(
     console.info(`Info: "` + receiptMsg.author.username + `" used quote skip.`);
     return;
   }
+  return {
+    serverId,
+    messageId,
+    quoteChannel,
+    quoteServer
+  };
+}
 
-  // 2. 例外処理
-  const failedMsg =
-    'Unexpected error reported from "quoteEvent" module. <@586824421470109716>, check the log. Or report it to <@586824421470109716>.';
-
-  if (serverId !== receiptMsg.guild.id) {
+function sanitize(
+  serverId: string,
+  receiptMsg: Message,
+  quoteChannel: AnyChannel | null,
+  quoteServer: Guild
+): asserts quoteChannel is TextChannel {
+  if (serverId !== receiptMsg.guild?.id) {
     throw new Error(
       `error: "` +
         receiptMsg.author.username +
@@ -35,21 +48,27 @@ async function quoteSystem(
     );
   }
   if (!quoteChannel || !quoteServer) {
-    await receiptMsg.reply(failedMsg);
     throw new Error(
       'Error: I was unable to discover the quoting channel and the quoting server.'
     );
   }
+  if (!quoteChannel?.isText()) {
+    throw new Error(
+      'Error: The channel of the message for which the citation request was issued is not a text channel.'
+    );
+  }
+}
 
-  if (!quoteChannel?.isText()) return;
-
-  // 3. メッセージの取得
+async function getQuote(quoteChannel: TextChannel, messageId: string) {
   const quoteMessage = await quoteChannel.messages.fetch(messageId);
 
   if (!quoteMessage) return;
   if (quoteMessage.system) return;
 
-  // 4. 引用の作成
+  return quoteMessage;
+}
+
+function createQuoteEmbed(quoteMessage: Message) {
   const startTime = performance.now();
   console.info(`* Quote Create Start >>> Start creating citations.`);
 
@@ -58,14 +77,12 @@ async function quoteSystem(
   const quoteUserAvatar = quoteUser.avatarURL();
 
   if (!quoteUser) {
-    await receiptMsg.reply(failedMsg);
     throw new Error(
       'The user information of the quoted message could not be retrieved from the Discord API.'
     );
   }
 
   if (!quoteChannelId) {
-    await receiptMsg.reply(failedMsg);
     throw new Error(
       'Error: The channel ID of the quoted message could not be retrieved from the Discord API.'
     );
@@ -111,13 +128,43 @@ async function quoteSystem(
     `* Quote Create End >>> The creation of the citation has been completed successfully. - Done! ${createMs}`
   );
 
-  // 5. 送信
+  return {
+    sendQuoteEmbed,
+    createMs
+  };
+}
+
+async function sendQuote(
+  sendQuoteEmbed: MessageEmbed,
+  createMs: number,
+  receiptMsg: Message
+) {
   sendQuoteEmbed.addField('処理時間', String(createMs));
 
   console.log(
     '* Quote Complete >>> "' + receiptMsg.author.username + '" uses a quote.'
   );
   await receiptMsg.reply({ embeds: [sendQuoteEmbed] });
+}
+
+async function quoteSystem(
+  receiptMsg: Message<boolean>,
+  client: Client<boolean>
+) {
+  const message = await getMessage(client, receiptMsg);
+  if (!message) return;
+  const { serverId, messageId, quoteChannel, quoteServer } = message;
+
+  sanitize(serverId, receiptMsg, quoteChannel, quoteServer);
+
+  const quote = await getQuote(quoteChannel, messageId);
+  if (!quote) return;
+
+  const quoteEmbed = createQuoteEmbed(quote);
+  if (!quoteEmbed) return;
+  const { sendQuoteEmbed, createMs } = quoteEmbed;
+
+  await sendQuote(sendQuoteEmbed, createMs, receiptMsg);
 }
 
 /**
