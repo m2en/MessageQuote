@@ -113,7 +113,7 @@ function createQuoteEmbed(quoteMessage: Message) {
 
   if (quoteUserAvatar) {
     sendQuoteEmbed.setAuthor({
-      name: quoteUser.username + `(${quoteUser.id})`,
+      name: quoteUser.username,
       iconURL: quoteUserAvatar
     });
   }
