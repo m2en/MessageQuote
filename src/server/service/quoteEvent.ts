@@ -3,6 +3,7 @@ import {
   Client,
   Guild,
   Message,
+  MessageActionRow,
   MessageButton,
   MessageEmbed,
   TextChannel
@@ -136,12 +137,14 @@ function createQuoteEmbed(quoteMessage: Message) {
 
   return {
     sendQuoteEmbed,
+    sendQuoteDeleteButton,
     createMs
   };
 }
 
 async function sendQuote(
   sendQuoteEmbed: MessageEmbed,
+  _sendQuoteDeleteButton: MessageButton,
   createMs: number,
   receiptMsg: Message
 ) {
@@ -150,7 +153,10 @@ async function sendQuote(
   console.log(
     '* Quote Complete >>> "' + receiptMsg.author.username + '" uses a quote.'
   );
-  await receiptMsg.reply({ embeds: [sendQuoteEmbed] });
+  await receiptMsg.reply({
+    embeds: [sendQuoteEmbed],
+    components: [new MessageActionRow().setComponents([_sendQuoteDeleteButton])]
+  });
 }
 
 async function quoteSystem(
@@ -168,9 +174,9 @@ async function quoteSystem(
 
   const quoteEmbed = createQuoteEmbed(quote);
   if (!quoteEmbed) return;
-  const { sendQuoteEmbed, createMs } = quoteEmbed;
+  const { sendQuoteEmbed, sendQuoteDeleteButton, createMs } = quoteEmbed;
 
-  await sendQuote(sendQuoteEmbed, createMs, receiptMsg);
+  await sendQuote(sendQuoteEmbed, sendQuoteDeleteButton, createMs, receiptMsg);
 }
 
 /**
