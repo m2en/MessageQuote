@@ -10,13 +10,15 @@ TypeScriptとDiscord.jsを使い、メッセージIDからDiscord APIでメッ�
 
 ----
 
+## ドキュメント
+
+MessageQuoteの使い方については [ドキュメント](https://m2q.notion.site/11ce627092084d579f71c4a14cb927fb) から確認できます。
+
 ## 導入する
 
 ホストせず使う場合は [このURL](https://discord.com/api/oauth2/authorize?client_id=889343802433757185&permissions=274877914112&scope=bot%20applications.commands) から導入できます。
 
 Botのプロフィールから直接導入も可です。
-
-![直接導入ボタン](image/addBot.png)
 
 ### 自分でホストする
 
