@@ -3,9 +3,12 @@ import {
   Client,
   Guild,
   Message,
+  MessageActionRow,
+  MessageButton,
   MessageEmbed,
   TextChannel
 } from 'discord.js';
+import { DELETE_BUTTON_ID } from './quoteDelete';
 const toSec = 1000;
 
 async function getMessage(client: Client, receiptMsg: Message) {
@@ -91,10 +94,14 @@ function createQuoteEmbed(quoteMessage: Message) {
 
   const quoteCreateTstamp = quoteMessage.createdTimestamp / toSec;
 
+  const sendQuoteDeleteButton = new MessageButton()
+    .setLabel('Delete / 削除')
+    .setStyle('DANGER')
+    .setCustomId(DELETE_BUTTON_ID);
   const sendQuoteEmbed = new MessageEmbed()
     .setDescription(quoteMessage.content)
     .setColor('#FFC9E9')
-    .setAuthor({ name: `${quoteUser.username}(${quoteUser.id})` })
+    .setAuthor({ name: `${quoteUser.username}` })
     .addField('チャンネル', `<#${quoteChannelId}>`, true)
     .addField(
       '送信日時',
@@ -131,12 +138,14 @@ function createQuoteEmbed(quoteMessage: Message) {
 
   return {
     sendQuoteEmbed,
+    sendQuoteDeleteButton,
     createMs
   };
 }
 
 async function sendQuote(
   sendQuoteEmbed: MessageEmbed,
+  sendQuoteDeleteButton: MessageButton,
   createMs: number,
   receiptMsg: Message
 ) {
@@ -145,7 +154,10 @@ async function sendQuote(
   console.log(
     '* Quote Complete >>> "' + receiptMsg.author.username + '" uses a quote.'
   );
-  await receiptMsg.reply({ embeds: [sendQuoteEmbed] });
+  await receiptMsg.reply({
+    embeds: [sendQuoteEmbed],
+    components: [new MessageActionRow().setComponents([sendQuoteDeleteButton])]
+  });
 }
 
 async function quoteSystem(
@@ -163,9 +175,9 @@ async function quoteSystem(
 
   const quoteEmbed = createQuoteEmbed(quote);
   if (!quoteEmbed) return;
-  const { sendQuoteEmbed, createMs } = quoteEmbed;
+  const { sendQuoteEmbed, sendQuoteDeleteButton, createMs } = quoteEmbed;
 
-  await sendQuote(sendQuoteEmbed, createMs, receiptMsg);
+  await sendQuote(sendQuoteEmbed, sendQuoteDeleteButton, createMs, receiptMsg);
 }
 
 /**
