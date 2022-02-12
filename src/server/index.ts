@@ -31,7 +31,6 @@ client.on('ready', () => {
 
   setInterval(function () {
     shardClient.setActivity(`v${shardClientV} ｜  Ping: ${client.ws.ping}ms`);
-    console.log('Activity update succeeded.');
   }, 1000 * 15);
   console.log('Successfully configured activity.');
 
