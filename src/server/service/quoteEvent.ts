@@ -100,7 +100,7 @@ function createQuoteEmbed(quoteMessage: Message) {
   const sendQuoteEmbed = new MessageEmbed()
     .setDescription(quoteMessage.content)
     .setColor('#FFC9E9')
-    .setAuthor({ name: `${quoteUser.username}(${quoteUser.id})` })
+    .setAuthor({ name: `${quoteUser.username}` })
     .addField('チャンネル', `<#${quoteChannelId}>`, true)
     .addField(
       '送信日時',
