@@ -1,14 +1,14 @@
 {
   "name": "messagequote",
-  "version": "2.3.2",
+  "version": "3.3.2",
   "main": "index.js",
   "license": "MIT",
   "description": "メッセージリンク、IDからメッセージを取得して展開するBot。",
   "author": "merunno",
   "private": false,
   "scripts": {
-    "start": "node ./build/run/server/index.js",
-    "debug": "ts-node src/run/server/index.ts",
+    "start": "node ./build/server/index.js",
+    "debug": "ts-node src/server/index.ts",
     "compile": "tsc -p .",
     "format": "prettier --write src/**/**/*.ts",
     "check": "prettier --check src/**/**/*.ts",
