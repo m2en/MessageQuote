@@ -30,9 +30,7 @@ client.on('ready', () => {
   // アクティビティ登録
 
   setInterval(function () {
-    shardClient.setActivity(
-      `v${shardClientV} ｜ /help ｜ Ping: ${client.ws.ping}ms`
-    );
+    shardClient.setActivity(`v${shardClientV} ｜  Ping: ${client.ws.ping}ms`);
     console.log('Activity update succeeded.');
   }, 1000 * 15);
   console.log('Successfully configured activity.');
