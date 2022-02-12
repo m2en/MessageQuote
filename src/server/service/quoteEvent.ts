@@ -144,7 +144,7 @@ function createQuoteEmbed(quoteMessage: Message) {
 
 async function sendQuote(
   sendQuoteEmbed: MessageEmbed,
-  _sendQuoteDeleteButton: MessageButton,
+  sendQuoteDeleteButton: MessageButton,
   createMs: number,
   receiptMsg: Message
 ) {
@@ -155,7 +155,7 @@ async function sendQuote(
   );
   await receiptMsg.reply({
     embeds: [sendQuoteEmbed],
-    components: [new MessageActionRow().setComponents([_sendQuoteDeleteButton])]
+    components: [new MessageActionRow().setComponents([sendQuoteDeleteButton])]
   });
 }
 
