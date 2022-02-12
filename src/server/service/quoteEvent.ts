@@ -3,6 +3,7 @@ import {
   Client,
   Guild,
   Message,
+  MessageButton,
   MessageEmbed,
   TextChannel
 } from 'discord.js';
@@ -91,6 +92,10 @@ function createQuoteEmbed(quoteMessage: Message) {
 
   const quoteCreateTstamp = quoteMessage.createdTimestamp / toSec;
 
+  const sendQuoteDeleteButton = new MessageButton()
+    .setLabel('Delete / 削除')
+    .setStyle('DANGER')
+    .setCustomId('quoteDelete');
   const sendQuoteEmbed = new MessageEmbed()
     .setDescription(quoteMessage.content)
     .setColor('#FFC9E9')
