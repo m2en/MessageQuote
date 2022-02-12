@@ -12,8 +12,9 @@ export function quoteDelete(client: Client<boolean>) {
 
     await quote.delete();
     await interaction.reply({
-      content: 'あなたの引用を削除しました。',
+      content: '引用を削除しました。',
       ephemeral: true
     });
+    console.log(`${interaction.user.username} has removed the quote.`);
   });
 }
