@@ -1,6 +1,6 @@
 import { Client } from 'discord.js';
 
-function quoteDeleteSystem(client: Client<boolean>) {
+export function quoteDelete(client: Client<boolean>) {
   client.on('interactionCreate', async (interaction) => {
     if (!interaction.guild || !interaction.isButton()) return;
     if (interaction.customId !== 'quoteDelete') return;
@@ -15,8 +15,4 @@ function quoteDeleteSystem(client: Client<boolean>) {
       ephemeral: true
     });
   });
-}
-
-export function quoteDelete(client: Client) {
-  quoteDeleteSystem(client);
 }
