@@ -8,6 +8,7 @@ import {
   MessageEmbed,
   TextChannel
 } from 'discord.js';
+import { DELETE_BUTTON_ID } from './quoteDelete';
 const toSec = 1000;
 
 async function getMessage(client: Client, receiptMsg: Message) {
@@ -96,7 +97,7 @@ function createQuoteEmbed(quoteMessage: Message) {
   const sendQuoteDeleteButton = new MessageButton()
     .setLabel('Delete / 削除')
     .setStyle('DANGER')
-    .setCustomId('quoteDelete');
+    .setCustomId(DELETE_BUTTON_ID);
   const sendQuoteEmbed = new MessageEmbed()
     .setDescription(quoteMessage.content)
     .setColor('#FFC9E9')
