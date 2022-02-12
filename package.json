@@ -27,8 +27,6 @@
     ]
   },
   "dependencies": {
-    "@discordjs/rest": "^0.3.0",
-    "discord-api-types": "^0.26.1",
     "discord.js": "^13.6.0",
     "dotenv": "^16.0.0"
   },
@@ -36,6 +34,7 @@
     "@types/node": "^17.0.17",
     "@typescript-eslint/eslint-plugin": "^5.11.0",
     "@typescript-eslint/parser": "^5.11.0",
+    "deepl": "^1.0.13",
     "eslint": "^8.8.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.2",
