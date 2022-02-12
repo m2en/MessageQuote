@@ -6,7 +6,7 @@ dotenv.config();
 const token = process.env.DISCORD_TOKEN;
 if (!token) {
   console.error(
-    '環境変数に必須のKeyが設定されていません。README.mdにあるKeyを設定してください。'
+    'The required key is not set in the environment variable, please set the key in README.md.'
   );
   process.exit(1);
 }
@@ -21,10 +21,10 @@ quoteEvent(client);
 
 client.on('ready', () => {
   const shardClient: ClientUser | null = client.user;
-  const shardClientV: string = process.env.npm_package_version ?? '不明';
+  const shardClientV: string = process.env.npm_package_version ?? 'unknown';
   if (!shardClient) return;
 
-  console.log(`${shardClient.username}@${shardClientV} 起動しています......`);
+  console.log(`${shardClient.username}@${shardClientV} Start.....`);
 
   // アクティビティ登録
 
@@ -32,5 +32,9 @@ client.on('ready', () => {
     shardClient.setActivity(
       `v${shardClientV} ｜ /help ｜ Ping: ${client.ws.ping}ms`
     );
+    console.log('Activity update succeeded.');
   }, 1000 * 15);
+  console.log('Successfully configured activity.');
+
+  console.log(`${shardClient.username}@${shardClientV} Operation start.`);
 });
