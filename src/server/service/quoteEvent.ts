@@ -83,7 +83,9 @@ async function getQuote(
     });
     setTimeout(() => {
       void errorReply.delete();
-      console.log();
+      console.error(
+        `Error: ${receiptMsg.author.username} tried to quote a message on the NSFW channel, but skipped it.`
+      );
     }, 1000 * 6);
     return;
   }
