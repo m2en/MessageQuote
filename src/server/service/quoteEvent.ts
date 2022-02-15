@@ -86,7 +86,7 @@ async function getQuote(
       console.error(
         `Error: ${receiptMsg.author.username} tried to quote a message on the NSFW channel, but skipped it.`
       );
-    }, 1000 * 6);
+    }, toSec * 6);
     return;
   }
   if (!quoteMessage) return;
