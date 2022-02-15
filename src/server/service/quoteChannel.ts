@@ -71,8 +71,8 @@ function createInfoEmbed(quoteChannel: TextChannel) {
     .setTitle(`チャンネル引用`)
     .setDescription(`${channelName} の情報を引用し、表示しています。`)
     .setColor(embedColor)
-    .addField('チャンネル名', `${channelName}`, true)
-    .addField('チャンネルID', `${channelId}`, true)
+    .addField('チャンネル名', channelName, true)
+    .addField('チャンネルID', channelId, true)
     .addField('メンション', `<#${channelId}>`, true)
     .addField('NSFWの有無(年齢制限)', channelNfnw ? 'はい' : 'なし', true);
 
