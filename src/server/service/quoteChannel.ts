@@ -12,7 +12,7 @@ async function getMessage(client: Client, receiptMsg: Message) {
   if (!receiptMsg.guild || receiptMsg.author.bot) return;
 
   const receiptLink = new RegExp(
-    /https:\/\/(?:ptb.|canary.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)/
+    /https:\/\/(?:ptb\.|canary\.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)/
   );
   const str = receiptMsg.content;
   const match = str.match(receiptLink);
