@@ -9,7 +9,8 @@ import {
   TextChannel
 } from 'discord.js';
 import { DELETE_BUTTON_ID } from './quoteDelete';
-const toSec = 1000;
+export const toSec = 1000;
+export const embedColor = '#FFC9E9';
 
 async function getMessage(client: Client, receiptMsg: Message) {
   // メッセージの受け取り
@@ -100,7 +101,7 @@ function createQuoteEmbed(quoteMessage: Message) {
     .setCustomId(DELETE_BUTTON_ID);
   const sendQuoteEmbed = new MessageEmbed()
     .setDescription(quoteMessage.content)
-    .setColor('#FFC9E9')
+    .setColor(embedColor)
     .setAuthor({ name: `${quoteUser.username}` })
     .addField('チャンネル', `<#${quoteChannelId}>`, true)
     .addField(

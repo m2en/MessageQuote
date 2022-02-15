@@ -1,6 +1,6 @@
 import * as dotenv from 'dotenv';
 import { Client, ClientUser } from 'discord.js';
-import { quoteDelete, quoteEvent } from './service';
+import { quoteChannel, quoteDelete, quoteEvent } from './service';
 
 dotenv.config();
 const token = process.env.DISCORD_TOKEN;
@@ -19,6 +19,7 @@ void client.login(token);
 
 quoteEvent(client);
 quoteDelete(client);
+quoteChannel(client);
 
 client.on('ready', () => {
   const shardClient: ClientUser | null = client.user;
