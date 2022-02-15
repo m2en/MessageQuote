@@ -63,9 +63,30 @@ function sanitize(
   }
 }
 
-async function getQuote(quoteChannel: TextChannel, messageId: string) {
+async function getQuote(
+  quoteChannel: TextChannel,
+  messageId: string,
+  receiptMsg: Message
+) {
   const quoteMessage = await quoteChannel.messages.fetch(messageId);
 
+  if (quoteChannel.nsfw) {
+    const errorReply = await receiptMsg.reply({
+      embeds: [
+        new MessageEmbed()
+          .setTitle('NSFWチャンネルのため引用をキャンセルしました。')
+          .setDescription(
+            'メッセージの内容は直接メッセージにジャンプしてください。'
+          )
+          .setColor('RED')
+      ]
+    });
+    setTimeout(() => {
+      void errorReply.delete();
+      console.log();
+    }, 1000 * 6);
+    return;
+  }
   if (!quoteMessage) return;
   if (quoteMessage.system) return;
 
@@ -170,7 +191,7 @@ async function quoteSystem(
 
   sanitize(serverId, receiptMsg, quoteChannel, quoteServer);
 
-  const quote = await getQuote(quoteChannel, messageId);
+  const quote = await getQuote(quoteChannel, messageId, receiptMsg);
   if (!quote) return;
 
   const quoteEmbed = createQuoteEmbed(quote);
