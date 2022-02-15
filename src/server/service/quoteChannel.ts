@@ -18,8 +18,8 @@ async function getMessage(client: Client, receiptMsg: Message) {
   const match = str.match(receiptLink);
   if (!match) return;
   const [, serverId, channelId] = match;
-  const quoteChannel = await client.channels.fetch(`${channelId}`); // 引用チャンネル
-  const quoteServer = await client.guilds.fetch(`${serverId}`); // 引用サーバー
+  const quoteChannel = await client.channels.fetch(channelId); // 引用チャンネル
+  const quoteServer = await client.guilds.fetch(serverId); // 引用サーバー
   if (receiptMsg.content.startsWith(';')) {
     console.info(`Info: "` + receiptMsg.author.username + `" used quote skip.`);
     return;
