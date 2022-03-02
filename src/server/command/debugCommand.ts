@@ -1,6 +1,6 @@
 import { AnyChannel, Client, Message } from 'discord.js';
 
-async function getCommand(client: Client, message: Message, command: string) {
+async function parseCommand(client: Client, message: Message, command: string) {
   if (message.author.bot || !message.guild) return;
 
   const str = message.content;
@@ -77,7 +77,7 @@ async function runDebug(debugMessage: Message, message: Message) {
 }
 
 async function debugSystem(client: Client, message: Message, command: string) {
-  const commandData = await getCommand(client, message, command);
+  const commandData = await parseCommand(client, message, command);
   if (!commandData) return;
   const { argsMessageId, channel } = commandData;
 
