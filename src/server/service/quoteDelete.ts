@@ -12,8 +12,7 @@ async function deleteQuoteSystem(
   if (!interaction.guild || !interaction.isSelectMenu()) return;
   if (interaction.customId !== DELETE_BUTTON_ID) return;
   if (!interaction.values.find((name) => name.match(DELETE_VALUE))) return;
-
-  const channel = interaction.channel;
+  const { channel } = interaction;
   const quote = await channel?.messages.fetch(interaction.message.id);
   if (!quote) return;
 
