@@ -12,7 +12,7 @@ async function getCommand(
   const match = str.startsWith(command);
   if (!match) return;
 
-  const commandArgs = str.slice(prefix.length).trim().split(' ');
+  const commandArgs = str.slice(prefix.length).trim().split(/\s+/);
   const argsMessageId = commandArgs[1];
   if (!argsMessageId) {
     await message.reply({
