@@ -4,7 +4,7 @@ import { quoteDelete, quoteEvent } from './service';
 
 dotenv.config();
 const token = process.env.DISCORD_TOKEN;
-const prefix = process.env.PREFIX;
+export const prefix = process.env.PREFIX;
 if (!token || !prefix) {
   console.error(
     'The required key is not set in the environment variable, please set the key in README.md.'
@@ -27,6 +27,9 @@ client.on('ready', () => {
   if (!shardClient) return;
 
   console.log(`${shardClient.username}@${shardClientV} Start.....`);
+
+  console.log('= 環境変数設定 =');
+  console.log('Prefix: ' + prefix);
 
   // アクティビティ登録
 
