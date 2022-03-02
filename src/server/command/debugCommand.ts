@@ -16,7 +16,7 @@ async function getCommand(
   const argsMessageId = commandArgs[1];
   if (!argsMessageId) {
     await message.reply({
-      content: `**メッセージIDが指定されていません。**\n Usage: \`${prefix}debug <メッセージID>\``
+      content: `**メッセージIDが指定されていません。**\n Usage: \`${command} <メッセージID>\``
     });
     return;
   }
