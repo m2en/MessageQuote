@@ -4,7 +4,8 @@ import { quoteDelete, quoteEvent } from './service';
 
 dotenv.config();
 const token = process.env.DISCORD_TOKEN;
-if (!token) {
+const prefix = process.env.PREFIX;
+if (!token || !prefix) {
   console.error(
     'The required key is not set in the environment variable, please set the key in README.md.'
   );
