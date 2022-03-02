@@ -1,9 +1,13 @@
 import { AnyChannel, Client, Message } from 'discord.js';
 
-async function getCommand(client: Client, message: Message, prefix: string) {
+async function getCommand(
+  client: Client,
+  message: Message,
+  prefix: string,
+  command: string
+) {
   if (message.author.bot || !message.guild) return;
 
-  const command = `${prefix || '!'}debug`;
   const str = message.content;
   const match = str.startsWith(command);
   if (!match) return;
@@ -79,8 +83,13 @@ async function runDebug(debugMessage: Message, message: Message) {
   console.info(`* Debug End: ` + debugMessage.author.username);
 }
 
-async function debugSystem(client: Client, message: Message, prefix: string) {
-  const commandData = await getCommand(client, message, prefix);
+async function debugSystem(
+  client: Client,
+  message: Message,
+  prefix: string,
+  command: string
+) {
+  const commandData = await getCommand(client, message, prefix, command);
   if (!commandData) return;
   const { argsMessageId, channel } = commandData;
 
@@ -91,9 +100,11 @@ async function debugSystem(client: Client, message: Message, prefix: string) {
 }
 
 export function debugCommand(client: Client, prefix: string) {
+  const command = `${prefix || '!'}debug`;
+
   client.on('messageCreate', async (message) => {
     try {
-      await debugSystem(client, message, prefix);
+      await debugSystem(client, message, prefix, command);
     } catch (e) {
       console.error(e);
     }
