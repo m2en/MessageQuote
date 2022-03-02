@@ -5,8 +5,8 @@ import { debugCommand } from './command/debugCommand';
 
 dotenv.config();
 const token = process.env.DISCORD_TOKEN;
-export const prefix = process.env.PREFIX;
-if (!token || !prefix) {
+const prefix = process.env.PREFIX || '!';
+if (!token) {
   throw new Error(
     'The required key is not set in the environment variable, please set the key in README.md.'
   );

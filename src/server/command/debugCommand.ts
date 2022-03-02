@@ -20,9 +20,8 @@ async function getCommand(client: Client, message: Message) {
     return;
   }
 
-  const server = await client.guilds.fetch(message.guild.id);
   const channel = await client.channels.fetch(message.channel.id);
-  if (!server || !channel) {
+  if (!channel) {
     throw new Error('Could not obtain guild ID and channel ID.');
   }
 
