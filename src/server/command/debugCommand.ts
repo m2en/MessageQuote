@@ -6,7 +6,7 @@ async function getCommand(client: Client, message: Message) {
 
   const command = `${prefix || '!'}debug`;
   const str = message.content;
-  const match = str.match(command);
+  const match = str.startsWith(command);
   if (!match) return;
 
   const commandArgs = str.slice(prefix?.length).trim().split(' ');
