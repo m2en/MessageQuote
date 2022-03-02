@@ -1,4 +1,4 @@
-import { AnyChannel, Client, Message } from 'discord.js';
+import type { AnyChannel, Client, Message } from 'discord.js';
 
 async function getCommand(client: Client, message: Message, command: string) {
   if (message.author.bot || !message.guild) return;
