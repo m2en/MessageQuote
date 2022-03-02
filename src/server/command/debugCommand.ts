@@ -3,17 +3,17 @@ import { AnyChannel, Client, Message } from 'discord.js';
 async function getCommand(client: Client, message: Message, prefix: string) {
   if (message.author.bot || !message.guild) return;
 
-  const command = `${prefix || '!'}debug`;
+  const command = `${prefix}debug`;
   const str = message.content;
   const match = str.startsWith(command);
   if (!match) return;
 
-  const commandArgs = str.slice(prefix?.length).trim().split(' ');
+  const commandArgs = str.slice(prefix.length).trim().split(' ');
   const argsMessageId = commandArgs[1];
   if (!argsMessageId) {
     await message.reply({
       content: `**メッセージIDが指定されていません。**\n Usage: \`${
-        prefix || '!'
+        prefix
       }debug <メッセージID>\``
     });
     return;
