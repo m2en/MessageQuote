@@ -3,12 +3,11 @@ import {
   Client,
   Guild,
   Message,
-  MessageActionRow,
-  MessageButton,
   MessageEmbed,
   TextChannel
 } from 'discord.js';
-import { DELETE_BUTTON_ID } from './quoteDelete';
+import { deleteButton } from '../component/deleteButton';
+
 const toSec = 1000;
 
 async function getMessage(client: Client, receiptMsg: Message) {
@@ -117,10 +116,6 @@ function createQuoteEmbed(quoteMessage: Message) {
 
   const quoteCreateTstamp = quoteMessage.createdTimestamp / toSec;
 
-  const sendQuoteDeleteButton = new MessageButton()
-    .setLabel('Delete / 削除')
-    .setStyle('DANGER')
-    .setCustomId(DELETE_BUTTON_ID);
   const sendQuoteEmbed = new MessageEmbed()
     .setDescription(quoteMessage.content)
     .setColor('#FFC9E9')
@@ -161,14 +156,12 @@ function createQuoteEmbed(quoteMessage: Message) {
 
   return {
     sendQuoteEmbed,
-    sendQuoteDeleteButton,
     createMs
   };
 }
 
 async function sendQuote(
   sendQuoteEmbed: MessageEmbed,
-  sendQuoteDeleteButton: MessageButton,
   createMs: number,
   receiptMsg: Message
 ) {
@@ -179,7 +172,7 @@ async function sendQuote(
   );
   await receiptMsg.reply({
     embeds: [sendQuoteEmbed],
-    components: [new MessageActionRow().setComponents([sendQuoteDeleteButton])]
+    components: [deleteButton]
   });
 }
 
@@ -198,9 +191,9 @@ async function quoteSystem(
 
   const quoteEmbed = createQuoteEmbed(quote);
   if (!quoteEmbed) return;
-  const { sendQuoteEmbed, sendQuoteDeleteButton, createMs } = quoteEmbed;
+  const { sendQuoteEmbed, createMs } = quoteEmbed;
 
-  await sendQuote(sendQuoteEmbed, sendQuoteDeleteButton, createMs, receiptMsg);
+  await sendQuote(sendQuoteEmbed, createMs, receiptMsg);
 }
 
 /**
@@ -212,6 +205,7 @@ export function quoteEvent(client: Client) {
     try {
       await quoteSystem(receiptMsg, client);
     } catch (e) {
+      await receiptMsg.reply({ content: 'hoge' });
       console.error(e);
     }
   });
