@@ -8,7 +8,7 @@ import {
 } from 'discord.js';
 import { deleteButton } from '../component/deleteButton';
 
-const toSec = 1000;
+export const toSec = 1000;
 
 async function getMessage(client: Client, receiptMsg: Message) {
   // メッセージの受け取り
@@ -205,7 +205,6 @@ export function quoteEvent(client: Client) {
     try {
       await quoteSystem(receiptMsg, client);
     } catch (e) {
-      await receiptMsg.reply({ content: 'hoge' });
       console.error(e);
     }
   });
