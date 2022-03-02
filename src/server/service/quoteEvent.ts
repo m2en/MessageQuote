@@ -8,7 +8,7 @@ import {
 } from 'discord.js';
 import { deleteButton } from '../component/deleteButton';
 
-export const toSec = 1000;
+const toSec = 1000;
 
 async function getMessage(client: Client, receiptMsg: Message) {
   // メッセージの受け取り
