@@ -1,15 +1,15 @@
 import * as dotenv from 'dotenv';
 import { Client, ClientUser } from 'discord.js';
 import { quoteDelete, quoteEvent } from './service';
+import { debugCommand } from './command/debugCommand';
 
 dotenv.config();
 const token = process.env.DISCORD_TOKEN;
 export const prefix = process.env.PREFIX;
 if (!token || !prefix) {
-  console.error(
+  throw new Error(
     'The required key is not set in the environment variable, please set the key in README.md.'
   );
-  process.exit(1);
 }
 
 const client = new Client({
@@ -20,6 +20,8 @@ void client.login(token);
 
 quoteEvent(client);
 quoteDelete(client);
+// ----
+debugCommand(client);
 
 client.on('ready', () => {
   const shardClient: ClientUser | null = client.user;
