@@ -1,24 +1,18 @@
 import { AnyChannel, Client, Message } from 'discord.js';
 
-async function getCommand(
-  client: Client,
-  message: Message,
-  prefix: string,
-  command: string
-) {
+async function getCommand(client: Client, message: Message, prefix: string) {
   if (message.author.bot || !message.guild) return;
 
+  const command = `${prefix}debug`;
   const str = message.content;
   const match = str.startsWith(command);
   if (!match) return;
 
-  const commandArgs = str.slice(prefix?.length).trim().split(' ');
+  const commandArgs = str.slice(prefix.length).trim().split(' ');
   const argsMessageId = commandArgs[1];
   if (!argsMessageId) {
     await message.reply({
-      content: `**メッセージIDが指定されていません。**\n Usage: \`${
-        prefix || '!'
-      }debug <メッセージID>\``
+      content: `**メッセージIDが指定されていません。**\n Usage: \`${prefix}debug <メッセージID>\``
     });
     return;
   }
@@ -83,13 +77,8 @@ async function runDebug(debugMessage: Message, message: Message) {
   console.info(`* Debug End: ` + debugMessage.author.username);
 }
 
-async function debugSystem(
-  client: Client,
-  message: Message,
-  prefix: string,
-  command: string
-) {
-  const commandData = await getCommand(client, message, prefix, command);
+async function debugSystem(client: Client, message: Message, prefix: string) {
+  const commandData = await getCommand(client, message, prefix);
   if (!commandData) return;
   const { argsMessageId, channel } = commandData;
 
@@ -100,11 +89,9 @@ async function debugSystem(
 }
 
 export function debugCommand(client: Client, prefix: string) {
-  const command = `${prefix || '!'}debug`;
-
   client.on('messageCreate', async (message) => {
     try {
-      await debugSystem(client, message, prefix, command);
+      await debugSystem(client, message, prefix);
     } catch (e) {
       console.error(e);
     }
