@@ -1,7 +1,6 @@
 import { AnyChannel, Client, Message } from 'discord.js';
-import { prefix } from '../index';
 
-async function getCommand(client: Client, message: Message) {
+async function getCommand(client: Client, message: Message, prefix: string) {
   if (message.author.bot || !message.guild) return;
 
   const command = `${prefix || '!'}debug`;
@@ -51,7 +50,7 @@ async function getMessage(
   };
 }
 
-async function runDebug(debugMessage: Message<boolean>, message: Message) {
+async function runDebug(debugMessage: Message, message: Message) {
   console.info(`* Debug Start`);
 
   const debugContent = debugMessage.content;
@@ -80,8 +79,8 @@ async function runDebug(debugMessage: Message<boolean>, message: Message) {
   console.info(`* Debug End: ` + debugMessage.author.username);
 }
 
-async function debugSystem(client: Client, message: Message) {
-  const commandData = await getCommand(client, message);
+async function debugSystem(client: Client, message: Message, prefix: string) {
+  const commandData = await getCommand(client, message, prefix);
   if (!commandData) return;
   const { argsMessageId, channel } = commandData;
 
@@ -91,10 +90,10 @@ async function debugSystem(client: Client, message: Message) {
   await runDebug(messageData.debugMessage, message);
 }
 
-export function debugCommand(client: Client) {
+export function debugCommand(client: Client, prefix: string) {
   client.on('messageCreate', async (message) => {
     try {
-      await debugSystem(client, message);
+      await debugSystem(client, message, prefix);
     } catch (e) {
       console.error(e);
     }

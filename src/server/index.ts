@@ -21,7 +21,7 @@ void client.login(token);
 quoteEvent(client);
 quoteDelete(client);
 // ----
-debugCommand(client);
+debugCommand(client, prefix);
 
 client.on('ready', () => {
   const shardClient: ClientUser | null = client.user;
