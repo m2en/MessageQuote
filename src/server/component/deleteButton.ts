@@ -4,7 +4,7 @@ export const DELETE_VALUE = 'delete_quote';
 
 export const deleteButton = new MessageActionRow().setComponents([
   new MessageSelectMenu()
-    .setCustomId(String(DELETE_BUTTON_ID))
+    .setCustomId(DELETE_BUTTON_ID)
     .setPlaceholder('引用に関する操作はこちら')
     .addOptions([
       {
