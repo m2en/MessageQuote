@@ -205,7 +205,6 @@ export function quoteEvent(client: Client) {
     try {
       await quoteSystem(receiptMsg, client);
     } catch (e) {
-      await receiptMsg.reply({ content: 'hoge' });
       console.error(e);
     }
   });
