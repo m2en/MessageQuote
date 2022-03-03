@@ -102,10 +102,10 @@ function createQuoteEmbed(quoteMessage: Message) {
   const quoteChannelId = quoteMessage.channel.id;
   const quoteUserAvatar = quoteUser.avatarURL();
 
-  let quoteMessageType: string = quoteMessage.type;
+  let quoteMessageType: string;
   // システムメッセージ等、MessageQuoteが引用できないものは除外
   // 参考: https://discord.js.org/#/docs/discord.js/stable/typedef/MessageType
-  switch (quoteMessageType) {
+  switch (quoteMessage.type) {
     case 'DEFAULT': {
       quoteMessageType = 'デフォルトメッセージ';
       break;
