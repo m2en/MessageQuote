@@ -118,6 +118,9 @@ function createQuoteEmbed(quoteMessage: Message) {
       quoteMessageType = 'アプリケーション';
       break;
     }
+    default: {
+      quoteMessageType = 'その他';
+    }
   }
 
   if (!quoteUser) {
