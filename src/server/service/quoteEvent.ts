@@ -99,7 +99,7 @@ function createQuoteEmbed(quoteMessage: Message) {
   console.info(`* Quote Create Start >>> Start creating citations.`);
 
   const quoteUser = quoteMessage.author;
-  const quoteChannelId = quoteMessage.channel.id;
+  const quoteChannel = quoteMessage.channel;
   const quoteUserAvatar = quoteUser.avatarURL();
 
   let quoteMessageType: string;
@@ -123,13 +123,40 @@ function createQuoteEmbed(quoteMessage: Message) {
     }
   }
 
+  let quoteChannelType: string;
+  switch (quoteChannel.type) {
+    case 'GUILD_TEXT': {
+      quoteChannelType = 'テキストチャンネル';
+      break;
+    }
+    case 'GUILD_NEWS': {
+      quoteChannelType = 'ニュースチャンネル';
+      break;
+    }
+    case 'GUILD_NEWS_THREAD': {
+      quoteChannelType = 'スレッド:ニュースチャンネル';
+      break;
+    }
+    case 'GUILD_PUBLIC_THREAD': {
+      quoteChannelType = 'スレッド:パブリック';
+      break;
+    }
+    case 'GUILD_PRIVATE_THREAD': {
+      quoteChannelType = 'スレッド:プライベート';
+      break;
+    }
+    default: {
+      quoteChannelType = 'その他';
+    }
+  }
+
   if (!quoteUser) {
     throw new Error(
       'The user information of the quoted message could not be retrieved from the Discord API.'
     );
   }
 
-  if (!quoteChannelId) {
+  if (!quoteChannel.id) {
     throw new Error(
       'Error: The channel ID of the quoted message could not be retrieved from the Discord API.'
     );
@@ -142,13 +169,12 @@ function createQuoteEmbed(quoteMessage: Message) {
     .setColor('#FFC9E9')
     .setAuthor({ name: `${quoteUser.username}` })
     .setFooter({ text: 'メッセージタイプ: ' + quoteMessageType })
-    .addField('チャンネル', `<#${quoteChannelId}>`, true)
+    .addField('チャンネル', `<#${quoteChannel.id}>(${quoteChannelType})`)
     .addField(
       '送信日時',
       `<t:${Math.floor(quoteCreateTstamp)}:F>(<t:${Math.floor(
         quoteCreateTstamp
-      )}:R>)`,
-      true
+      )}:R>)`
     );
 
   if (quoteUserAvatar) {
