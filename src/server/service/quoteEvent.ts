@@ -102,6 +102,27 @@ function createQuoteEmbed(quoteMessage: Message) {
   const quoteChannelId = quoteMessage.channel.id;
   const quoteUserAvatar = quoteUser.avatarURL();
 
+  let quoteMessageType: string;
+  // システムメッセージ等、MessageQuoteが引用できないものは除外
+  // 参考: https://discord.js.org/#/docs/discord.js/stable/typedef/MessageType
+  switch (quoteMessage.type) {
+    case 'DEFAULT': {
+      quoteMessageType = 'デフォルトメッセージ';
+      break;
+    }
+    case 'REPLY': {
+      quoteMessageType = 'リプライメッセージ';
+      break;
+    }
+    case 'APPLICATION_COMMAND': {
+      quoteMessageType = 'アプリケーション';
+      break;
+    }
+    default: {
+      quoteMessageType = 'その他';
+    }
+  }
+
   if (!quoteUser) {
     throw new Error(
       'The user information of the quoted message could not be retrieved from the Discord API.'
@@ -120,6 +141,7 @@ function createQuoteEmbed(quoteMessage: Message) {
     .setDescription(quoteMessage.content)
     .setColor('#FFC9E9')
     .setAuthor({ name: `${quoteUser.username}` })
+    .setFooter({ text: 'メッセージタイプ: ' + quoteMessageType })
     .addField('チャンネル', `<#${quoteChannelId}>`, true)
     .addField(
       '送信日時',
