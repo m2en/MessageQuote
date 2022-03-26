@@ -1,4 +1,4 @@
-name: MessageQuote run eslint
+name: ESLint
 
 on:
   push:

@@ -1,4 +1,4 @@
-name: MessageQuote run prettier
+name: Prettier
 
 on:
   push:
