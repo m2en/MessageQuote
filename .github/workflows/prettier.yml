@@ -1,10 +1,17 @@
-name: MessageQuote run prettier
+name: Prettier
 
-on: pull_request
+on:
+  pull_request:
+    paths-ignore:
+      - '**/node_modules/**'
+      - 'package.json'
+      - 'yarn.lock'
+      - '**.md'
+    branches:
+      - master
 
 jobs:
-  run_eslint:
-    name: MessageQuote prettier
+  run-prettier:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
