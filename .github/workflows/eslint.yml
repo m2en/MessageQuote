@@ -1,12 +1,6 @@
 name: ESLint
 
 on:
-  push:
-    paths-ignore:
-      - '**/node_modules/**'
-      - 'package.json'
-      - 'yarn.lock'
-      - '**.md'
   pull_request:
     paths-ignore:
       - '**/node_modules/**'
