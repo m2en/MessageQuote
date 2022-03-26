@@ -1,6 +1,20 @@
 name: MessageQuote run prettier
 
-on: pull_request
+on:
+  push:
+    paths-ignore:
+      - '**/node_modules/**'
+      - 'package.json'
+      - 'yarn.lock'
+      - '**.md'
+  pull_request:
+    paths-ignore:
+      - '**/node_modules/**'
+      - 'package.json'
+      - 'yarn.lock'
+      - '**.md'
+    branches:
+      - master
 
 jobs:
   run_eslint:
