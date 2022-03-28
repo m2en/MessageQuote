@@ -8,8 +8,14 @@ function createPing(client: Client, interaction: Interaction) {
   const pingEmbed = new MessageEmbed()
     .setTitle('MessageQuote Ping:')
     .setDescription('🏓 Pong!')
-    .addField('Latency(WebSocket):', `${client.ws.ping}ms`)
-    .addField('Latency(API):', `${Date.now() - interaction.createdTimestamp}ms`)
+    .addField('Latency(WebSocket):', `${client.ws.ping}ms`, true)
+    .addField(
+      'Latency(API):',
+      `${
+        Date.now() - interaction.createdTimestamp
+      }ms\n([Discord Status](https://discordstatus.com/))`,
+      true
+    )
     .setColor('YELLOW');
 
   return { pingReady, pingEmbed };
