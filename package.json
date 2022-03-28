@@ -8,21 +8,25 @@
   "private": false,
   "scripts": {
     "start": "node ./build/server/index.js",
-    "debug": "ts-node src/server/index.ts",
-    "setup": "pm2 start ./build/server/index.js --name MessageQuote",
+    "prestart": "ts-node src/server/index.ts",
+    "setup": "pm2 start ./build/index.js --name MessageQuote",
+    "deploy": "node ./build/setup/index.js",
     "compile": "tsc -p .",
     "format": "prettier --write src/**/**/*.ts",
     "check": "prettier --check src/**/**/*.ts",
-    "lint": "eslint",
-    "fix": "yarn run format && yarn run lint -- --fix",
+    "lint": "eslint --ignore-path .gitignore \"src/**/**/*.ts\"",
+    "lint:fix": "eslint --ignore-path .gitignore \"src/**/**/*.ts\" --fix",
+    "fix": "yarn run format && yarn run lint:fix",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
     "compile:test": "tsc -p . --noEmit"
   },
   "lint-staged": {
     "*.{js,ts}": [
-      "eslint --fix",
-      "prettier --write"
+      "yarn run format",
+      "yarn run lint",
+      "yarn run lint:fix",
+      "yarn run check"
     ]
   },
   "dependencies": {
@@ -31,9 +35,11 @@
     "pm2": "^5.2.0"
   },
   "devDependencies": {
+    "@discordjs/rest": "^0.3.0",
     "@types/node": "^17.0.23",
-    "@typescript-eslint/parser": "^5.16.0",
     "@typescript-eslint/eslint-plugin": "^5.16.0",
+    "@typescript-eslint/parser": "^5.16.0",
+    "discord-api-types": "^0.30.0",
     "eslint": "^8.12.0",
     "husky": "^7.0.4",
     "lint-staged": "^12.3.7",
