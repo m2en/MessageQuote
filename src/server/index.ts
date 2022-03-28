@@ -1,6 +1,6 @@
 import { Client, Intents } from 'discord.js';
 import * as dotenv from 'dotenv';
-import { helpCommand, pingCommand } from './command';
+import { debugCommand, helpCommand, pingCommand } from './command';
 
 // 環境変数の設定
 dotenv.config();
@@ -60,3 +60,4 @@ client.once('ready', () => {
 // Event/Command の読み込み
 helpCommand(client);
 pingCommand(client);
+debugCommand(client);
