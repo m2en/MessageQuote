@@ -19,7 +19,7 @@ export function pingCommand(client: Client) {
   client.on('interactionCreate', async (interaction) => {
     try {
       if (!interaction.isCommand() || !interaction.guild) return;
-      if (interaction.commandName !== 'help') return;
+      if (interaction.commandName !== 'ping') return;
 
       const { pingReady, pingEmbed } = createPing(client, interaction);
 
