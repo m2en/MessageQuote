@@ -5,13 +5,12 @@
 ### feat
 
 - 新規コマンドを追加しました。
-  - `/help
+  - `/help`
   - `/ping`
   - 使用するには [Slash Command](./src/setup/README.md) を設定してください。
 - デバック機能を追加しました。
   - `/debug <id>` で指定したIDのメッセージをコードブロックで表示することでデバックを行える機能です。
   - 使用するには [Slash Command](./src/setup/README.md) を設定してください。
-- スレッドに自動参加するようになりました。
 
 ### Changed
 
