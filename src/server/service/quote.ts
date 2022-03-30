@@ -53,8 +53,7 @@ function createEmbed(message: Message) {
 }
 
 async function sendQuote(createEmbed: MessageEmbed, message: Message) {
-  const quote = await message.reply({ embeds: [createEmbed] });
-  await quote.react('🗑️');
+  await message.reply({ embeds: [createEmbed] });
 }
 
 export function quote(client: Client) {
