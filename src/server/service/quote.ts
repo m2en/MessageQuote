@@ -12,8 +12,7 @@ function getLink(message: Message) {
   if (!match) return;
   const [, serverId, channelId, messageId] = match;
 
-  if (match.toString().startsWith('<') && match.toString().endsWith('>'))
-    return;
+  if (message.content.startsWith(';')) return;
   if (serverId !== message.guildId) return;
 
   return {
