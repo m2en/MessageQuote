@@ -1,6 +1,5 @@
 import { Client, Message, MessageEmbed } from 'discord.js';
-import { getQuoteEmbed } from '../util/quoteEmbed';
-import { getErrorEmbed } from '../util/errorEmbed';
+import { getQuoteEmbed, getErrorEmbed } from '../util';
 
 function getLink(message: Message) {
   if (message.author.bot || !message.guild) return;
