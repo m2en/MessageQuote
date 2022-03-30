@@ -16,15 +16,13 @@ function createHelp() {
     '```';
   const help = new MessageEmbed()
     .setTitle('MessageQuote Help:')
-    .setDescription('メッセージリンク、IDからメッセージを取得して展開するBot')
+    .setDescription(
+      'メッセージリンクからメッセージを取得して展開するDiscord Bot'
+    )
     .setColor(embedColor)
     .addField(
       '基本的な使い方',
       'メッセージリンクをそのまま送信してください。引用をしてほしくない場合はメッセージの最初に`;`をつけてください。'
-    )
-    .addField(
-      '引用削除',
-      'MessageQuoteのすべてのメッセージは削除することができます。'
     )
     .addField(
       'コマンド一覧',
