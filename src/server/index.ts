@@ -1,7 +1,8 @@
 import { Client, Intents } from 'discord.js';
 import * as dotenv from 'dotenv';
 import { debugCommand, helpCommand, pingCommand } from './command';
-import { errorEvent } from './event/errorEvent';
+import { errorEvent } from './event';
+import { quote } from './service';
 
 // 環境変数の設定
 dotenv.config();
@@ -64,3 +65,5 @@ pingCommand(client);
 debugCommand(client);
 
 errorEvent(client);
+
+quote(client);
