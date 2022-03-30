@@ -1,62 +1,45 @@
 # MessageQuote
 
-[![GitHub Actions#CodeQL](https://github.com/approvers/MessageQuote/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/approvers/MessageQuote/actions/workflows/codeql-analysis.yml)
+[![Auto Pull Request Labeler](https://github.com/approvers/MessageQuote/actions/workflows/auto-label.yml/badge.svg)](https://github.com/approvers/MessageQuote/actions/workflows/auto-label.yml)
+[![GitHub Actions#CodeQL](https://github.com/approvers/MessageQuote/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/approvers/MessageQuote/actions/workflows/codeql-analysis.yml)  
+
+
 [![GitHub Actions#eslint](https://github.com/approvers/MessageQuote/actions/workflows/eslint.yml/badge.svg)](https://github.com/approvers/MessageQuote/actions/workflows/eslint.yml)
 [![GitHub Actions#prettier](https://github.com/approvers/MessageQuote/actions/workflows/prettier.yml/badge.svg)](https://github.com/approvers/MessageQuote/actions/workflows/prettier.yml)
 
-メッセージリンクからIDを取得して引用できるDiscord Bot
-
-TypeScriptとDiscord.jsを使い、メッセージIDからDiscord APIでメッセージを取得しています。
-
 ----
 
-## ドキュメント
+メッセージリンクからメッセージを取得して展開するDiscord Bot
 
-MessageQuoteの使い方については [ドキュメント](https://m2q.notion.site/11ce627092084d579f71c4a14cb927fb) から確認できます。
 
-## 導入する
+## 依存関係
 
-ホストせず使う場合は [このURL](https://discord.com/api/oauth2/authorize?client_id=889343802433757185&permissions=274877914112&scope=bot%20applications.commands) から導入できます。
+TypeScript(node.js) + discord.js
 
-Botのプロフィールから直接導入も可です。
+- dotenv
+- pm2
 
-### 自分でホストする
+## セットアップ
 
-node.jsの最新版をセットアップしてください。
+1. MessageQuoteをクローンしてください。
+2. `.env` を作成し、必要な環境変数を記入してください。
+3. `yarn install` を実行し、依存関係をインストールしてください。
+4. `yarn compile` を実行し、コンパイルしてください。
+5. `yarn setup` を実行してください。
 
-```
-git clone https://github.com/approvers/MessageQuote.git
-yarn
-echo .env >> TOKEN=
-yarn compile
-yarn start
-```
+- 以後 pm2 で MessageQuote を管理することが出来るようになりました。
+- pm2に関する詳細は [pm2](https://pm2.io/) を参照してください。
+- この状態ではコマンドを使用することができないので、セットアップが完了したら [Application (/) Commandのセットアップ](src/setup/README.md) を見ながら、Slash Command を設定してください。
 
-<details>
-<summary>アップデート方法</summary>
+~~なお、開発者がホストしているバージョンを導入する際は [このリンク]() から導入できます。~~
+> 2022/03/30現在、ホストは中止中です。
 
-[Releases](https://github.com/approvers/MessageQuote/releases) が更新されたらアップデートを行うことを推奨します。
+## 環境変数
 
-```
-git pull
-yarn
-yarn compile
-yarn start
-```
+| 値                 | 説明                           | 必須    |
+|-------------------|------------------------------|-------|
+| `DISCORD_TOKEN`   | Discord Botのトークン             | true  |
+| `CLIENT_ID`       | Discord BotのクライアントID(ユーザーID) | true  |
+| `TARGET_GUILD_ID` | GuildCommandとして登録したいギルドのID   | false |
 
-</details>
-
-### 寄稿者など
-- [mirror-kt](https://github.com/mirror-kt)
-- [isso0424](https://github.com/isso0424)
-- [loxygenK](https://github.com/loxygenK)
-- [watano1168](https://github.com/watano1168)
-- [MikuroXina](https://github.com/MikuroXina)
-- [skytomo221](https://github.com/skytomo221)
-
-----
-
-| 値                 | 概要                      |
-|-------------------|-------------------------|
-| TOKEN             | DiscordのBotのToken       |
-| STATUS_CHANNEL_ID | ステータスメッセージを送信するチャンネルを指定 |
+詳細は [.example.env](https://github.com/approvers/MessageQuote/blob/master/.example.env) を参照してください。
