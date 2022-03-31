@@ -36,7 +36,7 @@ function createDebug(message: Message) {
     .setLabel('元のメッセージ')
     .setURL(message.url);
 
-  if (content.match('`')) {
+  if (content.includes('`')) {
     content = content.replaceAll('`', `'`);
     debugContext = '```\n' + content + '\n```';
     debug.setDescription(debugContext);
