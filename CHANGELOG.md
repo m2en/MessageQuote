@@ -30,4 +30,4 @@
 
 ## v0.3.0 ~ v3.4.0
 
-https://github.com/approvers/MessageQuote/releases　を参照ください。
+[GitHubのリリース](https://github.com/approvers/MessageQuote/releases) を参照ください。
