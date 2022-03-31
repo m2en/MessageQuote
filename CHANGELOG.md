@@ -1,8 +1,28 @@
 # MessageQuote
 
+## v4.1.0 [Unreleased]
+
+### Added
+
+- スレッドに自動で参加するようになりました。
+
+### Changed
+
+- 引用キャンセルの判定を最初の方で行うように ([#131](https://github.com/approvers/MessageQuote/pull/131))
+- グレイヴ・アクセント(`)があった際の置き換え判定時に文字を検索する方式に変更 ([#131](https://github.com/approvers/MessageQuote/pull/131))
+- 一部の型を修正 ([#130](https://github.com/approvers/MessageQuote/pull/130))
+
+### Bug Fixes
+
+- メッセージリンクを送信したユーザーのアバターが取得できなかった際に、ただしくEmbedを作成できない問題を修正 ([#132](https://github.com/approvers/MessageQuote/pull/132))
+
+### Documentation Fixes
+
+- リンクが地の文にまで波及している箇所を修正 (CHANGELOG.md) ([#129](https://github.com/approvers/MessageQuote/pull/129))
+
 ## v4.0.0 (2022-03-30)
 
-### feat
+### Added
 
 - 新規コマンドを追加しました。
   - `/help`
