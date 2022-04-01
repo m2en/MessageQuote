@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv';
 import { debugCommand, helpCommand, pingCommand } from './command';
 import { errorEvent } from './event';
 import { quote } from './service';
+import { autoJoinThread } from './event/autoJoinThread';
 
 // 環境変数の設定
 dotenv.config();
@@ -65,5 +66,6 @@ pingCommand(client);
 debugCommand(client);
 
 errorEvent(client);
+autoJoinThread(client);
 
 quote(client);
