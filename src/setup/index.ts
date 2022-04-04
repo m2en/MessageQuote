@@ -1,5 +1,6 @@
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
+import { ApplicationCommandData } from 'discord.js';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -13,7 +14,7 @@ if (!TARGET_TOKEN || !TARGET_CLIENT_ID) {
 
 const rest = new REST({ version: '9' }).setToken(TARGET_TOKEN);
 
-function commands(): object[] {
+function commands(): ApplicationCommandData[] {
   return [
     {
       name: 'help',
