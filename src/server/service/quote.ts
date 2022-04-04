@@ -1,4 +1,4 @@
-import { Client, Message, MessageEmbed } from 'discord.js';
+import { Client, Message, MessageEmbed, Snowflake } from 'discord.js';
 import { getQuoteEmbed, getErrorEmbed } from '../util';
 
 function getLink(message: Message) {
@@ -23,8 +23,8 @@ function getLink(message: Message) {
 
 async function fetchMessage(
   client: Client,
-  channelId: string,
-  messageId: string
+  channelId: Snowflake,
+  messageId: Snowflake
 ) {
   const channel = await client.channels.fetch(channelId);
   if (!channel || !channel.isText())

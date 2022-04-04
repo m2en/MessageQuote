@@ -4,11 +4,12 @@ import {
   Message,
   MessageActionRow,
   MessageButton,
-  MessageEmbed
+  MessageEmbed,
+  Snowflake
 } from 'discord.js';
 import { embedColor } from './helpCommand';
 
-async function getMessage(messageId: string, interaction: Interaction) {
+async function getMessage(messageId: Snowflake, interaction: Interaction) {
   const channelId = interaction.channelId;
   const guild = interaction.guild;
   if (!channelId || !guild) return;
