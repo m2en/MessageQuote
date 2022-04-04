@@ -21,7 +21,7 @@ export function getQuoteEmbed({ message }: quoteProps): MessageEmbed {
     .setDescription(message.content)
     .setAuthor({
       name: message.author.username,
-      iconURL: avatarURL ? avatarURL : undefined
+      iconURL: avatarURL ?? undefined
     })
     .setColor('AQUA')
     .addField('チャンネル', `<#${message.channelId}>`, true)
@@ -34,7 +34,7 @@ export function getQuoteEmbed({ message }: quoteProps): MessageEmbed {
   message.attachments
     .map((attachment) => attachment.name)
     .forEach((name) =>
-      embed.addField('添付ファイル', `${name ? name : '不明'}`, true)
+      embed.addField('添付ファイル', `${name ?? '不明'}`, true)
     );
 
   // ステッカー(スタンプ)
