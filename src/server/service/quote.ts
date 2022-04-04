@@ -6,7 +6,7 @@ function getLink(message: Message) {
   if (message.content.startsWith(';')) return;
 
   const messageLink =
-    /https:\/\/(?:ptb.|canary.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)\/(\d+)/;
+    /https:\/\/(?:ptb\.|canary\.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)\/(\d+)/;
   const str = message.content;
   const match = str.match(messageLink);
   if (!match) return;
