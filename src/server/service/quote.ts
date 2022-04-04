@@ -3,6 +3,7 @@ import { getQuoteEmbed, getErrorEmbed } from '../util';
 
 function getLink(message: Message) {
   if (message.author.bot || !message.guild) return;
+  if (message.content.startsWith(';')) return;
 
   const messageLink = new RegExp(
     /https:\/\/(?:ptb.|canary.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)\/(\d+)/
@@ -12,7 +13,6 @@ function getLink(message: Message) {
   if (!match) return;
   const [, serverId, channelId, messageId] = match;
 
-  if (message.content.startsWith(';')) return;
   if (serverId !== message.guildId) return;
 
   return {
