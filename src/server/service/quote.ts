@@ -1,18 +1,17 @@
-import { Client, Message, MessageEmbed } from 'discord.js';
+import { Client, Message, MessageEmbed, Snowflake } from 'discord.js';
 import { getQuoteEmbed, getErrorEmbed } from '../util';
 
 function getLink(message: Message) {
   if (message.author.bot || !message.guild) return;
+  if (message.content.startsWith(';')) return;
 
-  const messageLink = new RegExp(
-    /https:\/\/(?:ptb\.|canary\.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)\/(\d+)/
-  );
+  const messageLink =
+    /https:\/\/(?:ptb\.|canary\.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)\/(\d+)/;
   const str = message.content;
   const match = str.match(messageLink);
   if (!match) return;
   const [, serverId, channelId, messageId] = match;
 
-  if (message.content.startsWith(';')) return;
   if (serverId !== message.guildId) return;
 
   return {
@@ -23,8 +22,8 @@ function getLink(message: Message) {
 
 async function fetchMessage(
   client: Client,
-  channelId: string,
-  messageId: string
+  channelId: Snowflake,
+  messageId: Snowflake
 ) {
   const channel = await client.channels.fetch(channelId);
   if (!channel || !channel.isText())
