@@ -4,9 +4,8 @@ import { getQuoteEmbed, getErrorEmbed } from '../util';
 function getLink(message: Message) {
   if (message.author.bot || !message.guild) return;
 
-  const messageLink = new RegExp(
-    /https:\/\/(?:ptb.|canary.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)\/(\d+)/
-  );
+  const messageLink =
+    /https:\/\/(?:ptb.|canary.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)\/(\d+)/;
   const str = message.content;
   const match = str.match(messageLink);
   if (!match) return;
