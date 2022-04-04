@@ -1,6 +1,7 @@
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
-import { ApplicationCommandData } from 'discord.js';
+// this type is not exported from discord.js itself
+import { RESTPostAPIApplicationCommandsJSONBody } from 'discord-api-types/v9';
 import * as dotenv from 'dotenv';
 
 dotenv.config();
@@ -14,7 +15,7 @@ if (!TARGET_TOKEN || !TARGET_CLIENT_ID) {
 
 const rest = new REST({ version: '9' }).setToken(TARGET_TOKEN);
 
-function commands(): ApplicationCommandData[] {
+function commands(): RESTPostAPIApplicationCommandsJSONBody[] {
   return [
     {
       name: 'help',
