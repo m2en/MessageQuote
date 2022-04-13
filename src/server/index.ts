@@ -53,7 +53,9 @@ client.once('ready', () => {
     );
   }, 1000 * 60 * 30);
 
-  console.log(`Done!- Connect to ${clientUser.username}(${clientUser.id})`);
+  console.log(
+    `Done! - Connect to ${clientUser.username}(${clientUser.id}) @ v${packageVersion}`
+  );
 });
 
 // Event/Command の読み込み
