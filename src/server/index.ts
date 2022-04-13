@@ -38,7 +38,6 @@ const client = new Client({ intents });
 client.login(env.DISCORD_TOKEN).catch(console.error);
 
 client.once('ready', () => {
-  const startMS = performance.now();
   console.log(`logging.....`);
 
   const clientUser = client.user;
@@ -54,10 +53,7 @@ client.once('ready', () => {
     );
   }, 1000 * 60 * 30);
 
-  const endMS = Math.round(performance.now() - startMS);
-  console.log(
-    `Done! (${endMS}ms) - Connect to ${clientUser.username}(${clientUser.id})`
-  );
+  console.log(`Done!- Connect to ${clientUser.username}(${clientUser.id})`);
 });
 
 // Event/Command の読み込み
