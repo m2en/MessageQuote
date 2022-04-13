@@ -5,8 +5,10 @@
 
 ## Version 4
 
-- [v4.0.0](version4/v4.0.0.md)
+- [v4.2.0](version4/v4.2.0.md)
 - [v4.1.0](version4/v4.1.0.md)
+- [v4.0.0](version4/v4.0.0.md)
+
 
 ## Version 0 ~ Version 3
 
