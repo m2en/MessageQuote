@@ -19,7 +19,10 @@ function getLink(message: Message) {
   const authorId = message.author.id;
   const [, serverId, channelId, messageId] = match;
 
-  if (serverId !== message.guildId) return;
+  if (serverId !== message.guildId)
+    throw Error(
+      '引用リクエスト元のサーバーIDと一致しないため、引用リクエストを無視しました。'
+    );
 
   return {
     authorId,
