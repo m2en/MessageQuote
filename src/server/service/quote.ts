@@ -1,4 +1,10 @@
-import { Client, Message, MessageEmbed, Snowflake } from 'discord.js';
+import {
+  Client,
+  Message,
+  MessageEmbed,
+  Permissions,
+  Snowflake
+} from 'discord.js';
 import { getQuoteEmbed, getErrorEmbed } from '../util';
 
 function getLink(message: Message) {
@@ -39,6 +45,10 @@ async function fetchMessage(
   if (!channel || !channel.isText())
     throw Error(
       'チャンネルが存在しないまたは、テキストチャンネルではありません。'
+    );
+  if (!member.permissionsIn(channel).has(Permissions.FLAGS.VIEW_CHANNEL))
+    throw Error(
+      'チャンネルにアクセスできないユーザーからの引用リクエストを無視しました。'
     );
 
   const message = await channel.messages.fetch(messageId);
