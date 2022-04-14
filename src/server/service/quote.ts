@@ -15,6 +15,7 @@ function getLink(message: Message) {
   if (serverId !== message.guildId) return;
 
   return {
+    serverId,
     channelId,
     messageId
   };
@@ -22,14 +23,18 @@ function getLink(message: Message) {
 
 async function fetchMessage(
   client: Client,
+  serverId: Snowflake,
   channelId: Snowflake,
   messageId: Snowflake
 ) {
+  const guild = await client.guilds.fetch(serverId);
+  if (!guild) throw Error('ギルドが存在しません。');
   const channel = await client.channels.fetch(channelId);
   if (!channel || !channel.isText())
     throw Error(
       'チャンネルが存在しないまたは、テキストチャンネルではありません。'
     );
+
   const message = await channel.messages.fetch(messageId);
   if (!message || message.system)
     throw Error('メッセージが存在しないまたは、システムメッセージです。');
@@ -60,9 +65,14 @@ export function quote(client: Client) {
     try {
       const id = getLink(request);
       if (!id) return;
-      const { channelId, messageId } = id;
+      const { serverId, channelId, messageId } = id;
 
-      const message = await fetchMessage(client, channelId, messageId);
+      const message = await fetchMessage(
+        client,
+        serverId,
+        channelId,
+        messageId
+      );
       if (!message) return;
 
       const embed = createEmbed(message);
