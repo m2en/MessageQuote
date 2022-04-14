@@ -19,7 +19,10 @@ function getLink(message: Message) {
   const authorId = message.author.id;
   const [, serverId, channelId, messageId] = match;
 
-  if (serverId !== message.guildId) return;
+  if (serverId !== message.guildId)
+    throw Error(
+      '引用リクエスト元のサーバーIDと一致しないため、引用リクエストを無視しました。'
+    );
 
   return {
     authorId,
@@ -37,14 +40,18 @@ async function fetchMessage(
   messageId: Snowflake
 ) {
   const guild = await client.guilds.fetch(serverId);
-  if (!guild) throw Error('ギルドが存在しません。');
+  if (!guild)
+    throw Error('ギルドが存在しないか、Discord APIからのfetchに失敗しました。');
   const member = await guild.members.fetch(authorId);
-  if (!member) throw Error('メンバーが存在しません。');
+  if (!member)
+    throw Error(
+      'メンバーが存在しません。Discord API (in Guild) からのfetchに失敗しました。'
+    );
 
   const channel = await guild.channels.fetch(channelId);
   if (!channel || !channel.isText())
     throw Error(
-      'チャンネルが存在しないまたは、テキストチャンネルではありません。'
+      'チャンネルが存在しないまたは、テキストチャンネル・スレッドチャンネル・アナウンスチャンネルではありません。'
     );
   if (!member.permissionsIn(channel).has(Permissions.FLAGS.VIEW_CHANNEL))
     throw Error(
