@@ -47,7 +47,7 @@ async function fetchMessage(
   const channel = await guild.channels.fetch(channelId);
   if (!channel || !channel.isText())
     throw Error(
-      'チャンネルが存在しないまたは、テキストチャンネルではありません。'
+      'チャンネルが存在しないまたは、テキストチャンネル・スレッドチャンネル・アナウンスチャンネルではありません。'
     );
   if (!member.permissionsIn(channel).has(Permissions.FLAGS.VIEW_CHANNEL))
     throw Error(
