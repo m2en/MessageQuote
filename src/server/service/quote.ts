@@ -35,7 +35,7 @@ async function fetchMessage(
   const member = await guild.members.fetch(authorId);
   if (!member) throw Error('メンバーが存在しません。');
 
-  const channel = await client.channels.fetch(channelId);
+  const channel = await guild.channels.fetch(channelId);
   if (!channel || !channel.isText())
     throw Error(
       'チャンネルが存在しないまたは、テキストチャンネルではありません。'
