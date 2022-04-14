@@ -40,9 +40,13 @@ async function fetchMessage(
   messageId: Snowflake
 ) {
   const guild = await client.guilds.fetch(serverId);
-  if (!guild) throw Error('ギルドが存在しません。');
+  if (!guild)
+    throw Error('ギルドが存在しないか、Discord APIからのfetchに失敗しました。');
   const member = await guild.members.fetch(authorId);
-  if (!member) throw Error('メンバーが存在しません。');
+  if (!member)
+    throw Error(
+      'メンバーが存在しません。Discord API (in Guild) からのfetchに失敗しました。'
+    );
 
   const channel = await guild.channels.fetch(channelId);
   if (!channel || !channel.isText())
