@@ -10,11 +10,13 @@ function getLink(message: Message) {
   const str = message.content;
   const match = str.match(messageLink);
   if (!match) return;
+  const authorId = message.author.id;
   const [, serverId, channelId, messageId] = match;
 
   if (serverId !== message.guildId) return;
 
   return {
+    authorId,
     serverId,
     channelId,
     messageId
@@ -23,12 +25,16 @@ function getLink(message: Message) {
 
 async function fetchMessage(
   client: Client,
+  authorId: Snowflake,
   serverId: Snowflake,
   channelId: Snowflake,
   messageId: Snowflake
 ) {
   const guild = await client.guilds.fetch(serverId);
   if (!guild) throw Error('ギルドが存在しません。');
+  const member = await guild.members.fetch(authorId);
+  if (!member) throw Error('メンバーが存在しません。');
+
   const channel = await client.channels.fetch(channelId);
   if (!channel || !channel.isText())
     throw Error(
@@ -65,10 +71,11 @@ export function quote(client: Client) {
     try {
       const id = getLink(request);
       if (!id) return;
-      const { serverId, channelId, messageId } = id;
+      const { serverId, authorId, channelId, messageId } = id;
 
       const message = await fetchMessage(
         client,
+        authorId,
         serverId,
         channelId,
         messageId
