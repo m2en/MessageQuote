@@ -43,7 +43,7 @@ export function getQuoteEmbed({ message }: quoteProps): MessageEmbed {
     .forEach((url) => embed.setThumbnail(url));
   message.stickers
     .map((sticker) => sticker.name)
-    .forEach((name) => embed.addField('スタンプ', `${name}`), true);
+    .forEach((name) => embed.addField('スタンプ', `${name ?? '不明'}`), true);
 
   return embed;
 }
