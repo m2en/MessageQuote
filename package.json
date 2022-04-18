@@ -9,7 +9,7 @@
   "scripts": {
     "start": "node ./build/server/index.js",
     "prestart": "ts-node src/server/index.ts",
-    "setup": "pm2 start ./build/index.js --name MessageQuote",
+    "setup": "pm2 start ./build/server/index.js --name MessageQuote",
     "deploy": "node ./build/setup/index.js",
     "compile": "tsc -p .",
     "format": "prettier --write src/**/**/*.ts",
