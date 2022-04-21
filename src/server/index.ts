@@ -19,7 +19,7 @@ function setupEnv<K extends readonly string[]>(
   return process.env as Record<K[number], string>;
 }
 
-const env = setupEnv('DISCORD_TOKEN', 'npm_package_version');
+const env = setupEnv('DISCORD_TOKEN');
 
 // Discordクライアントのインスタンスを作成
 const intents = new Intents();
@@ -41,21 +41,17 @@ client.once('ready', () => {
   console.log(`logging.....`);
 
   const clientUser = client.user;
-  const packageVersion = env.npm_package_version ?? 'unknown';
   if (!clientUser) {
     throw new Error('Error: client.user is undefined');
   }
 
   setInterval(() => {
-    clientUser.setActivity(
-      `!help | v${packageVersion} | ping:${client.ws.ping}ms`,
-      { type: 'PLAYING' }
-    );
+    clientUser.setActivity(`!help | ping:${client.ws.ping}ms`, {
+      type: 'PLAYING'
+    });
   }, 1000 * 60 * 30);
 
-  console.log(
-    `Done! - Connect to ${clientUser.username}(${clientUser.id}) @ v${packageVersion}`
-  );
+  console.log(`Done! - Connect to ${clientUser.username}(${clientUser.id})`);
 });
 
 // Event/Command の読み込み
