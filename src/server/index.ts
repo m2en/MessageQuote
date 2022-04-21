@@ -20,6 +20,7 @@ function setupEnv<K extends readonly string[]>(
 }
 
 const env = setupEnv('DISCORD_TOKEN');
+const version = process.env.npm_package_version ?? '不明'; // versionのみ別の変数として取得する
 
 // Discordクライアントのインスタンスを作成
 const intents = new Intents();
@@ -46,12 +47,14 @@ client.once('ready', () => {
   }
 
   setInterval(() => {
-    clientUser.setActivity(`!help | ping:${client.ws.ping}ms`, {
+    clientUser.setActivity(`!help | v${version} | ping:${client.ws.ping}ms`, {
       type: 'PLAYING'
     });
   }, 1000 * 60 * 30);
 
-  console.log(`Done! - Connect to ${clientUser.username}(${clientUser.id})`);
+  console.log(
+    `Done! - Connect to ${clientUser.username}(${clientUser.id}) @ v${version}`
+  );
 });
 
 // Event/Command の読み込み
