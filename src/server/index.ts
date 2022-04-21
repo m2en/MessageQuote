@@ -30,9 +30,7 @@ intents.add(
   // ギルド関連のGateway Intents (1 << 0)
   Intents.FLAGS.GUILDS,
   // メッセージ関連のGateway Intents (1 << 9)
-  Intents.FLAGS.GUILD_MESSAGES,
-  // ギルドに送信され、なおかつリアクションが付与されたメッセージに対するGateway Intents (1 << 10)
-  Intents.FLAGS.GUILD_MESSAGE_REACTIONS
+  Intents.FLAGS.GUILD_MESSAGES
 );
 
 const client = new Client({ intents });
