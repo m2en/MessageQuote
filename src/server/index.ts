@@ -47,7 +47,7 @@ client.once('ready', () => {
   }
 
   setInterval(() => {
-    clientUser.setActivity(`!help | v${version} | ping:${client.ws.ping}ms`, {
+    clientUser.setActivity(`/help | v${version} | ping:${client.ws.ping}ms`, {
       type: 'PLAYING'
     });
   }, 1000 * 60 * 30);
