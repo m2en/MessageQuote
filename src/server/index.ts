@@ -21,7 +21,7 @@ function setupEnv<K extends readonly string[]>(
   return process.env as Record<K[number], string>;
 }
 
-const env = setupEnv('DISCORD_TOKEN');
+const env = setupEnv('DISCORD_TOKEN', 'SKIP_PREFIX');
 const clientVersion = process.env.npm_package_version ?? '不明'; // versionのみ別の変数として取得する
 
 // Discordクライアントのインスタンスを作成
@@ -43,7 +43,8 @@ function createLoginLog(user: ClientUser) {
     `接続元ユーザー: ${user.username}\n` +
     `接続元ユーザーID: ${user.id}\n` +
     `MessageQuoteのバージョン: v${clientVersion} (https://github.com/approvers/MessageQuote/releases/latest)\n` +
-    `discord.jsのバージョン: v${version} (https://github.com/discordjs/discord.js/releases)\n` +
+    `discord.jsのバージョン: v${version} (https://github.com/discordjs/discord.js/releases)\n\n` +
+    `SkipPrefix: ${env.SKIP_PREFIX}\n` +
     '=========\n';
   return console.log(loginLog);
 }

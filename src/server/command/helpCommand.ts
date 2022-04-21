@@ -4,8 +4,26 @@ import {
   MessageButton,
   MessageEmbed
 } from 'discord.js';
+import * as dotenv from 'dotenv';
 
 export const embedColor = '#6AC99D';
+
+dotenv.config();
+function setupEnv<K extends readonly string[]>(
+  ...keys: K
+): Record<K[number], string> {
+  for (const key of keys) {
+    if (process.env[key] == undefined) {
+      throw new Error(
+        `Error: 次の環境変数を取得することができませんでした: ${key} \n 環境変数の詳細は README を確認してください。`
+      );
+    }
+  }
+
+  return process.env as Record<K[number], string>;
+}
+
+const env = setupEnv('SKIP_PREFIX');
 
 function createHelp() {
   const helpCommand =
@@ -22,12 +40,13 @@ function createHelp() {
     .setColor(embedColor)
     .addField(
       '基本的な使い方',
-      'メッセージリンクをそのまま送信してください。引用をしてほしくない場合はメッセージの最初に`;`をつけてください。'
+      `メッセージリンクをそのまま送信してください。引用をしてほしくない場合はメッセージの最初に\`${env.SKIP_PREFIX}\`をつけてください。`
     )
     .addField(
       'コマンド一覧',
       '**◆ スラッシュコマンドが使える人のみに限られます ◆**\n' + helpCommand
-    );
+    )
+    .addField('Config', env.SKIP_PREFIX);
   const linkButton1 = new MessageButton()
     .setStyle('LINK')
     .setLabel('GitHub')
