@@ -82,7 +82,12 @@ async function fetchMessage(
   return message;
 }
 
+function checkMessage(message: Message) {
+  if([...message.content].length >= 4096) throw Error('メッセージの内容が上限に達しているため、引用に失敗しました。')
+}
+
 function createEmbed(message: Message) {
+  checkMessage(message);
   try {
     return getQuoteEmbed({ message: message });
   } catch (error) {
