@@ -1,28 +1,9 @@
 import { Client, ClientUser, Intents, version } from 'discord.js';
-import * as dotenv from 'dotenv';
 import { debugCommand, helpCommand, pingCommand } from './command';
 import { errorEvent } from './event';
 import { quote } from './service';
 import { autoJoinThread } from './event/autoJoinThread';
-
-// 環境変数の設定
-dotenv.config();
-function setupEnv<K extends readonly string[]>(
-  ...keys: K
-): Record<K[number], string> {
-  for (const key of keys) {
-    if (process.env[key] == undefined) {
-      throw new Error(
-        `Error: 次の環境変数を取得することができませんでした: ${key} \n 環境変数の詳細は README を確認してください。`
-      );
-    }
-  }
-
-  return process.env as Record<K[number], string>;
-}
-
-const env = setupEnv('DISCORD_TOKEN', 'SKIP_PREFIX');
-const clientVersion = process.env.npm_package_version ?? '不明'; // versionのみ別の変数として取得する
+import { prefix, token } from './util';
 
 // Discordクライアントのインスタンスを作成
 const intents = new Intents();
@@ -35,6 +16,8 @@ intents.add(
 
 const client = new Client({ intents });
 
+const clientVersion = process.env.npm_package_version ?? '不明'; // versionのみ別の変数として取得する
+
 // ログイン時のイベント
 function createLoginLog(user: ClientUser) {
   const loginLog =
@@ -44,12 +27,12 @@ function createLoginLog(user: ClientUser) {
     `接続元ユーザーID: ${user.id}\n` +
     `MessageQuoteのバージョン: v${clientVersion} (https://github.com/approvers/MessageQuote/releases/latest)\n` +
     `discord.jsのバージョン: v${version} (https://github.com/discordjs/discord.js/releases)\n\n` +
-    `SkipPrefix: ${env.SKIP_PREFIX}\n` +
+    `SkipPrefix: ${prefix}\n` +
     '=========\n';
   return console.log(loginLog);
 }
 
-client.login(env.DISCORD_TOKEN).catch(console.error);
+client.login(token).catch(console.error);
 
 client.once('ready', () => {
   console.log(`ログインしています....`);

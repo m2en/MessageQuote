@@ -5,29 +5,11 @@ import {
   Permissions,
   Snowflake
 } from 'discord.js';
-import { getQuoteEmbed, getErrorEmbed } from '../util';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
-function setupEnv<K extends readonly string[]>(
-  ...keys: K
-): Record<K[number], string> {
-  for (const key of keys) {
-    if (process.env[key] == undefined) {
-      throw new Error(
-        `Error: 次の環境変数を取得することができませんでした: ${key} \n 環境変数の詳細は README を確認してください。`
-      );
-    }
-  }
-
-  return process.env as Record<K[number], string>;
-}
-
-const env = setupEnv('SKIP_PREFIX');
+import { getQuoteEmbed, getErrorEmbed, prefix } from '../util';
 
 function getLink(message: Message) {
   if (message.author.bot || !message.guild) return;
-  if (message.content.startsWith(env.SKIP_PREFIX)) return;
+  if (message.content.startsWith(prefix)) return;
 
   const messageLink =
     /https:\/\/(?:ptb\.|canary\.)?discord(?:app)?\.com\/channels\/(\d+)\/(\d+)\/(\d+)/;
