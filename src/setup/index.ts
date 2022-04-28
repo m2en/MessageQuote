@@ -1,7 +1,9 @@
 import { REST } from '@discordjs/rest';
-import { Routes } from 'discord-api-types/v9';
 // this type is not exported from discord.js itself
-import { RESTPostAPIApplicationCommandsJSONBody } from 'discord-api-types/v9';
+import {
+  RESTPostAPIApplicationCommandsJSONBody,
+  Routes
+} from 'discord-api-types/v9';
 import * as dotenv from 'dotenv';
 
 dotenv.config();

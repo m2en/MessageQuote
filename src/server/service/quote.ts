@@ -5,7 +5,7 @@ import {
   Permissions,
   Snowflake
 } from 'discord.js';
-import { getQuoteEmbed, getErrorEmbed, prefix } from '../util';
+import { getErrorEmbed, getQuoteEmbed, prefix } from '../util';
 
 function getLink(message: Message) {
   if (message.author.bot || !message.guild) return;

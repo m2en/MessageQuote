@@ -1,8 +1,7 @@
 # MessageQuote
 
 [![Auto Pull Request Labeler](https://github.com/approvers/MessageQuote/actions/workflows/auto-label.yml/badge.svg)](https://github.com/approvers/MessageQuote/actions/workflows/auto-label.yml)
-[![GitHub Actions#CodeQL](https://github.com/approvers/MessageQuote/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/approvers/MessageQuote/actions/workflows/codeql-analysis.yml)  
-
+[![GitHub Actions#CodeQL](https://github.com/approvers/MessageQuote/actions/workflows/codeql-analysis.yml/badge.svg)](https://github.com/approvers/MessageQuote/actions/workflows/codeql-analysis.yml)
 
 [![GitHub Actions#eslint](https://github.com/approvers/MessageQuote/actions/workflows/eslint.yml/badge.svg)](https://github.com/approvers/MessageQuote/actions/workflows/eslint.yml)
 [![GitHub Actions#prettier](https://github.com/approvers/MessageQuote/actions/workflows/prettier.yml/badge.svg)](https://github.com/approvers/MessageQuote/actions/workflows/prettier.yml)
@@ -10,7 +9,6 @@
 ----
 
 メッセージリンクからメッセージを取得して展開するDiscord Bot
-
 
 ## 依存関係
 
@@ -29,7 +27,8 @@ TypeScript(node.js) + discord.js
 
 - 以後 pm2 で MessageQuote を管理することが出来るようになりました。
 - pm2に関する詳細は [pm2](https://pm2.io/) を参照してください。
-- この状態ではコマンドを使用することができないので、セットアップが完了したら [Application (/) Commandのセットアップ](src/setup/README.md) を見ながら、Slash Command を設定してください。
+- この状態ではコマンドを使用することができないので、セットアップが完了したら [Application (/) Commandのセットアップ](src/setup/README.md) を見ながら、Slash Command
+  を設定してください。
 
 ~~なお、開発者がホストしているバージョンを導入する際は [このリンク]() から導入できます。~~
 > 2022/03/30現在、ホストは中止中です。
