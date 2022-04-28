@@ -1,18 +1,9 @@
 import { Client, ClientUser, Intents, version } from 'discord.js';
-import * as dotenv from 'dotenv';
 import { debugCommand, helpCommand, pingCommand } from './command';
-import { extractEnv } from './util';
 import { errorEvent } from './event';
 import { quote } from './service';
 import { autoJoinThread } from './event/autoJoinThread';
-
-// 環境変数の設定
-dotenv.config();
-const { DISCORD_TOKEN: token, SKIP_PREFIX: prefix } = extractEnv([
-  'DISCORD_TOKEN',
-  'SKIP_PREFIX'
-]);
-const clientVersion = process.env.npm_package_version ?? '不明'; // versionのみ別の変数として取得する
+import { prefix, token } from './util';
 
 // Discordクライアントのインスタンスを作成
 const intents = new Intents();
@@ -24,6 +15,8 @@ intents.add(
 );
 
 const client = new Client({ intents });
+
+const clientVersion = process.env.npm_package_version ?? '不明'; // versionのみ別の変数として取得する
 
 // ログイン時のイベント
 function createLoginLog(user: ClientUser) {

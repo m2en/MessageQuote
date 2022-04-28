@@ -1,3 +1,5 @@
+import * as dotenv from 'dotenv';
+
 export function extractEnv<K extends readonly string[]>(
   keys: K,
   defaluts?: Readonly<Partial<Record<K[number], string>>>
@@ -16,3 +18,9 @@ export function extractEnv<K extends readonly string[]>(
 
   return env as Record<K[number], string>;
 }
+
+dotenv.config();
+export const { DISCORD_TOKEN: token, SKIP_PREFIX: prefix } = extractEnv([
+  'DISCORD_TOKEN',
+  'SKIP_PREFIX'
+]);

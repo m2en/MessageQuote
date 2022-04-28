@@ -4,13 +4,9 @@ import {
   MessageButton,
   MessageEmbed
 } from 'discord.js';
-import * as dotenv from 'dotenv';
-import { extractEnv } from '../util';
+import { prefix } from '../util';
 
 export const embedColor = '#6AC99D';
-
-dotenv.config();
-const { SKIP_PREFIX: prefix } = extractEnv(['SKIP_PREFIX']);
 
 function createHelp() {
   const helpCommand =

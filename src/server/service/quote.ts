@@ -5,11 +5,7 @@ import {
   Permissions,
   Snowflake
 } from 'discord.js';
-import { getQuoteEmbed, getErrorEmbed, extractEnv } from '../util';
-import * as dotenv from 'dotenv';
-
-dotenv.config();
-const { SKIP_PREFIX: prefix } = extractEnv(['SKIP_PREFIX']);
+import { getQuoteEmbed, getErrorEmbed, prefix } from '../util';
 
 function getLink(message: Message) {
   if (message.author.bot || !message.guild) return;
