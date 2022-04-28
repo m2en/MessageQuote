@@ -63,5 +63,6 @@ TypeScript(node.js) + discord.js
 | `DISCORD_TOKEN`   | Discord Botのトークン             | true  |
 | `CLIENT_ID`       | Discord BotのクライアントID(ユーザーID) | true  |
 | `TARGET_GUILD_ID` | GuildCommandとして登録したいギルドのID   | false |
+| `SKIP_PREFIX`     | 引用スキップとして使用するprefix　         | true  |
 
 詳細は [.example.env](https://github.com/approvers/MessageQuote/blob/master/.example.env) を参照してください。
