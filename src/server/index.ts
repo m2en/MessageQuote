@@ -51,7 +51,7 @@ client.once('ready', () => {
         type: 'PLAYING'
       }
     );
-  }, 1000 * 60 * 30);
+  }, 1000 * 30);
 
   createLoginLog(clientUser);
 });
