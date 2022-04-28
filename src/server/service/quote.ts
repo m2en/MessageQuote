@@ -79,15 +79,12 @@ async function fetchMessage(
   const message = await channel.messages.fetch(messageId);
   if (!message || message.system)
     throw Error('メッセージが存在しないまたは、システムメッセージです。');
+  if ([...message.content].length >= 4096)
+    throw Error('メッセージの内容が上限に達しているため、引用に失敗しました。');
   return message;
 }
 
-function checkMessage(message: Message) {
-  if([...message.content].length >= 4096) throw Error('メッセージの内容が上限に達しているため、引用に失敗しました。')
-}
-
 function createEmbed(message: Message) {
-  checkMessage(message);
   try {
     return getQuoteEmbed({ message: message });
   } catch (error) {
