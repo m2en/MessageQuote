@@ -30,8 +30,7 @@ TypeScript(node.js) + discord.js
 - この状態ではコマンドを使用することができないので、セットアップが完了したら [Application (/) Commandのセットアップ](src/setup/README.md) を見ながら、Slash Command
   を設定してください。
 
-~~なお、開発者がホストしているバージョンを導入する際は [このリンク]() から導入できます。~~
-> 2022/03/30現在、ホストは中止中です。
+なお、開発者がホストしているバージョンを導入する際は [このリンク](https://discord.com/api/oauth2/authorize?client_id=889343802433757185&permissions=515396339712&scope=bot%20applications.commands) から導入できます。
 
 ## 環境変数
 
