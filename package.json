@@ -8,9 +8,9 @@
   "private": false,
   "scripts": {
     "start": "node ./build/server/index.js",
-    "debug": "ts-node src/server/index.ts",
-    "setup": "pm2 start ./build/server/index.js --name MessageQuote",
     "deploy": "node ./build/setup/index.js",
+    "dev": "ts-node src/server/index.ts",
+    "setup": "pm2 start ./build/server/index.js --name MessageQuote",
     "compile": "tsc -p .",
     "format": "prettier --write src/**/**/*.ts",
     "check": "prettier --check src/**/**/*.ts",
