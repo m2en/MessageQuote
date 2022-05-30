@@ -11,7 +11,7 @@
     "deploy": "node ./build/setup/index.js",
     "dev": "ts-node src/server/index.ts",
     "setup": "pm2 start ./build/server/index.js --name MessageQuote",
-    "compile": "tsc -p .",
+    "build": "tsc -p .",
     "format": "prettier --write src/**/**/*.ts",
     "check": "prettier --check src/**/**/*.ts",
     "lint": "eslint --ignore-path .gitignore \"src/**/**/*.ts\"",
@@ -19,7 +19,7 @@
     "fix": "yarn run format && yarn run lint:fix",
     "prepare": "husky install",
     "lint-staged": "lint-staged",
-    "compile:test": "tsc -p . --noEmit"
+    "build:test": "tsc -p . --noEmit"
   },
   "lint-staged": {
     "*.{js,ts}": [
