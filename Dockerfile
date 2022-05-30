@@ -10,7 +10,6 @@ COPY yarn.lock ./
 
 RUN yarn --production=false
 
-COPY .env ./
 COPY ./ ./
 
 RUN yarn build
