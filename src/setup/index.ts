@@ -21,11 +21,13 @@ function commands(): RESTPostAPIApplicationCommandsJSONBody[] {
   return [
     {
       name: 'help',
-      description: 'ヘルプを表示します'
+      description: 'ヘルプを表示します',
+      default_member_permissions: null
     },
     {
       name: 'ping',
-      description: 'pingを表示します'
+      description: 'pingを表示します',
+      default_member_permissions: null
     },
     {
       name: 'debug',
@@ -38,7 +40,8 @@ function commands(): RESTPostAPIApplicationCommandsJSONBody[] {
           type: 3,
           required: true
         }
-      ]
+      ],
+      default_member_permissions: null
     }
   ];
 }
