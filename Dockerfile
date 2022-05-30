@@ -1,5 +1,7 @@
 FROM node
 
+USER MessageQuoteUser
+
 WORKDIR /app
 
 COPY tsconfig.json ./
