@@ -10,7 +10,7 @@ COPY yarn.lock ./
 
 RUN yarn --production=false
 
-COPY ./ ./
+COPY src ./
 
 RUN yarn build
 
