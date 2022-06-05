@@ -32,7 +32,7 @@
   "dependencies": {
     "async": "3.2.2",
     "discord.js": "^13.6.0",
-    "dotenv": "^16.0.0",
+    "dotenv": "^16.0.1",
     "pm2": "^5.2.0"
   },
   "devDependencies": {
