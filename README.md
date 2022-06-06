@@ -8,7 +8,7 @@
 
 ----
 
-# 🚶　Setup
+# 🚶 Setup
 
 ```sh 
 docker build ./ -t message-quote
