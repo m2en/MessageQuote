@@ -47,17 +47,9 @@ Deploy without specifying `TARGET_GUILD_ID` in the environment variable.
 
 ## ✨ How use
 
-### Quotation
-
 When you send a message link on a channel where MessageQuote is participating and you have permission to view and send messages, MessageQuote will return the message of that message link as Embed
 
 ![Quote](https://cdn.discordapp.com/attachments/919569576939896832/981514025361887282/unknown.png)
-
-### Debug
-
-If a message ID is specified, the corresponding message is displayed as a command block (grave accent will be replaced as single quotation marks )
-
-![Debug](https://cdn.discordapp.com/attachments/919569576939896832/981515354868183110/unknown.png)
 
 ## 🔧 Config (env)
 

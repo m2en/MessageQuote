@@ -23,21 +23,6 @@ function commands(): RESTPostAPIApplicationCommandsJSONBody[] {
       name: 'ping',
       description: 'pingを表示します',
       default_member_permissions: null
-    },
-    {
-      name: 'debug',
-      description:
-        '指定メッセージをデバックします. (デバックしたいメッセージがあるチャンネルで実行してください。)',
-      options: [
-        {
-          name: 'id',
-          description:
-            'デバックするメッセージのIDを入力(IDのコピーは開発者モードを有効にしてください)',
-          type: 3,
-          required: true
-        }
-      ],
-      default_member_permissions: null
     }
   ];
 }
