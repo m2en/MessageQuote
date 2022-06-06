@@ -26,7 +26,8 @@ function commands(): RESTPostAPIApplicationCommandsJSONBody[] {
     },
     {
       name: 'debug',
-      description: '指定メッセージをデバックします',
+      description:
+        '指定メッセージをデバックします. (デバックしたいメッセージがあるチャンネルで実行してください。)',
       options: [
         {
           name: 'id',
