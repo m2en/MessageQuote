@@ -50,12 +50,3 @@ Specify the token of the Bot user with whom MessageQuote will connect
 ### `SKIP_PREFIX` - required
 
 Specifies the Prefix to be specified for through without citation
-
-### `TARGET_GUILD_ID`
-
-Specifies the ID of the guild to which the slash command is registered
-However, it is not necessary to specify when registering as a global command
-
-### `CLIENT_ID`
-
-Specifies the ID of the bot (client) that registers the slash command
