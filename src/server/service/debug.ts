@@ -66,7 +66,8 @@ export function debug(client: Client) {
 
     await interaction.reply({
       embeds: [debug],
-      components: [new MessageActionRow().addComponents([debugMessage])]
+      components: [new MessageActionRow().addComponents([debugMessage])],
+      ephemeral: true
     });
   });
 }
