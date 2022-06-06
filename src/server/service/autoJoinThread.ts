@@ -8,6 +8,7 @@ function createEmbed(thread: ThreadChannel) {
   return new MessageEmbed()
     .setTitle('MessageQuote AutoThreadJoin')
     .setDescription(`**${thread.name}** has been joined.`)
+    .setColor('AQUA')
     .addField('メンション', `<#${thread.id}>`, true)
     .addField('ID', thread.id, true)
     .addField(
