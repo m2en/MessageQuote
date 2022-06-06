@@ -8,7 +8,6 @@ import {
 import { getErrorEmbed, getQuoteEmbed, prefix } from '../util';
 
 function getLink(message: Message) {
-  if (message.author.bot || !message.guild) return;
   if (message.content.startsWith(prefix)) return;
 
   const messageLink =
@@ -83,26 +82,24 @@ async function sendQuote(createEmbed: MessageEmbed, message: Message) {
   await message.reply({ embeds: [createEmbed] });
 }
 
-export function quote(client: Client) {
-  client.on('messageCreate', async (request) => {
-    try {
-      const id = getLink(request);
-      if (!id) return;
-      const { serverId, authorId, channelId, messageId } = id;
+export async function quote(client: Client, message: Message) {
+  try {
+    const id = getLink(message);
+    if (!id) return;
+    const { serverId, authorId, channelId, messageId } = id;
 
-      const message = await fetchMessage(
-        client,
-        authorId,
-        serverId,
-        channelId,
-        messageId
-      );
-      if (!message) return;
+    const quote = await fetchMessage(
+      client,
+      authorId,
+      serverId,
+      channelId,
+      messageId
+    );
+    if (!quote) return;
 
-      const embed = createEmbed(message);
-      await sendQuote(embed, request);
-    } catch (error) {
-      console.error(error);
-    }
-  });
+    const embed = createEmbed(quote);
+    await sendQuote(embed, quote);
+  } catch (error) {
+    console.error(error);
+  }
 }

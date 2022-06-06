@@ -1,7 +1,6 @@
 import { Client, ClientUser, Intents, version } from 'discord.js';
-import { debugCommand, helpCommand, pingCommand } from './command';
 import { errorEvent } from './event';
-import { quote } from './service';
+import { ping, quote } from './service';
 import { autoJoinThread } from './event/autoJoinThread';
 import { prefix, token } from './util';
 
@@ -56,12 +55,13 @@ client.once('ready', () => {
   createLoginLog(clientUser);
 });
 
+client.on('messageCreate', async (message) => {
+  if (!message.guild || message.author.bot) return;
+  await quote(client, message);
+  await ping(client, message);
+});
+
 // Event/Command の読み込み
-helpCommand(client);
-pingCommand(client);
-debugCommand(client);
 
 errorEvent(client);
 autoJoinThread(client);
-
-quote(client);

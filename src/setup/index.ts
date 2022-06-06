@@ -20,27 +20,8 @@ const rest = new REST({ version: '9' }).setToken(TARGET_TOKEN);
 function commands(): RESTPostAPIApplicationCommandsJSONBody[] {
   return [
     {
-      name: 'help',
-      description: 'ヘルプを表示します',
-      default_member_permissions: null
-    },
-    {
       name: 'ping',
       description: 'pingを表示します',
-      default_member_permissions: null
-    },
-    {
-      name: 'debug',
-      description: '指定メッセージをデバックします',
-      options: [
-        {
-          name: 'id',
-          description:
-            'デバックするメッセージのIDを入力(IDのコピーは開発者モードを有効にしてください)',
-          type: 3,
-          required: true
-        }
-      ],
       default_member_permissions: null
     }
   ];
