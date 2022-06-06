@@ -25,6 +25,26 @@ yarn setup
 
 For daemon management using pm2, check the [pm2 documentation](https://pm2.keymetrics.io/docs/usage/quick-start/)
 
+### Slash (/) Command
+
+MessageQuote uses Slash Command.
+
+You need to register Slash Command when you host it yourself.
+
+```sh 
+yarn
+yarn build
+yarn deploy
+```
+
+#### Register with your guild only (Guild Command)
+
+Deploy with `TARGET_GUILD_ID` in the environment variable.
+
+#### Make this bot available to all guilds where it is installed (Global Command)
+
+Deploy without specifying `TARGET_GUILD_ID` in the environment variable.
+
 ## ✨ How use
 
 ### Quotation
