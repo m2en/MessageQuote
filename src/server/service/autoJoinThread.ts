@@ -1,4 +1,4 @@
-import { Client, MessageEmbed, ThreadChannel } from 'discord.js';
+import { MessageEmbed, ThreadChannel } from 'discord.js';
 
 async function joinThread(thread: ThreadChannel) {
   await thread.join();
@@ -21,9 +21,7 @@ async function sendJoinMessage(thread: ThreadChannel) {
   await thread.send({ embeds: [embed] });
 }
 
-export function autoJoinThread(client: Client) {
-  client.on('threadCreate', async (thread) => {
-    await joinThread(thread);
-    await sendJoinMessage(thread);
-  });
+export async function autoJoinThread(thread: ThreadChannel) {
+  await joinThread(thread);
+  await sendJoinMessage(thread);
 }

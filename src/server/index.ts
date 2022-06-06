@@ -1,7 +1,5 @@
 import { Client, ClientUser, Intents, version } from 'discord.js';
-import { errorEvent } from './event';
-import { ping, quote } from './service';
-import { autoJoinThread } from './event/autoJoinThread';
+import { ping, quote, autoJoinThread } from './service';
 import { prefix, token } from './util';
 
 // Discordクライアントのインスタンスを作成
@@ -61,7 +59,6 @@ client.on('messageCreate', async (message) => {
   await ping(client, message);
 });
 
-// Event/Command の読み込み
-
-errorEvent(client);
-autoJoinThread(client);
+client.on('threadCreate', async (thread) => {
+  await autoJoinThread(thread);
+});
