@@ -1,13 +1,13 @@
 {
   "name": "messagequote",
-  "version": "5.0.1",
+  "version": "5.0.2",
   "main": "index.js",
   "license": "MIT",
   "description": "メッセージリンク、IDからメッセージを取得して展開するBot。",
   "author": "merunno",
   "private": false,
   "scripts": {
-    "start": "node ./build/server/index.js",
+    "start": "node ./build/index.js",
     "dev": "ts-node src/index.ts",
     "setup": "pm2 start ./build/server/index.js --name MessageQuote",
     "build": "tsc -p .",
