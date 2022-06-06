@@ -1,8 +1,5 @@
 import { Client, ClientUser, Intents, version } from 'discord.js';
-import { debugCommand, helpCommand, pingCommand } from './command';
-import { errorEvent } from './event';
-import { quote } from './service';
-import { autoJoinThread } from './event/autoJoinThread';
+import { ping, quote, autoJoinThread } from './service';
 import { prefix, token } from './util';
 
 // Discordクライアントのインスタンスを作成
@@ -25,7 +22,7 @@ function createLoginLog(user: ClientUser) {
     '接続が完了し、MessageQuoteが利用可能になりました。\n\n' +
     `接続元ユーザー: ${user.username}\n` +
     `接続元ユーザーID: ${user.id}\n` +
-    `MessageQuoteのバージョン: v${clientVersion} (https://github.com/approvers/MessageQuote/releases/latest)\n` +
+    `MessageQuoteのバージョン: v${clientVersion} (https://github.com/Meru92/MessageQuote/releases/latest)\n` +
     `discord.jsのバージョン: v${version} (https://github.com/discordjs/discord.js/releases)\n\n` +
     `SkipPrefix: ${prefix}\n` +
     '=========\n';
@@ -45,23 +42,20 @@ client.once('ready', () => {
   }
 
   setInterval(() => {
-    clientUser.setActivity(
-      `/help | v${clientVersion} | ping:${client.ws.ping}ms`,
-      {
-        type: 'PLAYING'
-      }
-    );
+    clientUser.setActivity(`v${clientVersion} | ping:${client.ws.ping}ms`, {
+      type: 'PLAYING'
+    });
   }, 1000 * 30);
 
   createLoginLog(clientUser);
 });
 
-// Event/Command の読み込み
-helpCommand(client);
-pingCommand(client);
-debugCommand(client);
+client.on('messageCreate', async (message) => {
+  if (!message.guild || message.author.bot) return;
+  await quote(client, message);
+  await ping(client, message);
+});
 
-errorEvent(client);
-autoJoinThread(client);
-
-quote(client);
+client.on('threadCreate', async (thread) => {
+  await autoJoinThread(thread);
+});

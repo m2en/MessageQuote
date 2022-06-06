@@ -1,4 +1,4 @@
-import { Client, MessageEmbed, ThreadChannel } from 'discord.js';
+import { MessageEmbed, ThreadChannel } from 'discord.js';
 
 async function joinThread(thread: ThreadChannel) {
   await thread.join();
@@ -8,6 +8,7 @@ function createEmbed(thread: ThreadChannel) {
   return new MessageEmbed()
     .setTitle('MessageQuote AutoThreadJoin')
     .setDescription(`**${thread.name}** has been joined.`)
+    .setColor('AQUA')
     .addField('メンション', `<#${thread.id}>`, true)
     .addField('ID', thread.id, true)
     .addField(
@@ -21,9 +22,7 @@ async function sendJoinMessage(thread: ThreadChannel) {
   await thread.send({ embeds: [embed] });
 }
 
-export function autoJoinThread(client: Client) {
-  client.on('threadCreate', async (thread) => {
-    await joinThread(thread);
-    await sendJoinMessage(thread);
-  });
+export async function autoJoinThread(thread: ThreadChannel) {
+  await joinThread(thread);
+  await sendJoinMessage(thread);
 }
