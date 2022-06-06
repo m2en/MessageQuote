@@ -22,7 +22,7 @@ function createLoginLog(user: ClientUser) {
     '接続が完了し、MessageQuoteが利用可能になりました。\n\n' +
     `接続元ユーザー: ${user.username}\n` +
     `接続元ユーザーID: ${user.id}\n` +
-    `MessageQuoteのバージョン: v${clientVersion} (https://github.com/approvers/MessageQuote/releases/latest)\n` +
+    `MessageQuoteのバージョン: v${clientVersion} (https://github.com/Meru92/MessageQuote/releases/latest)\n` +
     `discord.jsのバージョン: v${version} (https://github.com/discordjs/discord.js/releases)\n\n` +
     `SkipPrefix: ${prefix}\n` +
     '=========\n';
