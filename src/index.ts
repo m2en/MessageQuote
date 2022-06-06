@@ -42,12 +42,9 @@ client.once('ready', () => {
   }
 
   setInterval(() => {
-    clientUser.setActivity(
-      `/help | v${clientVersion} | ping:${client.ws.ping}ms`,
-      {
-        type: 'PLAYING'
-      }
-    );
+    clientUser.setActivity(`v${clientVersion} | ping:${client.ws.ping}ms`, {
+      type: 'PLAYING'
+    });
   }, 1000 * 30);
 
   createLoginLog(clientUser);
