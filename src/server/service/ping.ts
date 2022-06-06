@@ -1,10 +1,6 @@
-import { Client, Interaction, MessageEmbed } from 'discord.js';
+import { Client, Message, MessageEmbed } from 'discord.js';
 
-function createPing(client: Client, interaction: Interaction) {
-  const pingReady = new MessageEmbed()
-    .setTitle('MessageQuote Ping:')
-    .setDescription('Pinging... Please wait...')
-    .setColor('YELLOW');
+function createPing(client: Client, message: Message) {
   const pingEmbed = new MessageEmbed()
     .setTitle('MessageQuote Ping:')
     .setDescription('🏓 Pong!')
@@ -13,27 +9,23 @@ function createPing(client: Client, interaction: Interaction) {
     .addField(
       'Latency(API):',
       `${
-        Date.now() - interaction.createdTimestamp
+        Date.now() - message.createdTimestamp
       }ms\n([Discord Status](https://discordstatus.com/))`,
       true
     )
     .setColor('YELLOW');
 
-  return { pingReady, pingEmbed };
+  return { pingEmbed };
 }
 
-export function ping(client: Client) {
-  client.on('interactionCreate', async (interaction) => {
-    try {
-      if (!interaction.isCommand() || !interaction.guild) return;
-      if (interaction.commandName !== 'ping') return;
+export async function ping(client: Client, message: Message) {
+  try {
+    if (message.content !== '!ping') return;
 
-      const { pingReady, pingEmbed } = createPing(client, interaction);
+    const { pingEmbed } = createPing(client, message);
 
-      await interaction.reply({ embeds: [pingReady] });
-      await interaction.editReply({ embeds: [pingEmbed] });
-    } catch (e) {
-      console.error(e);
-    }
-  });
+    await message.reply({ embeds: [pingEmbed] });
+  } catch (e) {
+    console.error(e);
+  }
 }
