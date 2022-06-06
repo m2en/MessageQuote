@@ -1,7 +1,6 @@
 import { Client, ClientUser, Intents, version } from 'discord.js';
-import { debugCommand, helpCommand, pingCommand } from './command';
 import { errorEvent } from './event';
-import { quote } from './service';
+import { debug, ping, quote } from './service';
 import { autoJoinThread } from './event/autoJoinThread';
 import { prefix, token } from './util';
 
@@ -57,9 +56,8 @@ client.once('ready', () => {
 });
 
 // Event/Command の読み込み
-helpCommand(client);
-pingCommand(client);
-debugCommand(client);
+ping(client);
+debug(client);
 
 errorEvent(client);
 autoJoinThread(client);

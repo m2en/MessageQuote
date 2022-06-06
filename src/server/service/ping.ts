@@ -1,5 +1,4 @@
 import { Client, Interaction, MessageEmbed } from 'discord.js';
-import { embedColor } from './helpCommand';
 
 function createPing(client: Client, interaction: Interaction) {
   const pingReady = new MessageEmbed()
@@ -9,7 +8,7 @@ function createPing(client: Client, interaction: Interaction) {
   const pingEmbed = new MessageEmbed()
     .setTitle('MessageQuote Ping:')
     .setDescription('🏓 Pong!')
-    .setColor(embedColor)
+    .setColor('YELLOW')
     .addField('Latency(WebSocket):', `${client.ws.ping}ms`, true)
     .addField(
       'Latency(API):',
@@ -23,7 +22,7 @@ function createPing(client: Client, interaction: Interaction) {
   return { pingReady, pingEmbed };
 }
 
-export function pingCommand(client: Client) {
+export function ping(client: Client) {
   client.on('interactionCreate', async (interaction) => {
     try {
       if (!interaction.isCommand() || !interaction.guild) return;

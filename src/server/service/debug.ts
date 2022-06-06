@@ -7,7 +7,6 @@ import {
   MessageEmbed,
   Snowflake
 } from 'discord.js';
-import { embedColor } from './helpCommand';
 
 async function getMessage(messageId: Snowflake, interaction: Interaction) {
   const channelId = interaction.channelId;
@@ -31,7 +30,7 @@ function createDebug(message: Message) {
   const debug = new MessageEmbed()
     .setTitle('MessageQuote Debug')
     .setDescription(debugContext)
-    .setColor(embedColor);
+    .setColor('YELLOW');
   const debugMessage = new MessageButton()
     .setStyle('LINK')
     .setLabel('元のメッセージ')
@@ -54,7 +53,7 @@ function createDebug(message: Message) {
   };
 }
 
-export function debugCommand(client: Client) {
+export function debug(client: Client) {
   client.on('interactionCreate', async (interaction) => {
     if (!interaction.isCommand() || !interaction.guild) return;
     if (interaction.commandName !== 'debug') return;

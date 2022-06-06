@@ -20,11 +20,6 @@ const rest = new REST({ version: '9' }).setToken(TARGET_TOKEN);
 function commands(): RESTPostAPIApplicationCommandsJSONBody[] {
   return [
     {
-      name: 'help',
-      description: 'ヘルプを表示します',
-      default_member_permissions: null
-    },
-    {
       name: 'ping',
       description: 'pingを表示します',
       default_member_permissions: null
