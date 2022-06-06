@@ -8,7 +8,6 @@ import {
 import { getErrorEmbed, getQuoteEmbed, prefix } from '../util';
 
 function getLink(message: Message) {
-  if (message.author.bot || !message.guild) return;
   if (message.content.startsWith(prefix)) return;
 
   const messageLink =
