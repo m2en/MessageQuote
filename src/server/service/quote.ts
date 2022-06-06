@@ -98,7 +98,7 @@ export async function quote(client: Client, message: Message) {
     if (!quote) return;
 
     const embed = createEmbed(quote);
-    await sendQuote(embed, quote);
+    await sendQuote(embed, message);
   } catch (error) {
     console.error(error);
   }
