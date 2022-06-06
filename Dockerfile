@@ -1,7 +1,5 @@
 FROM node
 
-USER MessageQuoteUser
-
 WORKDIR /app
 
 COPY tsconfig.json ./
@@ -10,7 +8,7 @@ COPY yarn.lock ./
 
 RUN yarn --production=false
 
-COPY src ./
+COPY ./ ./
 
 RUN yarn build
 
