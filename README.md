@@ -12,7 +12,7 @@
 
 ```sh 
 docker build ./ -t message-quote
-docker --env-file ./.env message-quote
+docker run --env-file ./.env message-quote
 ```
 
 If you do not use Docker, you can follow the steps below to set up using pm2
