@@ -25,14 +25,6 @@ yarn setup
 
 For daemon management using pm2, check the [pm2 documentation](https://pm2.keymetrics.io/docs/usage/quick-start/)
 
-#### Register with your guild only (Guild Command)
-
-Deploy with `TARGET_GUILD_ID` in the environment variable.
-
-#### Make this bot available to all guilds where it is installed (Global Command)
-
-Deploy without specifying `TARGET_GUILD_ID` in the environment variable.
-
 ## ✨ How use
 
 When you send a message link on a channel where MessageQuote is participating and you have permission to view and send messages, MessageQuote will return the message of that message link as Embed
