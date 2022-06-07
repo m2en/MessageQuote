@@ -13,7 +13,8 @@ intents.add(
 
 const client = new Client({ intents });
 
-const clientVersion = process.env.npm_package_version ?? '不明'; // versionのみ別の変数として取得する
+// eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-var-requires,@typescript-eslint/no-unsafe-assignment
+const clientVersion: number = require('../package.json').version;
 
 // ログイン時のイベント
 function createLoginLog(user: ClientUser) {
