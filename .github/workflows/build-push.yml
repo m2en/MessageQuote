@@ -26,5 +26,5 @@ jobs:
           labels: |
             org.opencontainers.image.source = https://github.com/${{ github.repository }}
           tags: |
-            ghcr.io/message-quote:master
-            ghcr.io/message-quote:${{ github.sha }}
+            ghcr.io/Meru92/message-quote:master
+            ghcr.io/Meru92/message-quote:${{ github.sha }}
