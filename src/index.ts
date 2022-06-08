@@ -14,7 +14,7 @@ intents.add(
 const client = new Client({ intents });
 
 // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access,@typescript-eslint/no-var-requires,@typescript-eslint/no-unsafe-assignment
-const clientVersion: number = require('../package.json').version;
+const clientVersion: string = require('../package.json').version;
 
 // ログイン時のイベント
 function createLoginLog(user: ClientUser) {
