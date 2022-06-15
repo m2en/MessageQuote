@@ -42,3 +42,5 @@ Specify the token of the Bot user with whom MessageQuote will connect
 ### `SKIP_PREFIX` - required
 
 Specifies the Prefix to be specified for through without citation
+
+It also works as a prefix for the ping command

@@ -1,10 +1,10 @@
 {
   "name": "messagequote",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "main": "index.js",
   "license": "MIT",
   "description": "メッセージリンク、IDからメッセージを取得して展開するBot。",
-  "author": "merunno",
+  "author": "m2en <me@merunno.dev>",
   "private": false,
   "scripts": {
     "start": "node ./build/index.js",
