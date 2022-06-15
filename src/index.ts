@@ -24,7 +24,7 @@ function createLoginLog(user: ClientUser) {
     `接続元ユーザー: ${user.username}\n` +
     `接続元ユーザーID: ${user.id}\n` +
     `MessageQuoteのバージョン: v${clientVersion} (https://github.com/m2en/MessageQuote/releases/latest)\n` +
-    `discord.jsのバージョン: v${version} (https://github.com/discordjs/discord.js/releases)\n\n` +
+    `discord.jsのバージョン: v${version} (https://github.com/discordjs/discord.js/releases/latest)\n\n` +
     `SkipPrefix: ${prefix}\n` +
     '=========\n';
   return console.log(loginLog);
