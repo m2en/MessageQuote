@@ -1,4 +1,5 @@
 import { Client, Message, MessageEmbed } from 'discord.js';
+import { prefix } from '../util';
 
 function createPing(client: Client, message: Message) {
   const pingEmbed = new MessageEmbed()
@@ -20,7 +21,7 @@ function createPing(client: Client, message: Message) {
 
 export async function ping(client: Client, message: Message) {
   try {
-    if (message.content !== '!ping') return;
+    if (message.content !== prefix + 'ping') return;
 
     const { pingEmbed } = createPing(client, message);
 
