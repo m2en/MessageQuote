@@ -1,3 +1,13 @@
+# ⚠️ Deprecated ⚠️
+
+MessageQuote is no longer under development (End of Life)
+
+As long as nodejs v16 and discord.js v13 (Discord API v10) are available, the current build of MessageQuote will continue to function
+
+It may not work in the future depending on the state of the Discord API, but the developer will not take any responsibility. Please understand
+
+----
+
 # MessageQuote
 
 [![Auto Pull Request Labeler](https://github.com/approvers/MessageQuote/actions/workflows/auto-label.yml/badge.svg)](https://github.com/approvers/MessageQuote/actions/workflows/auto-label.yml)
