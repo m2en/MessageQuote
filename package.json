@@ -34,7 +34,7 @@
   "devDependencies": {
     "@types/node": "^17.0.43",
     "@typescript-eslint/eslint-plugin": "^5.28.0",
-    "@typescript-eslint/parser": "^5.28.0",
+    "@typescript-eslint/parser": "^5.30.0",
     "eslint": "^8.17.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.1",
